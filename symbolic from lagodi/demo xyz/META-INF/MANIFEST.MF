@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Built-By: cafebabe
+Build-Jdk: 1.6.0_37
+Created-By: Apache Maven
+Main-Class: com.lagodiuk.gp.symbolic.example.Main
+Archiver-Version: Plexus Archiver
+
