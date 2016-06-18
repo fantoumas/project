@@ -1,0 +1,15 @@
+shared latex online
+it can even change the style of citation if you tell it
+eg: from harvad to something else
+
+Miktex for windows
+
+
+\documentclass{report}
+\title{Simple Example}
+\author{Andrei Gurtov}
+\date{March 2000}
+\begin{document}
+\maketitle
+Hello world!
+\end{document}

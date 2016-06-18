@@ -1,0 +1,24 @@
+[16.06.2016 19:28:51,718] [main] INFO  org.jgap.gp.impl.GPGenotype  - Creating initial population
+[16.06.2016 19:28:51,779] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free: 61.5 MB
+[16.06.2016 19:28:51,800] [main] INFO  org.jgap.gp.impl.GPPopulation  - Prototype program set
+[16.06.2016 19:28:51,855] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free after creating population: 61.5 MB
+[16.06.2016 19:36:04,859] [main] INFO  org.jgap.gp.impl.GPGenotype  - Creating initial population
+[16.06.2016 19:36:04,866] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free: 61.5 MB
+[16.06.2016 19:36:04,907] [main] INFO  org.jgap.gp.impl.GPPopulation  - Prototype program set
+[16.06.2016 19:36:05,052] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free after creating population: 61.5 MB
+[16.06.2016 19:43:38,065] [main] INFO  org.jgap.gp.impl.GPGenotype  - Creating initial population
+[16.06.2016 19:43:38,070] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free: 61.5 MB
+[16.06.2016 19:43:38,090] [main] INFO  org.jgap.gp.impl.GPPopulation  - Prototype program set
+[16.06.2016 19:43:38,148] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free after creating population: 61.5 MB
+[17.06.2016 10:58:06,191] [main] INFO  org.jgap.gp.impl.GPGenotype  - Creating initial population
+[17.06.2016 10:58:06,359] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free: 61.5 MB
+[17.06.2016 10:58:06,385] [main] INFO  org.jgap.gp.impl.GPPopulation  - Prototype program set
+[17.06.2016 10:58:06,433] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free after creating population: 61.5 MB
+[17.06.2016 10:58:11,334] [main] INFO  org.jgap.gp.impl.GPGenotype  - Creating initial population
+[17.06.2016 10:58:11,340] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free: 61.5 MB
+[17.06.2016 10:58:11,358] [main] INFO  org.jgap.gp.impl.GPPopulation  - Prototype program set
+[17.06.2016 10:58:11,423] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free after creating population: 61.5 MB
+[17.06.2016 10:59:22,575] [main] INFO  org.jgap.gp.impl.GPGenotype  - Creating initial population
+[17.06.2016 10:59:22,581] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free: 61.5 MB
+[17.06.2016 10:59:22,605] [main] INFO  org.jgap.gp.impl.GPPopulation  - Prototype program set
+[17.06.2016 10:59:22,666] [main] INFO  org.jgap.gp.impl.GPGenotype  - Mem free after creating population: 61.5 MB
