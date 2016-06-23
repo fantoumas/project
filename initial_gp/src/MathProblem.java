@@ -40,8 +40,10 @@ public class MathProblem
     private final static String CVS_REVISION = "$Revision: 1.25 $";
 
     public static Variable vx;
+    public static Variable vz;
 
     protected static Float[] x = new Float[20];
+    protected static Float[] z = new Float[20];
 
     protected static float[] y = new float[20];
 
@@ -95,6 +97,7 @@ public class MathProblem
                 // We use a variable that can be set in the fitness function.
                 // ----------------------------------------------------------
                 vx = Variable.create(conf, "X", CommandGene.FloatClass),
+                vz = Variable.create(conf, "Z", CommandGene.FloatClass),
                 new Multiply(conf, CommandGene.FloatClass),
                 new Multiply3(conf, CommandGene.FloatClass),
                 new Divide(conf, CommandGene.FloatClass),
@@ -121,23 +124,14 @@ public class MathProblem
         Random random = new Random();
         // Randomly initialize function data (X-Y table) for x^4+x^3+x^2-x
         // ---------------------------------------------------------------
-//        x[0] = 0.0f;
-//        y[0] = 0f;
-//        x[1] = 1f;
-//        y[1] = 2f;
-////        y[1] = 1f;
-//        x[2] = 2f;
-//        y[2] = 24f;
-////        y[2] = 2f;
-//        x[3] = .5f;
-//        y[3] = -.0625f;
-////        y[3] = .5f;
+
         for (int i = 0; i < 20; i++) {
             float f = 8.0f * (random.nextFloat() - 0.3f);
             x[i] = new Float(f);
+            z[i] = f*f;
 //            y[i] = f * f * f * f + f * f * f + f * f - f;
             y[i] = (float) (java.lang.Math.sin(f));
-            System.out.println(i + ") " + x[i] + "   " + y[i]);
+            System.out.println(i + ") " + x[i] + "   " +z[i]+ "   " + y[i]);
         }
         // Create genotype with initial population. Here, we use the declarations
         // made above:
@@ -164,7 +158,6 @@ public class MathProblem
      */
     public static void main(String[] args)
             throws Exception {
-        System.out.println("Formula to discover: X^4 + X^3 + X^2 - X");
         // Setup the algorithm's parameters.
         // ---------------------------------
         GPConfiguration config = new GPConfiguration();
@@ -222,6 +215,7 @@ public class MathProblem
                 // defined.
                 // -------------------------------------------------------------
                 vx.set(x[i]);
+                vz.set(z[i]);
                 try {
                     // Execute the GP program representing the function to be evolved.
                     // As in method create(), the return type is declared as float (see

@@ -38,7 +38,7 @@
 /*     */     }
 /*     */     
 /*     */     public T fit(C chr) {
-/*  41 */       T fit = (Comparable)this.cache.get(chr);
+/*  41 */       T fit = (T) this.cache.get(chr);
 /*  42 */       if (fit == null) {
 /*  43 */         fit = GeneticAlgorithm.this.fitnessFunc.calculate(chr);
 /*  44 */         this.cache.put(chr, fit);
@@ -71,7 +71,7 @@
 /*     */   public GeneticAlgorithm(Population<C> population, Fitness<C, T> fitnessFunc) {
 /*  72 */     this.population = population;
 /*  73 */     this.fitnessFunc = fitnessFunc;
-/*  74 */     this.chromosomesComparator = new ChromosomesComparator(null);
+/*  74 */     this.chromosomesComparator = new ChromosomesComparator();
 /*  75 */     this.population.sortPopulationByFitness(this.chromosomesComparator);
 /*     */   }
 /*     */   

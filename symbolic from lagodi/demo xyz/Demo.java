@@ -3,7 +3,7 @@
 /*     */ import com.lagodiuk.ga.GeneticAlgorithm;
 /*     */ import com.lagodiuk.ga.IterartionListener;
 /*     */ import com.lagodiuk.ga.Population;
-/*     */ import java.io.PrintStream;
+/*     */
 /*     */ import java.util.Arrays;
 /*     */ import java.util.List;
 /*     */ import java.util.Random;
@@ -30,7 +30,7 @@
 /*     */     
 /*  31 */     Fitness<Demo.MyVector, Double> fitness = new Demo.MyVectorFitness();
 /*     */     
-/*  33 */     GeneticAlgorithm<Demo.MyVector, Double> ga = new GeneticAlgorithm(population, fitness);
+/*  33 */     GeneticAlgorithm<Demo.MyVector, Double> ga = new GeneticAlgorithm<MyVector, Double>(population, fitness);
 /*     */     
 /*  35 */     addListener(ga);
 /*     */     
@@ -42,7 +42,7 @@
 /*     */ 
 /*     */   private static Population<Demo.MyVector> createInitialPopulation(int populationSize)
 /*     */   {
-/*  45 */     Population<Demo.MyVector> population = new Population();
+/*  45 */     Population<Demo.MyVector> population = new Population<MyVector>();
 /*  46 */     Demo.MyVector base = new Demo.MyVector();
 /*  47 */     for (int i = 0; i < populationSize; i++)
 /*     */     {
@@ -63,7 +63,12 @@
 /*     */ 
 /*  64 */     ga.addIterationListener(new IterartionListener()
 /*     */     {
-/*  66 */       private final double threshold = 1.0E-5D;
+        @Override
+        public void update(GeneticAlgorithm paramGeneticAlgorithm) {
+
+        }
+
+        /*  66 */       private final double threshold = 1.0E-5D;
 /*     */       
 /*     */ 
 /*     */       public void update(GeneticAlgorithm<Demo.MyVector, Double> ga)

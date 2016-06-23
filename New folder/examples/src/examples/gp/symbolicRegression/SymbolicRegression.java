@@ -7,8 +7,6 @@
  * or have a look at the top of class org.jgap.Chromosome which representatively
  * includes the JGAP license policy applicable for any file delivered with JGAP.
  */
-package examples.gp.symbolicRegression;
-
 import java.io.*;
 import java.util.*;
 
@@ -628,12 +626,12 @@ public class SymbolicRegression
             commandsList.add(new Modulo(conf, CommandGene.BooleanClass));
           }
         }
-        else if ("ModuloD".equals(functions[i])) {
-          commandsList.add(new ModuloD(conf, CommandGene.DoubleClass));
-          if (useADF && "boolean".equals(adfType)) {
-            commandsList.add(new ModuloD(conf, CommandGene.BooleanClass));
-          }
-        }
+//        else if ("ModuloD".equals(functions[i])) {
+//          commandsList.add(new ModuloD(conf, CommandGene.DoubleClass));
+//          if (useADF && "boolean".equals(adfType)) {
+//            commandsList.add(new ModuloD(conf, CommandGene.BooleanClass));
+//          }
+//        }
         else if ("Max".equals(functions[i])) {
           commandsList.add(new Max(conf, CommandGene.DoubleClass));
           if (useADF && "boolean".equals(adfType)) {

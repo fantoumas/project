@@ -46,12 +46,12 @@
 /* 46 */     this.expressionFitness = expressionFitness;
 /* 47 */     SymbolicRegressionFitness fitnessFunction = new SymbolicRegressionFitness(this.expressionFitness);
 /* 48 */     Population<GpChromosome> population = createPopulation(this.context, fitnessFunction, 5);
-/* 49 */     this.environment = new GeneticAlgorithm(population, fitnessFunction);
+/* 49 */     this.environment = new GeneticAlgorithm<GpChromosome, Double>(population, fitnessFunction);
 /* 50 */     this.environment.setParentChromosomesSurviveCount(1);
 /*    */   }
 /*    */   
 /*    */   private Population<GpChromosome> createPopulation(Context context, Fitness<GpChromosome, Double> fitnessFunction, int populationSize) {
-/* 54 */     Population<GpChromosome> population = new Population();
+/* 54 */     Population<GpChromosome> population = new Population<GpChromosome>();
 /* 55 */     for (int i = 0; i < populationSize; i++) {
 /* 56 */       GpChromosome chromosome = new GpChromosome(context, fitnessFunction, SyntaxTreeUtils.createTree(1, context));
 /*    */       
@@ -63,7 +63,12 @@
 /*    */   public void addIterationListener(final SymbolicRegressionIterationListener listener) {
 /* 64 */     this.environment.addIterationListener(new IterartionListener()
 /*    */     {
-/*    */       public void update(GeneticAlgorithm<GpChromosome, Double> environment) {
+        @Override
+        public void update(GeneticAlgorithm paramGeneticAlgorithm) {
+
+        }
+
+        /*    */       public void update(GeneticAlgorithm<GpChromosome, Double> environment) {
 /* 67 */         listener.update(SymbolicRegressionEngine.this);
 /*    */       }
 /*    */     });

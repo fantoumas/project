@@ -19,32 +19,26 @@ public class Program extends GPProblem {
 
     public static void main(String[] args) throws Exception {
 
-        int numInputVariables;
-        Integer outputVariable; // default last
-        String[] variableNames;
-        String type, nameOfFile;
-//        nameOfFile = scanString("Pass the configuration file");
+//        nameOfFile = scanString("Pass the data file");
 //            type = scanString("What is the type of the file? Type txt or csv.");
 //        ReadFile readData = new ReadFile();
 //        readData.readFile(nameOfFile);
         Menu menu = new Menu();
         menu.createMenuAndPrint();
-        System.out.println("Formula to discover: X^4 + X^3 + X^2 - X");
-        // Setup the algorithm's parameters.
-        // ---------------------------------
+
         GPConfiguration config = new GPConfiguration();
         // We use a delta fitness evaluator because we compute a defect rate, not
         // a point score!
         // ----------------------------------------------------------------------
         config.setGPFitnessEvaluator(new DeltaGPFitnessEvaluator());
-        config.setMaxInitDepth(4);
-        config.setPopulationSize(1000);
+        config.setMaxInitDepth(6);
+        config.setPopulationSize(100);
         config.setMaxCrossoverDepth(8);
         config.setFitnessFunction(new MathProblem.FormulaFitnessFunction());
         config.setStrictProgramCreation(true);
         GPProblem problem = new MathProblem(config);
         GPGenotype gp = problem.create();
-//        gp.setVerboseOutput(true);
+        gp.setVerboseOutput(true);
         System.out.println("so far so good");
 
     }

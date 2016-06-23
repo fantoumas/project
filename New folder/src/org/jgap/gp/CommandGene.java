@@ -316,7 +316,7 @@ public abstract class CommandGene
    * @author Klaus Meffert
    * @since 3.4
    */
-  protected void setArity(int a_arity) {
+   void setArity(int a_arity) {
     m_arity = a_arity;
   }
 

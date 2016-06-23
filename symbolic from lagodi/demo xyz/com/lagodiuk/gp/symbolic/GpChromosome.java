@@ -247,14 +247,14 @@
 /* 247 */     List<Double> coefficientsOfTree = this.syntaxTree.getCoefficientsOfTree();
 /*     */     
 /* 249 */     if (coefficientsOfTree.size() > 0) {
-/* 250 */       CoefficientsChromosome initialChromosome = new CoefficientsChromosome(coefficientsOfTree, 0.6D, 0.8D);
+/* 250 */       CoefficientsChromosome initialChromosome = new CoefficientsChromosome(coefficientsOfTree, 0.6D);
 /* 251 */       Population<CoefficientsChromosome> population = new Population();
 /* 252 */       for (int i = 0; i < 5; i++) {
 /* 253 */         population.addChromosome(initialChromosome.mutate());
 /*     */       }
 /* 255 */       population.addChromosome(initialChromosome);
 /*     */       
-/* 257 */       Fitness<CoefficientsChromosome, Double> fit = new CoefficientsFitness(null);
+/* 257 */       Fitness<CoefficientsChromosome, Double> fit = new CoefficientsFitness();
 /*     */       
 /* 259 */       GeneticAlgorithm<CoefficientsChromosome, Double> env = new GeneticAlgorithm(population, fit);
 /*     */       
@@ -285,7 +285,7 @@
 /*     */     private double pCrossover;
 /*     */     private List<Double> coefficients;
 /*     */     
-/*     */     public CoefficientsChromosome(double coefficients, double arg4)
+/*     */     public CoefficientsChromosome(List<Double> coefficients, double arg4)
 /*     */     {
 /* 290 */       this.coefficients = coefficients;
 /* 291 */       this.pMutation = pMutation;
@@ -330,7 +330,7 @@
 /* 330 */       for (Iterator i$ = this.coefficients.iterator(); i$.hasNext();) { double d = ((Double)i$.next()).doubleValue();
 /* 331 */         ret.add(Double.valueOf(d));
 /*     */       }
-/* 333 */       return new CoefficientsChromosome(GpChromosome.this, ret, this.pMutation, this.pCrossover);
+/* 333 */       return new CoefficientsChromosome(ret, this.pMutation);
 /*     */     }
 /*     */     
 /*     */     public List<Double> getCoefficients() {

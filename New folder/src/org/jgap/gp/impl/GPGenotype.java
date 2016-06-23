@@ -261,10 +261,9 @@ public class GPGenotype
       Class[] a_types, Class[][] a_argTypes, CommandGene[][] a_nodeSets,
       int a_maxNodes, boolean a_verboseOutput)
       throws InvalidConfigurationException {
-    System.out.println("HELLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
     int[] minDepths = null;
     int[] maxDepths = null;
-    return randomInitialGenotype(a_conf, a_types, a_argTypes, a_nodeSets,
+      return randomInitialGenotype(a_conf, a_types, a_argTypes, a_nodeSets,
                                  minDepths, maxDepths, a_maxNodes,
                                  a_verboseOutput);
   }
@@ -401,7 +400,6 @@ public class GPGenotype
       boolean[] a_fullModeAllowed, boolean a_verboseOutput,
       IPopulationCreator a_popCreator)
       throws InvalidConfigurationException {
-    System.out.println("HELLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
 
     // Check preconditions.
     // --------------------
@@ -437,7 +435,7 @@ public class GPGenotype
     // ----------------
     System.gc();
     if (a_verboseOutput) {
-      LOGGER.info("Mem free after creating population: "
+      LOGGER.info("Mem free after creating population somtheing:  "
                   + SystemKit.niceMemory(SystemKit.getTotalMemoryMB()) + " MB");
     }
     checkErroneousPop(pop, " after creating population/2");
@@ -1402,20 +1400,21 @@ public class GPGenotype
       GPConfiguration a_conf, Class[] a_types, CommandGene[][] a_nodeSets) {
     List<CommandGene> triedNodes;
     Map<String, CommandGene> invalidNodes = new Hashtable();
-    // For every chromosome in the GP program.
-    // ---------------------------------------
-    for (int i = 0; i < a_nodeSets.length; i++) {
-      triedNodes = new Vector();
-      // Determine impossible functions and terminals.
-      // ---------------------------------------------
-      for (int j = 0; j < a_nodeSets[i].length; j++) {
-        CommandGene node = a_nodeSets[i][j];
-        System.out.println("HELLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
-        if (triedNodes.contains(node)) {
+      System.out.println("HELLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
+      // For every chromosome in the GP program.
+      // ---------------------------------------
+      for (int i = 0; i < a_nodeSets.length; i++) {
+        triedNodes = new Vector();
+        // Determine impossible functions and terminals.
+        // ---------------------------------------------
+        for (int j = 0; j < a_nodeSets[i].length; j++) {
+          CommandGene node = a_nodeSets[i][j];
+         if (triedNodes.contains(node)) {
 
-          continue;
+            continue;
         }
-        triedNodes.add(node);
+
+          triedNodes.add(node);
         // Verify if node is possible.
         // ---------------------------
         int arity = node.getArity(null);

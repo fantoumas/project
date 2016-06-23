@@ -45,7 +45,6 @@ import java.util.*;
 import java.io.*;
 import java.text.*;
 import java.util.Collections.*;
-import java.util.logging.Logger;
 
 import org.jgap.*;
 import org.jgap.gp.*;
@@ -1217,8 +1216,8 @@ public class SymbolicRegression
         // Use the log4j configuration
         // Log to stdout instead of file
         // -----------------------------
-//        org.apache.log4j.PropertyConfigurator.configure("log4j.properties");
-//        LOGGER.addAppender(new ConsoleAppender(new SimpleLayout(),"System.out"));
+        org.apache.log4j.PropertyConfigurator.configure("log4j.properties");
+        LOGGER.addAppender(new ConsoleAppender(new SimpleLayout(),"System.out"));
 
 
         //

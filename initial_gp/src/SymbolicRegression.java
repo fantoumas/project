@@ -42,13 +42,17 @@
  *
  */
 
+import examples.gp.symbolicRegression.Sqrt;
 import org.apache.log4j.*;
 import org.apache.log4j.ConsoleAppender;
 import java.util.*;
 import java.io.*;
 import java.text.*;
 import java.util.Collections.*;
-import java.util.logging.Logger;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.RollingFileAppender;
 
 import org.jgap.*;
 import org.jgap.gp.*;
@@ -266,7 +270,7 @@ public class SymbolicRegression
                     adfs[i] = CommandGene.DoubleClass;
                 }
             }
-
+System.out.println("are you sure?");
             argTypes = new Class[][]{{}, adfs};
 
         } else {
@@ -353,9 +357,14 @@ public class SymbolicRegression
         // Create genotype with initial population. Here, we use the
         // declarations made above:
         // ----------------------------------------------------------
-        System.out.println("something "+conf+ " " + types+ " " + argTypes+ " " + nodeSets+ " " +
-                maxNodes+ " " +verboseOutput);
-        return GPGenotype.randomInitialGenotype(conf, types, argTypes, nodeSets,
+//        System.out.println("something1 "+conf );
+//        System.out.println("something2 "+types.length);
+//        System.out.println("something3 "+ argTypes.length);
+//        System.out.println("something4 "+ nodeSets.length);
+//        System.out.println("something5 "+  maxNodes);
+//        System.out.println("something6 "+verboseOutput);
+        GPGenotype gpGeno = new GPGenotype();
+        return gpGeno.randomInitialGenotype(conf, types, argTypes, nodeSets,
                 maxNodes,verboseOutput);
 
         // this is experimental
@@ -948,12 +957,12 @@ public class SymbolicRegression
                         commandsList.add(new Min(conf, CommandGene.BooleanClass));
                     }
 
-//                } else if ("Sqrt".equals(functions[i])) {
-//                    // Note: This uses my Sqrt.java file
-//                    commandsList.add(new Sqrt(conf, CommandGene.DoubleClass));
-//
+                } else if ("Sqrt".equals(functions[i])) {
+                    // Note: This uses my Sqrt.java file
+                    commandsList.add(new Sqrt(conf, CommandGene.DoubleClass));
+
 //                } else if ("Square".equals(functions[i])) {
-//                    // Note: This uses my Square.java file
+//                     Note: This uses my Square.java file
 //                    commandsList.add(new Square(conf, CommandGene.DoubleClass));
 //
 //                } else if ("Cube".equals(functions[i])) {
@@ -1220,47 +1229,53 @@ public class SymbolicRegression
         // Use the log4j configuration
         // Log to stdout instead of file
         // -----------------------------
-//        org.apache.log4j.PropertyConfigurator.configure("log4j.properties");
-//        LOGGER.addAppender(new ConsoleAppender(new SimpleLayout(),"System.out"));
+        org.apache.log4j.PropertyConfigurator.configure("log4j.properties");
+        ConsoleAppender console = new ConsoleAppender(new SimpleLayout(),"System.out"); //create appender
+        //configure the appender
+        Logger.getRootLogger().getLoggerRepository().resetConfiguration();
+
+        //add appender to any Logger (here is root)
+        Logger.getRootLogger().addAppender(console);
+        LOGGER.addAppender(console);
 
 
         //
         // Read a configuration file, or not...
         //
-        if (args.length > 0) {
-            readFile(args[0]);
-
-        } else {
-
-            // Default problem
-            // Fibonacci series, with three input variables to make it
-            // somewhat harder.
-            // -------------------------------------------------------
-            numRows = 21;
-            numInputVariables = 3;
-
-            // Note: The last array is the output array
-            int[][] indata = {
-                    {1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946},
-                    {1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711},
-                    {2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657},
-                    {3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368}
-            };
-
-            data = new Double[numInputVariables+1][numRows];
-            for (int i = 0; i < numInputVariables+1; i++) {
-                for(int j = 0; j < numRows; j++) {
-                    data[i][j] = new Double(indata[i][j]);
-                }
-            }
-            populationSize = 100;
-            numEvolutions = 100;
-            functions = "Multiply,Divide,Add,Subtract".split(",");
-            variableNames = "F1,F2,F3,F4".split(",");
-
-            presentation = "Fibonacci series";
-
-        }
+//        if (args.length < 0) {
+//            readFile(args[0]);
+            readFile("gelman.conf");
+//        } else {
+//
+//            // Default problem
+//            // Fibonacci series, with three input variables to make it
+//            // somewhat harder.
+//            // -------------------------------------------------------
+//            numRows = 21;
+//            numInputVariables = 3;
+//
+//            // Note: The last array is the output array
+//            int[][] indata = {
+//                    {1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946},
+//                    {1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711},
+//                    {2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657},
+//                    {3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368}
+//            };
+//
+//            data = new Double[numInputVariables+1][numRows];
+//            for (int i = 0; i < numInputVariables+1; i++) {
+//                for(int j = 0; j < numRows; j++) {
+//                    data[i][j] = new Double(indata[i][j]);
+//                }
+//            }
+//            populationSize = 100;
+//            numEvolutions = 100;
+//            functions = "Multiply,Divide,Add,Subtract".split(",");
+//            variableNames = "F1,F2,F3,F4".split(",");
+//
+//            presentation = "Fibonacci series";
+//
+//        }
 
 
         // Present the problem
@@ -1663,7 +1678,7 @@ public class SymbolicRegression
                     // original:
                     double res = data[outputVariable][j];
                     double diff = Math.abs(result - res) + penalty;
-                    // diff = Math.sqrt(Math.abs(result*result - res*res));
+                     diff = Math.sqrt(Math.abs(result*result - res*res));
 
                     errors[j] = diff;
 
