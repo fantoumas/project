@@ -7,5 +7,46 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/commons-lang3-3.4/apidocs" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/site/apidocs" />
+        </JAVADOC>
+        <NATIVE>
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17" />
+        </NATIVE>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/contribs/CekiGulcu" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/contribs/Jamie Tsao" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/contribs/JimMoore" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/contribs/ThomasFenner" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/src/main/java" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/src/main/javadoc" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/src/performance/java" />
+          <root url="file://$MODULE_DIR$/apache-log4j-1.2.17/tests/src/java" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/apache-log4j-1.2.17" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/commons-lang-2.6" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$MODULE_DIR$/commons-lang-2.6/apidocs" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/commons-lang-2.6" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/commons-lang-2.6" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/commons-lang-2.6" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>

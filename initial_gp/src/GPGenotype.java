@@ -536,11 +536,11 @@ public class GPGenotype
             if (m_verbose) {
                 if (i % 25 == 0) {
                     String freeMB = SystemKit.niceMemory(SystemKit.getFreeMemoryMB());
-                    LOGGER.info("Evolving generation "
-                            + (i + offset)
-                            + ", memory free: "
-                            + freeMB
-                            + " MB");
+//                    LOGGER.info("Evolving generation "
+//                            + (i + offset)
+//                            + ", memory free: "
+//                            + freeMB
+//                            + " MB");
                 }
             }
             evolve();
@@ -679,10 +679,10 @@ public class GPGenotype
             depths += a_best.getChromosome(i).getDepth(0);
         }
         if (size == 1) {
-            LOGGER.info("Depth of chrom: " + depths);
+//            LOGGER.info("Depth of chrom: " + depths);
         }
         else {
-            LOGGER.info("Depths of chroms: " + depths);
+//            LOGGER.info("Depths of chroms: " + depths);
         }
     }
 
@@ -841,11 +841,11 @@ public class GPGenotype
                         checkErroneousProg(program,
                                 " when adding a program, evolution (index " + i +
                                         ")", true);
-                        LOGGER.debug("Added new GP program (depth parameter: "
-                                + depth
-                                + ", "
-                                + tries
-                                + " tries)");
+//                        LOGGER.debug("Added new GP program (depth parameter: "
+//                                + depth
+//                                + ", "
+//                                + tries
+//                                + " tries)");
                         break;
                     } catch (IllegalStateException iex) {
                         tries++;
@@ -855,13 +855,13 @@ public class GPGenotype
                          * Or even better: Make the validator return a defect rate!
                          */
                         if ( (maxTries > 0 && tries > maxTries) || tries > 40) {
-                            LOGGER.debug(
-                                    "Creating random GP program failed (depth "
-                                            + depth
-                                            + ", "
-                                            + tries
-                                            + " tries), will use prototype");
-                            // Try cloning a previously generated valid program.
+//                            LOGGER.debug(
+//                                    "Creating random GP program failed (depth "
+//                                            + depth
+//                                            + ", "
+//                                            + tries
+//                                            + " tries), will use prototype");
+//                            // Try cloning a previously generated valid program.
                             // -------------------------------------------------
                             IGPProgram program = cloneProgram(getGPConfiguration().
                                     getPrototypeProgram());
@@ -891,10 +891,10 @@ public class GPGenotype
                 } while (true)
                         ;
             }
-            LOGGER.debug("Did "
-                    + crossover + " x-overs, "
-                    + reproduction + " reproductions, "
-                    + creation + " creations");
+//            LOGGER.debug("Did "
+//                    + crossover + " x-overs, "
+//                    + reproduction + " reproductions, "
+//                    + creation + " creations");
             // Now set the new population as the active one.
             // ---------------------------------------------
             setGPPopulation(newPopulation);
@@ -1270,7 +1270,7 @@ public class GPGenotype
         }
         if (!a_active) {
             // Verification not activated!
-            // ---------------------------
+            // ---------------------------verifyv
             return;
         }
         int popSize1 = a_pop.size();
@@ -1459,16 +1459,15 @@ public class GPGenotype
                     // ------------------------------------------------------------
                     for (int l = 0; l < arity; l++) {
                         System.out.println("is this null l "+l+"  arity"+arity+" "+a_nodeSets[i]);
-//                        if (!nodeExists(a_nodeSets[i], childTypes[l], subChildTypes[l])) {
-//                            String s = i + "," + j;
-//                            invalidNodes.put(s, node);
-//                            break;
-//                        }
+                        if (!nodeExists(a_nodeSets[i], childTypes[l], subChildTypes[l])) {
+                            String s = i + "," + j;
+                            invalidNodes.put(s, node);
+                            break;
+                        }
                     }
                 }
             }
         }
-        System.out.println("HELLO!!!!%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5!! ");
         return invalidNodes;
     }
 
@@ -1487,9 +1486,8 @@ public class GPGenotype
     protected static boolean nodeExists(CommandGene[] a_functionSet,
                                         Class a_returnType,
                                         int a_subReturnType) {
-        System.out.println("is this null i "+a_functionSet.length+"  "+a_functionSet[0].getReturnType());
         for (int i = 0; i < a_functionSet.length; i++) {
-            System.out.println("this is not  null i "+i+" "+a_functionSet[i].getReturnType());
+            if (a_functionSet[i] == null) return false;
             if (a_functionSet[i].getReturnType() == a_returnType
                     && (a_subReturnType == 0
                     || a_subReturnType == a_functionSet[i].getSubReturnType())) {

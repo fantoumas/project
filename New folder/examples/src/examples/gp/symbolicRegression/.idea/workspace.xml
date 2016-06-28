@@ -2,113 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9fe5a85-4048-49c6-be59-8f743f8c831b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../Ferreira-GSP2006.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../cs528_Project2_Zhang.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype$GPFitnessComparator.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../manual-3.5.0.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/symbolic_regression_1.0.jar.src.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/func1.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/gelman (2).conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/gelman.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/test1.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/GPGenotype.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/func1.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/gelman (2).conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/gelman.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/test1 (2).conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/test1.conf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/.idea/libraries/symbolic_regression_1_0_jar_src.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/demo xyz.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/.idea/libraries/symbolic_regression_1_0_jar_src.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/META-INF/maven/com.lagodiuk/ga/pom.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/META-INF/maven/com.lagodiuk/ga/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/META-INF/maven/com.lagodiuk/gp/pom.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/META-INF/maven/com.lagodiuk/gp/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/demo xyz.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commons-lang3-3.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/log4j_jgap.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/catalan.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/circle_1.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/commons-lang3-3.4.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/AndD.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Gamma$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Gamma.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Gaussian$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Gaussian.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Hill$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Hill.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Logistic$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Logistic.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/ModuloD$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/ModuloD.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/NotD.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/OrD.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Sigmoid$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Sigmoid.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Sign$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Sign.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Sqrt$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Sqrt.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Step$Compatible.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/Step.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/SymbolicRegression$FormulaFitnessFunction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/SymbolicRegression.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/examples/gp/symbolicRegression/XorD.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/exp_formula.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/fahrenheit_celsius.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/fib1.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/fib2.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/fib_50.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/gamma_test.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/henon_100.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/heron_formula.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/intro_page_262.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/iris.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/isbn_test.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/log4j_jgap.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/mod_test.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/moons.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/mysterious.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/odd_parity.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/p10.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/p4.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/p4_2.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/p4_jgap.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/p6_2.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/package.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/planets.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/sigmoid_test.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/sin_formula.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/sin_formula_rand20.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/sqrt_formula.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/sqrt_formula2.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/sqrt_formula3.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/sunspots.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/symbolicRegression.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/x2.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/x4-x3+x2-x.conf" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/.idea/compiler.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/.idea/copyright/profiles_settings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/.idea/encodings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/.idea/misc.xml" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/.idea/misc.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/.idea/modules.xml" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/.idea/modules.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/out/production/demo xyz/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/gelman.conf" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/gelman.conf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/out/production/symbolicRegression/test1.conf" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/test1 (2).conf" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/Demo$MyVector.java" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/MyVector.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/Demo$MyVectorFitness.java" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/MyVectorFitness.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/mathproblem_best.png" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/mathproblem_best.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/MathProblem$FormulaFitnessFunction.class" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/MathProblem$FormulaFitnessFunction.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/MathProblem.class" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/MathProblem.class" />
@@ -117,31 +10,21 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/SymbolicRegression$ApplicationData.class" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/SymbolicRegression$ApplicationData.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/SymbolicRegression$FormulaFitnessFunction.class" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/SymbolicRegression$FormulaFitnessFunction.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/SymbolicRegression.class" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/SymbolicRegression.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/SymbolicRegression$1.class" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/SymbolicRegression$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/SymbolicRegression$ApplicationData.class" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/SymbolicRegression$ApplicationData.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/SymbolicRegression$FormulaFitnessFunction.class" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/SymbolicRegression$FormulaFitnessFunction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/SymbolicRegression.class" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/SymbolicRegression.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype$1.class" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype$GPFitnessComparator.class" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype$GPFitnessComparator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype.class" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/out/production/initial_gp/org/jgap/gp/impl/GPGenotype.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../.idea/misc.xml" afterPath="$PROJECT_DIR$/../../../../../.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../../.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../New folder.iml" afterPath="$PROJECT_DIR$/../../../../../New folder.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SymbolicRegression.java" afterPath="$PROJECT_DIR$/SymbolicRegression.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../src/org/jgap/gp/CommandGene.java" afterPath="$PROJECT_DIR$/../../../../../src/org/jgap/gp/CommandGene.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../src/org/jgap/gp/impl/GPGenotype.java" afterPath="$PROJECT_DIR$/../../../../../src/org/jgap/gp/impl/GPGenotype.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/circle_1.conf" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/circle_1.conf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/log4j_jgap.log" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/log4j_jgap.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/src/GPGenotype.java" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/GPGenotype.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/src/MathProblem.java" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/MathProblem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/src/Program.java" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/Program.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../initial_gp/src/SymbolicRegression.java" afterPath="$PROJECT_DIR$/../../../../../../initial_gp/src/SymbolicRegression.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/Demo.java" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/Demo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/com/lagodiuk/ga/GeneticAlgorithm.java" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/com/lagodiuk/ga/GeneticAlgorithm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/com/lagodiuk/gp/symbolic/GpChromosome.java" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/com/lagodiuk/gp/symbolic/GpChromosome.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/com/lagodiuk/gp/symbolic/SymbolicRegressionEngine.java" afterPath="$PROJECT_DIR$/../../../../../../symbolic from lagodi/demo xyz/com/lagodiuk/gp/symbolic/SymbolicRegressionEngine.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/SymbolicRegression.java" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/SymbolicRegression.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/log4j_jgap.log" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/log4j_jgap.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/log4j_jgap.log" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/log4j_jgap.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/symbolic regression.iml" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/out/production/symbolic regression/symbolic regression.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../../../symbolic regression/symbolic regression.iml" afterPath="$PROJECT_DIR$/../../../../../../symbolic regression/symbolic regression.iml" />
     </list>
     <ignored path="symbolicRegression.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -162,13 +45,14 @@
     <favorites_list name="symbolicRegression" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="SymbolicRegression.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SymbolicRegression.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+            <state relative-caret-position="136">
+              <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
               <folding>
+                <element signature="e#0#47300#0" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="e#18654#18667#0" expanded="true" />
               </folding>
@@ -179,7 +63,7 @@
       <file leaf-file-name="Gaussian.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gaussian.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
+            <state relative-caret-position="272">
               <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -236,8 +120,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -372,7 +256,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -383,7 +267,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16868381" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1709531" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -407,9 +291,31 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/SymbolicRegression.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#47300#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#18654#18667#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Gaussian.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
+        <state relative-caret-position="272">
+          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gaussian.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
           <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -419,9 +325,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SymbolicRegression.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+        <state relative-caret-position="136">
+          <caret line="8" column="3" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
           <folding>
+            <element signature="e#0#47300#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#18654#18667#0" expanded="true" />
           </folding>

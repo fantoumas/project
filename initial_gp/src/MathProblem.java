@@ -36,16 +36,11 @@ import org.jgap.gp.terminal.*;
  */
 public class MathProblem
         extends GPProblem {
-    /** String containing the CVS revision. Read out via reflection!*/
-    private final static String CVS_REVISION = "$Revision: 1.25 $";
 
-    public static Variable vx;
-    public static Variable vz;
+    private static Variable vx;
+    private static Float[] x = new Float[20];
+    private static float[] y = new float[20];
 
-    protected static Float[] x = new Float[20];
-    protected static Float[] z = new Float[20];
-
-    protected static float[] y = new float[20];
 
     public MathProblem(GPConfiguration a_conf)
             throws InvalidConfigurationException {
@@ -97,7 +92,6 @@ public class MathProblem
                 // We use a variable that can be set in the fitness function.
                 // ----------------------------------------------------------
                 vx = Variable.create(conf, "X", CommandGene.FloatClass),
-                vz = Variable.create(conf, "Z", CommandGene.FloatClass),
                 new Multiply(conf, CommandGene.FloatClass),
                 new Multiply3(conf, CommandGene.FloatClass),
                 new Divide(conf, CommandGene.FloatClass),
@@ -128,10 +122,9 @@ public class MathProblem
         for (int i = 0; i < 20; i++) {
             float f = 8.0f * (random.nextFloat() - 0.3f);
             x[i] = new Float(f);
-            z[i] = f*f;
-//            y[i] = f * f * f * f + f * f * f + f * f - f;
-            y[i] = (float) (java.lang.Math.sin(f));
-            System.out.println(i + ") " + x[i] + "   " +z[i]+ "   " + y[i]);
+            y[i] = f * f * f * f + f * f * f + f * f - f + (float)Math.random() ;
+//            y[i] = (float) (java.lang.Math.sin(f));
+            System.out.println(i + ") " + x[i] + "   " + y[i]);
         }
         // Create genotype with initial population. Here, we use the declarations
         // made above:
@@ -156,7 +149,7 @@ public class MathProblem
      * @author Klaus Meffert
      * @since 3.0
      */
-    public static void main(String[] args)
+    public void start(String args)
             throws Exception {
         // Setup the algorithm's parameters.
         // ---------------------------------
@@ -181,7 +174,7 @@ public class MathProblem
         // if a satisfying result is found (fitness value almost 0), JGAP stops
         // earlier automatically.
         // --------------------------------------------------------------------
-        gp.evolve(800);
+        gp.evolve(500);
         // Print the best solution so far to the console.
         // ----------------------------------------------
         gp.outputSolution(gp.getAllTimeBest());
@@ -215,7 +208,6 @@ public class MathProblem
                 // defined.
                 // -------------------------------------------------------------
                 vx.set(x[i]);
-                vz.set(z[i]);
                 try {
                     // Execute the GP program representing the function to be evolved.
                     // As in method create(), the return type is declared as float (see

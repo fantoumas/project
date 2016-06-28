@@ -22,59 +22,72 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MathProblem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MathProblem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="75" column="12" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#11770#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SymbolicRegression.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SymbolicRegression.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="354" column="41" selection-start-line="354" selection-start-column="41" selection-end-line="354" selection-end-column="41" />
+            <state relative-caret-position="33">
+              <caret line="1136" column="30" selection-start-line="1136" selection-start-column="30" selection-end-line="1136" selection-end-column="30" />
               <folding>
-                <element signature="e#0#85784#0" expanded="true" />
+                <element signature="e#0#79401#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#28556#28566#0" expanded="true" />
-                <element signature="e#33417#33430#0" expanded="true" />
+                <element signature="e#28102#28112#0" expanded="true" />
+                <element signature="e#32963#32976#0" expanded="true" />
+                <marker date="1467028496718" expanded="false" signature="2723:2731" placeholder="&lt;~&gt;" />
+                <marker date="1467028496718" expanded="false" signature="13697:13707" placeholder="&lt;~&gt;" />
+                <marker date="1467028496718" expanded="false" signature="57900:57908" placeholder="&lt;~&gt;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CommandGene.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/CommandGene.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="158" column="22" selection-start-line="158" selection-start-column="22" selection-end-line="158" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#8855#8856#0" expanded="true" />
-                <element signature="e#8879#8880#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GPGenotype.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GPGenotype.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GPGenotype.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="1467" column="17" selection-start-line="1467" selection-start-column="17" selection-end-line="1467" selection-end-column="17" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <element signature="e#0#64426#0" expanded="true" />
+                <element signature="e#0#64238#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#56437#56438#0" expanded="true" />
-                <element signature="e#56504#56505#0" expanded="true" />
+                <element signature="e#26309#26310#0" expanded="true" />
+                <element signature="e#26345#26346#0" expanded="true" />
+                <element signature="e#56490#56491#0" expanded="true" />
+                <element signature="e#56557#56558#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MathProblem.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/MathProblem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="163" column="76" selection-start-line="163" selection-start-column="76" selection-end-line="163" selection-end-column="76" />
+              <folding>
+                <element signature="e#0#11424#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#9113#9114#0" expanded="true" />
+                <element signature="e#9172#9173#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GPProblem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/GPProblem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProgramChromosome.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/impl/ProgramChromosome.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -82,46 +95,10 @@
       <file leaf-file-name="Program.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Program.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+            <state relative-caret-position="246">
+              <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ADF.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/function/ADF.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="81" column="45" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Menu.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Menu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadFile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ReadFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="75" column="13" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#394#402#0" expanded="true" />
-                <element signature="e#5882#5892#0" expanded="true" />
-                <element signature="e#5960#5970#0" expanded="true" />
-                <element signature="e#6033#6043#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -148,13 +125,15 @@
         <option value="$PROJECT_DIR$/../New folder/apache-log4j-1.2.17/log4j-1.2.17.jar!/org/apache/log4j/FileAppender.class" />
         <option value="$PROJECT_DIR$/src/ReadFile.java" />
         <option value="$PROJECT_DIR$/src/Menu.java" />
-        <option value="$PROJECT_DIR$/src/Program.java" />
-        <option value="$PROJECT_DIR$/src/MathProblem.java" />
         <option value="$PROJECT_DIR$/../New folder/src/org/jgap/gp/impl/GPGenotype.java" />
         <option value="$PROJECT_DIR$/src/CommangGene.java" />
         <option value="$PROJECT_DIR$/../New folder/src/org/jgap/gp/CommandGene.java" />
         <option value="$PROJECT_DIR$/src/EqualsBuilder.java" />
         <option value="$PROJECT_DIR$/src/SymbolicRegression.java" />
+        <option value="$PROJECT_DIR$/src/MathProblem.java" />
+        <option value="$PROJECT_DIR$/src/Display.form" />
+        <option value="$PROJECT_DIR$/src/Screen.java" />
+        <option value="$PROJECT_DIR$/src/Program.java" />
         <option value="$PROJECT_DIR$/src/GPGenotype.java" />
       </list>
     </option>
@@ -230,11 +209,14 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../New folder/examples" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../JAVA/Pacman" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.22758621" />
     <property name="SearchEverywhereHistoryKey" value="appe&#9;FILE&#9;jar://C:/Users/Christina/Desktop/Uni/Project/New folder/apache-log4j-1.2.17/log4j-1.2.17.jar!/org/apache/log4j/FileAppender.class&#10;log4j.appender&#9;null&#9;null&#10;plugins&#9;PSI&#9;JAVA://com.sun.deploy.config.PluginServerConfig" />
+    <property name="settings.editor.selected.configurable" value="project.propGUI" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="311" />
   </component>
   <component name="RunManager" selected="Application.SymbolicRegression">
     <configuration default="false" name="Program" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -579,12 +561,12 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32423207" sideWeight="0.49394855" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32423207" sideWeight="0.47276855" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20136519" sideWeight="0.5080527" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32423207" sideWeight="0.5060514" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32935154" sideWeight="0.52723145" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991454" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -601,6 +583,31 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32423207" sideWeight="0.48487142" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20136519" sideWeight="0.5080527" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32423207" sideWeight="0.5151286" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991454" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14069591" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32820514" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3982906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -630,83 +637,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/MathProblem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2023">
-          <caret line="132" column="25" selection-start-line="132" selection-start-column="25" selection-end-line="132" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#11770#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SymbolicRegression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5100">
-          <caret line="355" column="34" selection-start-line="355" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#85784#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#28556#28566#0" expanded="true" />
-            <element signature="e#33417#33430#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/GPProblem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/impl/GPGenotype.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25347">
-          <caret line="1532" column="22" selection-start-line="1532" selection-start-column="22" selection-end-line="1532" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#55311#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#18098#18099#0" expanded="false" />
-            <element signature="e#18130#18131#0" expanded="false" />
-            <element signature="e#18322#18323#0" expanded="false" />
-            <element signature="e#18360#18361#0" expanded="false" />
-            <element signature="e#23712#23713#0" expanded="false" />
-            <element signature="e#23742#23743#0" expanded="false" />
-            <element signature="e#34349#34350#0" expanded="false" />
-            <element signature="e#34378#34379#0" expanded="false" />
-            <element signature="e#34548#34549#0" expanded="false" />
-            <element signature="e#34579#34580#0" expanded="false" />
-            <element signature="e#36510#36511#0" expanded="false" />
-            <element signature="e#36540#36541#0" expanded="false" />
-            <element signature="e#36785#36786#0" expanded="false" />
-            <element signature="e#36828#36829#0" expanded="false" />
-            <element signature="e#40838#40839#0" expanded="false" />
-            <element signature="e#40869#40870#0" expanded="false" />
-            <element signature="e#41548#41549#0" expanded="false" />
-            <element signature="e#41597#41598#0" expanded="false" />
-            <element signature="e#41812#41813#0" expanded="false" />
-            <element signature="e#41866#41867#0" expanded="false" />
-            <element signature="e#44375#44376#0" expanded="false" />
-            <element signature="e#44417#44418#0" expanded="false" />
-            <element signature="e#45345#45346#0" expanded="false" />
-            <element signature="e#45389#45390#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Program.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="79" column="36" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EqualsBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
@@ -742,11 +672,11 @@
         <state relative-caret-position="5474">
           <caret line="329" column="15" selection-start-line="329" selection-start-column="15" selection-end-line="329" selection-end-column="15" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#394#402#0" expanded="true" />
-            <element signature="e#5882#5892#0" expanded="true" />
-            <element signature="e#5960#5970#0" expanded="true" />
-            <element signature="e#6033#6043#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#394#402#0" expanded="false" />
+            <element signature="e#5882#5892#0" expanded="false" />
+            <element signature="e#5960#5970#0" expanded="false" />
+            <element signature="e#6033#6043#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -766,11 +696,11 @@
         <state relative-caret-position="153">
           <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#394#402#0" expanded="true" />
-            <element signature="e#5882#5892#0" expanded="true" />
-            <element signature="e#5960#5970#0" expanded="true" />
-            <element signature="e#6033#6043#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#394#402#0" expanded="false" />
+            <element signature="e#5882#5892#0" expanded="false" />
+            <element signature="e#5960#5970#0" expanded="false" />
+            <element signature="e#6033#6043#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -874,21 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
           <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/GPProblem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -973,56 +888,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/function/ADF.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="81" column="45" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Program.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SymbolicRegression.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="354" column="41" selection-start-line="354" selection-start-column="41" selection-end-line="354" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#85784#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#28556#28566#0" expanded="true" />
-            <element signature="e#33417#33430#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MathProblem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="75" column="12" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#11770#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_72/src.zip!/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/impl/DefaultPopulationCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
@@ -1036,36 +901,192 @@
         <state relative-caret-position="136">
           <caret line="75" column="13" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#394#402#0" expanded="true" />
-            <element signature="e#5882#5892#0" expanded="true" />
-            <element signature="e#5960#5970#0" expanded="true" />
-            <element signature="e#6033#6043#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#394#402#0" expanded="false" />
+            <element signature="e#5882#5892#0" expanded="false" />
+            <element signature="e#5960#5970#0" expanded="false" />
+            <element signature="e#6033#6043#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/function/ADF.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_72/src.zip!/java/lang/NumberFormatException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="29" column="29" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/terminal/Variable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding>
+            <element signature="e#2179#2180#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/GPProblem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_72/src.zip!/java/util/Random.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="76" column="6" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/impl/GPProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="29" column="40" selection-start-line="29" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_72/src.zip!/java/lang/Class.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="1790" column="0" selection-start-line="1790" selection-start-column="0" selection-end-line="1790" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/CommandGene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="158" column="22" selection-start-line="158" selection-start-column="22" selection-end-line="158" selection-end-column="22" />
+        <state relative-caret-position="298">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#8855#8856#0" expanded="false" />
+            <element signature="e#8879#8880#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_72/src.zip!/java/lang/Runnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_72/src.zip!/javax/swing/Box.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Display.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Display.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8855#8856#0" expanded="true" />
-            <element signature="e#8879#8880#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Program.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../New folder/src/org/jgap/gp/impl/ProgramChromosome.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SymbolicRegression.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="1136" column="30" selection-start-line="1136" selection-start-column="30" selection-end-line="1136" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#79401#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#28102#28112#0" expanded="true" />
+            <element signature="e#32963#32976#0" expanded="true" />
+            <marker date="1467028496718" expanded="false" signature="2723:2731" placeholder="&lt;~&gt;" />
+            <marker date="1467028496718" expanded="false" signature="13697:13707" placeholder="&lt;~&gt;" />
+            <marker date="1467028496718" expanded="false" signature="57900:57908" placeholder="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GPGenotype.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="1467" column="17" selection-start-line="1467" selection-start-column="17" selection-end-line="1467" selection-end-column="17" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#64426#0" expanded="true" />
+            <element signature="e#0#64238#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#56437#56438#0" expanded="true" />
-            <element signature="e#56504#56505#0" expanded="true" />
+            <element signature="e#26309#26310#0" expanded="true" />
+            <element signature="e#26345#26346#0" expanded="true" />
+            <element signature="e#56490#56491#0" expanded="true" />
+            <element signature="e#56557#56558#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MathProblem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="163" column="76" selection-start-line="163" selection-start-column="76" selection-end-line="163" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#11424#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#9113#9114#0" expanded="true" />
+            <element signature="e#9172#9173#0" expanded="true" />
           </folding>
         </state>
       </provider>
