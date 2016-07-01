@@ -19,27 +19,25 @@ import org.jgap.gp.terminal.*;
  * Example demonstrating Genetic Programming (GP) capabilities of JGAP.
  * Also demonstrates usage of ADF's.<br>
  * The problem is to find a formula for a given truth table (X/Y-pairs).
- * <p>
- * <ul>
  * <li>The setup of the GP is done in method main and specifically in method
  * create()</li>
  * <li>The problem solving process is started via gp.evolve(800) in the main
  * method, with 800 the maximum number of evolutions to take place.
  * <li>The evaluation of the evolved formula is done in fitness function
  * FormulaFitnessFunction, which is implemented in this class, MathProblem
- * </ul>
- * <br>
- * For details, please see the mentioned methods and the fitness function.
- * <p>
- * @author Klaus Meffert
- * @since 3.0
  */
+
 public class MathProblem
         extends GPProblem {
 
     private static Variable vx;
-    private static Float[] x = new Float[20];
-    private static float[] y = new float[20];
+    private static int dataPoints = 50;
+    private static Float[] x = new Float[dataPoints];
+    private static float[] y = new float[dataPoints];
+    private static int maxInitDepth = 4;
+    private static int maxCrossoverDepth = 8;
+    private static int Population = 1000;
+    private static int Generations = 800;
 
 
     public MathProblem(GPConfiguration a_conf)
@@ -119,13 +117,32 @@ public class MathProblem
         // Randomly initialize function data (X-Y table) for x^4+x^3+x^2-x
         // ---------------------------------------------------------------
 
-        for (int i = 0; i < 20; i++) {
-            float f = 8.0f * (random.nextFloat() - 0.3f);
+        for (int i = 0; i < dataPoints; i++) {
+//            float f = (float)(Math.random()-Math.random());
+            float f = 10f * (random.nextFloat() - 0.5f);
             x[i] = new Float(f);
-            y[i] = f * f * f * f + f * f * f + f * f - f + (float)Math.random() ;
+//            y[i] = f * f * f * f + f * f * f + f * f - f + (float)Math.random() ;
+            if (i<dataPoints/2)
+                y[i] = f + (float)Math.random() ;
+//            y[i] = (float)Math.sqrt((double)(1-f*f));
+            else
+                y[i] = f - (float)Math.random() ;
+// y[i] = -(float)Math.sqrt((double)(1-f*f));
 //            y[i] = (float) (java.lang.Math.sin(f));
-            System.out.println(i + ") " + x[i] + "   " + y[i]);
+            {
+                System.out.println(i + ") " + x[i] + "   " + y[i]);
+            }
         }
+//        x[0]=0f;
+//        y[0] =1f;
+//        x[1]=0f;
+//        y[1]=-1f;
+//        x[2]=1f;
+//        y[2]=0f;
+//        x[3]=-1f;
+//        y[3]=0f;
+        Plot_Graph plot = new Plot_Graph();
+        plot.draw(x, y);
         // Create genotype with initial population. Here, we use the declarations
         // made above:
         // Use one result-producing chromosome (index 0) with return type float
@@ -137,19 +154,10 @@ public class MathProblem
         // float (argTypes[1]) and exactly one function: Add3 (nodeSets[1]).
         // ------------------------------------------------------------------------
         return GPGenotype.randomInitialGenotype(conf, types, argTypes, nodeSets,
-                20, true);
+                dataPoints, true);
     }
 
-    /**
-     * Starts the example.
-     *
-     * @param args ignored
-     * @throws Exception
-     *
-     * @author Klaus Meffert
-     * @since 3.0
-     */
-    public void start(String args)
+    public static void main(String[] args)
             throws Exception {
         // Setup the algorithm's parameters.
         // ---------------------------------
@@ -158,9 +166,9 @@ public class MathProblem
         // a point score!
         // ----------------------------------------------------------------------
         config.setGPFitnessEvaluator(new DeltaGPFitnessEvaluator());
-        config.setMaxInitDepth(4);
-        config.setPopulationSize(1000);
-        config.setMaxCrossoverDepth(8);
+        config.setMaxInitDepth(maxInitDepth);
+        config.setPopulationSize(Population);
+        config.setMaxCrossoverDepth(maxCrossoverDepth);
         config.setFitnessFunction(new MathProblem.FormulaFitnessFunction());
         config.setStrictProgramCreation(true);
         GPProblem problem = new MathProblem(config);
@@ -174,14 +182,15 @@ public class MathProblem
         // if a satisfying result is found (fitness value almost 0), JGAP stops
         // earlier automatically.
         // --------------------------------------------------------------------
-        gp.evolve(500);
+        gp.evolve(Generations);
         // Print the best solution so far to the console.
         // ----------------------------------------------
         gp.outputSolution(gp.getAllTimeBest());
         // Create a graphical tree of the best solution's program and write it to
         // a PNG file.
         // ----------------------------------------------------------------------
-        problem.showTree(gp.getAllTimeBest(), "mathproblem_best.png");
+        problem.showTree(gp.getAllTimeBest(), "mathproblem_best donw.png");
+        System.out.println("DOME");
     }
 
     /**
@@ -202,7 +211,7 @@ public class MathProblem
             Object[] noargs = new Object[0];
             // Evaluate function for input numbers 0 to 20.
             // --------------------------------------------
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < dataPoints; i++) {
                 // Provide the variable X with the input number.
                 // See method create(), declaration of "nodeSets" for where X is
                 // defined.
@@ -239,5 +248,9 @@ public class MathProblem
             }
             return error;
         }
+    }
+
+    void printGraph() {
+
     }
 }

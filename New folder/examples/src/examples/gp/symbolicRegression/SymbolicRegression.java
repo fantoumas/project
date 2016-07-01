@@ -10,6 +10,7 @@
 import java.io.*;
 import java.util.*;
 
+import examples.gp.symbolicRegression.*;
 import org.apache.log4j.*;
 import org.jgap.*;
 import org.jgap.gp.*;

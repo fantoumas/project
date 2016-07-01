@@ -1137,17 +1137,6 @@ public class SymbolicRegression
         // -------------------
         System.out.println("Presentation: " + presentation);
 
-        if (outputVariable == null) {
-            outputVariable = numInputVariables;
-        }
-
-        if (variableNames == null) {
-            variableNames = new String[numInputVariables+1];
-            for(int i = 0; i < numInputVariables+1; i++) {
-                variableNames[i] = "V" + (i+1);
-            }
-        }
-
         System.out.println("output_variable: " + variableNames[outputVariable] + " (index: " + outputVariable + ")" );
 
 

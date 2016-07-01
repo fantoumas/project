@@ -536,11 +536,11 @@ public class GPGenotype
             if (m_verbose) {
                 if (i % 25 == 0) {
                     String freeMB = SystemKit.niceMemory(SystemKit.getFreeMemoryMB());
-//                    LOGGER.info("Evolving generation "
-//                            + (i + offset)
-//                            + ", memory free: "
-//                            + freeMB
-//                            + " MB");
+                    LOGGER.info("Evolving generation "
+                            + (i + offset)
+                            + ", memory free: "
+                            + freeMB
+                            + " MB");
                 }
             }
             evolve();
