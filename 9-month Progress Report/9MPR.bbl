@@ -1,0 +1,193 @@
+\begin{thebibliography}{10}
+
+\bibitem{Aho06}
+A.~V. Aho, M.~S. Lam, R.~Sethi, and J.~D. Ullman.
+\newblock {\em {Compilers: Principles, Techniques, and Tools (2nd Edition)}}.
+\newblock Addison Wesley, 2 edition, Aug. 2006.
+
+\bibitem{DBLP:conf/birthday/ApostolicoB97}
+A.~Apostolico and D.~Breslauer.
+\newblock Of periods, quasiperiods, repetitions and covers.
+\newblock In {\em Structures in Logic and Computer Science}, pages 236--248,
+  1997.
+
+\bibitem{162414}
+A.~Apostolico and A.~Ehrenfeucht.
+\newblock Efficient detection of quasiperiodicities in strings.
+\newblock {\em Theor. Comput. Sci.}, 119(2):247--265, 1993.
+
+\bibitem{BannaiIST03}
+H.~Bannai, S.~Inenaga, A.~Shinohara, and M.~Takeda.
+\newblock Inferring strings from graphs and arrays.
+\newblock In B.~Rovan and P.~Vojt{\'a}s, editors, {\em Mathematical Foundations
+  of Computer Science}, volume 2747 of {\em Lecture Notes in Computer Science},
+  pages 208--217. Springer, 2003.
+
+\bibitem{DBLP:journals/ipl/Breslauer92}
+D.~Breslauer.
+\newblock An on-line string superprimitivity test.
+\newblock {\em Inf. Process. Lett.}, 44(6):345--347, 1992.
+
+\bibitem{SPIRE_2011}
+M.~Christou, M.~Crochemore, T.~Flouri, C.~S. Iliopoulos, B.~Melichar, and S.~P.
+  Pissis.
+\newblock Computing all the subtree repeats in ordered ranked trees.
+\newblock In {\em Proceedings of the 18th International Symposium on String
+  Processing and Information Retrieval}, Lecture Notes in Computer Science.
+  Springer, 2011.
+\newblock (accepted).
+
+\bibitem{COCOON_2011}
+M.~Christou, M.~Crochemore, O.~Guth, C.~S. Iliopoulos, and S.~P. Pissis.
+\newblock On the right-seed array of a string.
+\newblock In {\em Proceedings of the 17th Annual International Computing and
+  Combinatorics Conference (COCOON'11)}, Lecture Notes in Computer Science.
+  Springer, 2011.
+\newblock (accepted).
+
+\bibitem{cpm_2011}
+M.~Christou, M.~Crochemore, C.~S. Iliopoulos, M.~Kubica, S.~P. Pissis,
+  J.~Radoszewski, W.~Rytter, B.~Szreder, and T.~Walen.
+\newblock Efficient seed computation revisited.
+\newblock In {\em Proceedings of the 22nd Annual Symposium on Combinatorial
+  Pattern Matching (CPM 2011)}, Lecture Notes in Computer Science. Springer,
+  2011.
+\newblock (accepted).
+
+\bibitem{CCR09-pref}
+J.~Clement, M.~Crochemore, and G.~Rindone.
+\newblock Reverse engineering prefix tables.
+\newblock In S.~Albers and J.-Y. Marion, editors, {\em 26th International
+  Symposium on Theoretical Aspects of Computer Science (STACS 2009)}, pages
+  289--300, Dagstuhl, Germany, 2009. Schloss Dagstuhl - Leibniz-Zentrum fuer
+  Informatik, Germany.
+\newblock http://drops.dagstuhl.de/opus/volltexte/2009/1825.
+
+\bibitem{C81}
+M.~Crochemore.
+\newblock An optimal algorithm for computing the repetitions in a word.
+\newblock {\em Inf. Process. Lett.}, 12(5):244--250, 1981.
+
+\bibitem{CL07}
+M.~Crochemore, C.~Hancart, and T.~Lecroq.
+\newblock {\em Algorithms on Strings}.
+\newblock Cambridge University Press, New York, NY, USA, 2007.
+
+\bibitem{CIPT10}
+M.~Crochemore, C.~Iliopoulos, S.~Pissis, and G.~Tischler.
+\newblock Cover array string reconstruction.
+\newblock In A.~Amir and L.~Parida, editors, {\em Combinatorial Pattern
+  Matching}, volume 6129 of {\em Lecture Notes in Computer Science}, pages
+  251--259. Springer Berlin / Heidelberg, 2010.
+
+\bibitem{Downey80}
+P.~J. Downey, R.~Sethi, and R.~E. Tarjan.
+\newblock Variations on the common subexpression problem.
+\newblock {\em J. ACM}, 27:758--771, October 1980.
+
+\bibitem{Dubiner94}
+M.~Dubiner, Z.~Galil, and E.~Magen.
+\newblock Faster tree pattern matching.
+\newblock {\em J. ACM}, 41:205--213, March 1994.
+
+\bibitem{DLL05jalc}
+J.-P. Duval, T.~Lecroq, and A.~Lefebvre.
+\newblock Border array on bounded alphabet.
+\newblock {\em Journal of Automata, Languages and Combinatorics}, 10(1):51--60,
+  2005.
+
+\bibitem{Flajolet90}
+P.~Flajolet, P.~Sipala, and J.-M. Steyaert.
+\newblock Analytic variations on the common subexpression problem.
+\newblock In {\em Proceedings of the seventeenth international colloquium on
+  Automata, languages and programming}, pages 220--234, New York, NY, USA,
+  1990. Springer-Verlag New York, Inc.
+
+\bibitem{FGLRSSY02}
+F.~Franek, S.~Gao, W.~Lu, P.~J. Ryan, W.~F. Smyth, Y.~Sun, and L.~Yang.
+\newblock Verifying a {B}order array in linear time.
+\newblock {\em J. Combinatorial Math. and Combinatorial Computing},
+  42:223--236, 2002.
+
+\bibitem{FS06}
+F.~Franek and W.~F. Smyth.
+\newblock Reconstructing a {S}uffix {A}rray.
+\newblock {\em J. Foundations of Computer Sci.}, 17(6):1281--1295, 2006.
+
+\bibitem{Grossi93}
+R.~Grossi.
+\newblock On finding commong subtrees.
+\newblock {\em Theor. Comput. Sci.}, 108(2):345--356, 1993.
+
+\bibitem{Guillemot}
+S.~Guillemot and F.~Nicolas.
+\newblock Solving the maximum agreement subtree and the maximum compatible tree
+  problems on many bounded degree trees.
+\newblock {\em CoRR}, abs/0802.0024, 2008.
+
+\bibitem{Hoffmann}
+C.~M. Hoffmann and M.~J. O'Donnell.
+\newblock Pattern matching in trees.
+\newblock {\em J. ACM}, 29:68--95, January 1982.
+
+\bibitem{iliopoulos1996work}
+C.~Iliopoulos and K.~Park.
+\newblock {A work-time optimal algorithm for computing all string covers}.
+\newblock {\em Theoretical Computer Science}, 164(1-2):299--310, 1996.
+
+\bibitem{Iliopoulos96}
+C.~S. Iliopoulos, D.~W.~G. Moore, and K.~Park.
+\newblock Covering a string.
+\newblock {\em Algorithmica}, 16:289--297, Sept. 1996.
+
+\bibitem{Karp72}
+R.~M. Karp, R.~E. Miller, and A.~L. Rosenberg.
+\newblock Rapid identification of repeated patterns in strings, trees and
+  arrays.
+\newblock In {\em Proceedings of the fourth annual ACM symposium on Theory of
+  computing}, STOC '72, pages 125--136, New York, NY, USA, 1972. ACM.
+
+\bibitem{KMP}
+D.~E. Knuth, J.~H.~M. Jr., and V.~R. Pratt.
+\newblock Fast pattern matching in strings.
+\newblock {\em SIAM J. Comput.}, 6(2):323--350, 1977.
+
+\bibitem{Kosaraju89}
+S.~R. Kosaraju.
+\newblock Efficient tree pattern matching.
+\newblock In {\em Proceedings of the 30th Annual Symposium on Foundations of
+  Computer Science}, pages 178--183, Washington, DC, USA, 1989. IEEE Computer
+  Society.
+
+\bibitem{Kuboyama07}
+T.~Kuboyama.
+\newblock {\em Matching and Learning in Trees}.
+\newblock PhD thesis, University of Tokyo, 2007.
+
+\bibitem{cover_bill}
+Y.~Li and W.~F. Smyth.
+\newblock Computing the cover array in linear time.
+\newblock {\em Algorithmica}, 32(1):95--106, 2002.
+
+\bibitem{Lot01}
+M.~Lothaire, editor.
+\newblock {\em Algebraic Combinatorics on Words}.
+\newblock Cambridge University Press, 2001.
+
+\bibitem{Lot05}
+M.~Lothaire, editor.
+\newblock {\em Appplied Combinatorics on Words}.
+\newblock Cambridge University Press, 2005.
+
+\bibitem{Mauri05}
+G.~Mauri and G.~Pavesi.
+\newblock Algorithms for pattern matching and discovery in rna secondary
+  structure.
+\newblock {\em Theor. Comput. Sci.}, 335:29--51, May 2005.
+
+\bibitem{moore1994optimal}
+D.~Moore and W.~Smyth.
+\newblock {An optimal algorithm to compute all the covers of a string}.
+\newblock {\em Information Processing Letters}, 50(5):239--246, 1994.
+
+\end{thebibliography}

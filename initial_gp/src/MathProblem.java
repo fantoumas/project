@@ -9,11 +9,18 @@
  */
 
 import java.util.*;
+
+import matlabcontrol.MatlabConnectionException;
+import matlabcontrol.MatlabProxy;
+import matlabcontrol.MatlabProxyFactory;
+import matlabcontrol.MatlabProxyFactoryOptions;
 import org.jgap.*;
 import org.jgap.gp.*;
 import org.jgap.gp.function.*;
 import org.jgap.gp.impl.*;
 import org.jgap.gp.terminal.*;
+import matlabcontrol.extensions.MatlabTypeConverter;
+
 
 /**
  * Example demonstrating Genetic Programming (GP) capabilities of JGAP.
@@ -38,10 +45,12 @@ public class MathProblem
     private static int maxCrossoverDepth = 8;
     private static int Population = 1000;
     private static int Generations = 800;
+    private float error = 0f;
+    static MatlabControl mc = new MatlabControl();
 
 
     public MathProblem(GPConfiguration a_conf)
-            throws InvalidConfigurationException {
+            throws InvalidConfigurationException, MatlabConnectionException {
         super(a_conf);
     }
 
@@ -116,31 +125,23 @@ public class MathProblem
         Random random = new Random();
         // Randomly initialize function data (X-Y table) for x^4+x^3+x^2-x
         // ---------------------------------------------------------------
-
         for (int i = 0; i < dataPoints; i++) {
 //            float f = (float)(Math.random()-Math.random());
-            float f = 10f * (random.nextFloat() - 0.5f);
+            float f = 100f * random.nextFloat();
             x[i] = new Float(f);
 //            y[i] = f * f * f * f + f * f * f + f * f - f + (float)Math.random() ;
-            if (i<dataPoints/2)
-                y[i] = f + (float)Math.random() ;
-//            y[i] = (float)Math.sqrt((double)(1-f*f));
-            else
-                y[i] = f - (float)Math.random() ;
-// y[i] = -(float)Math.sqrt((double)(1-f*f));
-//            y[i] = (float) (java.lang.Math.sin(f));
-            {
-                System.out.println(i + ") " + x[i] + "   " + y[i]);
+            if (i<dataPoints/2) {
+                y[i] = f ;
             }
+//            y[i] = (float)Math.sqrt((double)(1-f*f));
+            else {
+                y[i] = f - (float)Math.random() ;
+            }
+// y[i] = -(float)Math.sqrt((double)(1-f*f));
+            error+= Math.abs(x[i] - y[i]);
+            System.out.println(i + ") " + x[i] + "   " + y[i]);
         }
-//        x[0]=0f;
-//        y[0] =1f;
-//        x[1]=0f;
-//        y[1]=-1f;
-//        x[2]=1f;
-//        y[2]=0f;
-//        x[3]=-1f;
-//        y[3]=0f;
+        System.out.println("error " + error/dataPoints);
         Plot_Graph plot = new Plot_Graph();
         plot.draw(x, y);
         // Create genotype with initial population. Here, we use the declarations
@@ -159,6 +160,10 @@ public class MathProblem
 
     public static void main(String[] args)
             throws Exception {
+//
+        mc.eval(new String("x=5;"));
+//        mc.eval(new String("sqrt(x)"));
+
         // Setup the algorithm's parameters.
         // ---------------------------------
         GPConfiguration config = new GPConfiguration();
@@ -241,6 +246,7 @@ public class MathProblem
                     throw ex;
                 }
             }
+            error = error/dataPoints;
             // In case the error is small enough, consider it perfect.
             // -------------------------------------------------------
             if (error < 0.001) {

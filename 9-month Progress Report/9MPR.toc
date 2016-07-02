@@ -1,0 +1,22 @@
+\contentsline {section}{\numberline {1}Introduction}{6}
+\contentsline {section}{\numberline {2}Left-seed and right-seed arrays}{6}
+\contentsline {subsection}{\numberline {2.1}Introduction}{6}
+\contentsline {subsection}{\numberline {2.2}Definitions and Problems}{8}
+\contentsline {subsection}{\numberline {2.3}Properties}{10}
+\contentsline {subsection}{\numberline {2.4}The algorithms}{12}
+\contentsline {subsubsection}{\numberline {2.4.1}Computing the minimal and the maximal left-seed array}{12}
+\contentsline {subsubsection}{\numberline {2.4.2}Computing the minimal and the maximal right-seed array}{14}
+\contentsline {section}{\numberline {3}Subtree repeats}{23}
+\contentsline {subsection}{\numberline {3.1}Preliminaries}{24}
+\contentsline {subsection}{\numberline {3.2}Properties of trees in postfix notation}{26}
+\contentsline {subsection}{\numberline {3.3}Algorithms}{29}
+\contentsline {subsubsection}{\numberline {3.3.1}Preprocessing}{29}
+\contentsline {subsubsection}{\numberline {3.3.2}Finding subtree repeats}{30}
+\contentsline {subsubsection}{\numberline {3.3.3}Solving the problem for labelled ordered ranked trees}{33}
+\contentsline {subsection}{\numberline {3.4}Experiments}{33}
+\contentsline {section}{\numberline {4}Conclusion and Further Work}{34}
+\let \numberline \tmptocnumberline 
+\contentsline {section}{\numberline {Appendix \nobreakspace {}A}Additional details for the Subtree repeats problem}{39}
+\contentsline {subsection}{\numberline {Appendix \nobreakspace {}A.1}Preprocessing phase}{39}
+\contentsline {subsection}{\numberline {Appendix \nobreakspace {}A.2}Example}{40}
+\contentsline {subsection}{\numberline {Appendix \nobreakspace {}A.3}Procedures for labelled ordered ranked trees}{42}

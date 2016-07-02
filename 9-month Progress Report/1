@@ -1,0 +1,515 @@
+%% This is file `elsarticle-template-1-num.tex',
+%%
+%% Copyright 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%%
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%%
+%% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
+%% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
+%%
+\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{graphics}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{theorem}
+\usepackage{subfig}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{cancel}
+\usepackage[lined]{algorithm2e}
+\usepackage{cmmib57}
+\usepackage{array}
+\usepackage{amssymb}
+\newcommand{\ypBigoh}{\mathcal{O}}
+\newcommand{\BO}{\mathcal{O}}
+\def\dd{\mathinner{.\,.}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{problem}{Problem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\long\def\symbolfootnote[#1]#2{\begingroup%
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup} 
+
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+\journal{IJSBBT} 
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\title{Mapping short reads to a genomic sequence with circular structure
+\symbolfootnote[1]{A preliminary version of this paper appeared in the Proceedings of the 
+International Conference on Information Technology and Applications in Biomedicine (ITAB 2010), 2010.}}
+
+%% use optional labels to link authors explicitly to addresses:
+\author[label1]{Tom\'{a}\v{s} Flouri}
+\author[label2,label3]{Jacqueline W. Daykin}
+\author[label3,label4]{Costas S. Iliopoulos}
+\author[label4]{Solon P. Pissis}
+\author[label5]{German Tischler}
+
+\address[label1]{Czech Technical University in Prague, Faculty of Information Technology, Dept. of Theoretical Computer Science, Czech Republic} 
+\address[label2]{Royal Holloway, Dept. of Computer Science, UK}
+\address[label3]{King's College London, Dept. of Informatics, UK}
+\address[label4]{Curtin University, Digital Ecosystems \& Business Intelligence Institute, Center for Stringology \& Applications, Australia}
+\address[label5]{University of W\"{u}rzburg, Lehrstuhl f{\"u}r Informatik II, Germany}
+
+\begin{abstract}
+The constant advances in sequencing technology are turning whole-genome sequencing 
+into a routine procedure, resulting in massive amounts of data that need to be processed. 
+Tens of gigabytes of data in the form of short sequences (reads) need to be mapped back 
+to reference sequences, a few gigabases long. 
+A first generation of short-read alignment algorithms successfully employed hash tables, and the current
+second generation uses the Burrows-Wheeler Transformation, further improving speed and memory footprint.
+
+These next-generation sequencing technologies allow researchers to characterise a bacterial genome 
+during a single experiment and at a moderate cost. In this article, as most of the bacterial chromosomes 
+contain a circular DNA molecule, we present a simple, yet efficient, 
+accurate and sensitive algorithm, specifically designed for mapping millions of short reads to 
+a genomic sequence with circular structure. 
+\end{abstract}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+next-generation sequencing  \sep algorithms on strings \sep circular pattern matching
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+% \linenumbers
+
+%% main text
+\section{Introduction} \label{intro}
+
+Sequencing technology has come a long way since the time when traditional sequencing techniques required 
+many laboratories around the world to cooperate for years in order to sequence the human genome for the first time.
+The traditional Sanger-based sequencing methods, developed in the mid 70's, had been the workhorse 
+technology for DNA sequencing for almost 30 years~\cite{SC75,SC77}. 
+
+Nowadays, next-generation sequencing technologies have reduced the task of sequencing a 
+whole genome to a matter of days or even hours, and the cost has decreased by orders of magnitude, making it an 
+accessible experimental procedure to many labs~\cite{seqncingReview}. This opened the door for 
+\emph{re-sequencing} to start becoming a more routine procedure, as it finds many applications in the detection 
+of genetic variability among individuals. Thus, it can help us understand the extent of that variability, 
+and also identify specific variants, alternative splicing sites and patterns, epigenetic effects, and 
+relate them to gene regulation and expression, as well as to diseases (\cite{1kgenomes},~\cite{gsnap},~\cite{methylome},~\cite{monogenic}). 
+Thus, {DNA} sequencing is quickly becoming a powerful tool in diagnostic medicine, and eventually personalized treatment~\cite{seqncingReview}.
+
+The data resulting from a single sequencing experiment can be quite large, and it is not uncommon to have data 
+from multiple experiments. This trend of increasing availability of sequencing data will continue as projects 
+even more ambitious than the 1000 Genomes Project~\cite{1kgenomes} start to materialize.
+According to their respective websites, typical output sizes for the three main next-generation sequencing 
+platforms -- 454/Roche, ABI SOLiD, and Illumina GA -- are millions of reads ranging in size from $25$bp to $400$bp.
+In most cases these reads are too short to be directly assembled, especially in the presence of repetitive regions~\cite{NGassmblReview}, 
+therefore a reference sequence is usually required. 
+
+Mapping so many short reads onto a reference sequence is a very challenging task that cannot be 
+adequately carried out by traditional search and alignment algorithms~\cite{BLAT} like BLAST~\cite{BLAST} and 
+FASTA~\cite{FASTA}, so a broad array of programs (\cite{SeqMap},~\cite{SOAP2}~\cite{Bowtie},~\cite{BWT},~\cite{REAL}) 
+has been published to address this task, placing emphasis on different aspects of the challenge. 
+The different algorithms implement various combinations of innovations 
+and trade-offs, to address computing speed, system resources requirements, and biological relevance and accuracy 
+of the computed results.
+
+Unlike the linear DNA of vertebrates, strain or species of bacteria with circular organization of their chromosomes or plasmids, are the most common. 
+Until towards the end of the 1980s, when the technology for examining chromosomes and plasmids improved, all bacteria 
+were thought to have a single circular chromosome~\cite{Cole}. In fact, not all bacteria have a single circular chromosome; 
+some bacteria have multiple circular chromosomes~\cite{Suwanto1989a,Suwanto1989b,Suwanto1992a,Suwanto1992b}, and many bacteria 
+have linear chromosomes and linear plasmids~\cite{Volff2000}. Bacterial genomes range in size from about $160,000$bp to $12,200,000$bp, 
+depending on the type considered~\cite{Nakabachi2006}.
+
+In this article, as most of the bacterial chromosomes contain a circular DNA molecule, we present a simple, yet efficient, 
+accurate and sensitive algorithm, specifically designed for mapping millions of short reads to a genomic sequence with circular structure.
+In particular, we define this problem as a \emph{circular pattern matching} (CPM) problem, reduce it to a classical pattern matching problem,
+and make use of REAL, the read aligner proposed in~\cite{REAL}, to efficiently map the reads to the genomic sequence. 
+
+The remainder of the paper is structured as follows. Section~\ref{sec:definitions} presents the basic definitions that are used throughout the paper. 
+In Section~\ref{sec:problem}, we formally define the problem solved in this paper. Section~\ref{sec:algorithm} presents the CPM
+algorithm for mapping short reads to a genomic sequence with circular structure. 
+Finally, in Section~\ref{sec:results}, we present extensive experimental results, which demonstrate the importance of the proposed approach compared to more 
+traditional approaches, and we briefly conclude in Section~\ref{sec:conclusion} with some future proposals.
+
+\section{Basic Definitions} \label{sec:definitions}
+
+A \textit{string} or \textit{sequence} is a succession of zero or more
+symbols from an alphabet $\Sigma$ of cardinality \textit{s}; the string
+with zero symbols is denoted by $\epsilon$. The set of all strings over
+the alphabet $\Sigma$ including $\epsilon$, is denoted by $\Sigma^*$. 
+The set $\Sigma^{+}$ is defined as $\Sigma^{+}=\Sigma^{*}\setminus \{\epsilon\}$.
+A string $x$ of length $m$ is represented by 
+$x[0\dd m-1]$, where $x[i]\in \Sigma$ for $0 \leq i < m$.
+The length of a string $x$ is denoted by $|x|$. We say that
+$\Sigma$ is \textit{bounded} when $s$ is a constant, \textit{unbounded}
+otherwise. A string $w$ is a factor of $x$ if $x=uwv$ for $u, v \in \Sigma^*$. 
+It is a {\em prefix} of $x$ if $u$ is empty and a {\em suffix} of $x$
+if $v$ is empty. We use $C(x)$ to denote the circular string formed from $x$ by 
+concatenating $x[0]$ at the right of $x[|x|-1]$ -- thus turning $x$ into a string 
+that has neither a leftmost nor a rightmost position.
+
+Let $x$ be a nonempty string and $y$ be a string, we say that there is an \emph{occurrence}
+of $x$ in $y$, or, more simply, that $x$ occurs in $y$, when $x$ is a factor of $y$.
+Every occurrence of $x$ can be characterised by a position on $y$. Thus we say
+that an occurrence of $x$ \emph{starts} at position $i$ on $y$ when $y[i..i + |x| − 1] = x$.
+It is sometimes more suitable to consider the position $i + |x| − 1$ at which
+this occurrence \emph{ends}.
+
+The Hamming distance $\delta_H$ is defined only for strings of the same length. For
+two strings $x$ and $y$, $\delta_H(x, y)$ is the number of places in which the two strings
+differ, i.e. have different characters. 
+Let $x$ be a nonempty string and $y$ be a string, we say that
+$x$ occurs in $y$ with at most $k$-mismatches, if there exists a factor of $y$, say $w$, such that $\delta_H(x, w)\leq k$.
+
+\section {Problem definition} \label{sec:problem}
+We denote the generated short reads as the set $p_1,p_2,...,p_{r}$, and we call them \textit{patterns}.
+Notice that $r$ is a very large natural number ($r > 10^6$).  The length $m$ of each pattern, generated by 
+the next-generation Illumina GA, is currently typically between $25$ and $100$ bp long. 
+We denote the circular genomic sequence of length $n$, typically $n>10^6$, as $C(t)$.
+
+\begin{problem}[Circular pattern matching]
+Given a set of patterns $p_1,p_2,...,p_{r}$, each of length $m$, with $p_i \in \Sigma^*$, $\Sigma=\{A,C,G,T\}$, 
+and a text $C(t)$ of length $n$, with $C(t) \in \Sigma^*$, find whether $p_i$, for all $1 \leq i \leq r$, 
+occurs in $C(t)$, with at most $k$-mismatches.
+\end{problem}
+
+\section{The {\sc CPM} algorithm} \label{sec:algorithm}
+An outline of the proposed {\sc CPM} algorithm is as follows.
+
+\begin{enumerate}
+\item{Linearise $C(t)$ by splitting it at a random point along the sequence.}
+\item{Convert the linear sequence to a new sequence that is equivalent to $C(t)$.}
+\item{Make use of REAL to map the patterns to the new sequence.}
+\end{enumerate}
+
+The idea is to first find a way to convert the circular genomic sequence $C(t)$ to a linear sequence $t'$, that is equivalent 
+to the circular one, thereby reducing the problem to a classical pattern matching problem, where we need 
+to find all the occurrences of a given pattern $p$ in text $t'$, with at most $k$-mismatches.
+
+This is accomplished by first splitting $C(t)$ at an arbitrary point along the sequence. The outcome of this 
+process is a linear sequence $t=t[0\dd n-1]$ with two extremities; the leftmost position, which is the start of the sequence, and the rightmost position, 
+which is the end of the sequence. The resulting linear sequence $t$ is still not equivalent to the original sequence, since there is a possibility of some 
+of the patterns occurring at the point $C(t)$ was split. To make the sequence $t$ equivalent to the circular sequence $C(t)$, 
+we copy the prefix of length $m-1$ of $t$, i.e. $t[0\dd m-2]$, and append it to the end of $t$ as a suffix, resulting in a new sequence 
+$t'=t[0\dd n]t[0\dd m-2]$, which is equivalent to $C(t)$. We have now reduced the problem to finding whether pattern $p_i$, for all $1 \leq i \leq r$, 
+occurs in $t'= t'[0\dd n+m-2]$, with at most $k$-mismatches.
+
+\begin{example}
+The circular sequence $C(t)$, shown in Fig.~\ref{fig:circular_seq}, illustrates this process; when $C(t)$ is split at the point the arrows touch, 
+it produces a sequence $t$=TGCACATGGTGCGTACCTTGG. Suppose we have a pattern $p=$GGTGC. Then, we have a match with $C(t)$, 
+but we do not have a match with the linearised sequence $t$, due to the pattern occurring across the split. A linearised sequence covering 
+all possible sequences across the split, for patterns of length $m = 5$, can be obtained by copying the first $4$ symbols, i.e. $t[0..3]$=TGCA, and 
+appending them to $t$. The outcome of this procedure is a sequence $t'$=TGCACATGGTGCGTACCTTGGTGCA, which covers every possible match 
+position around $C(t)$.   
+\end{example}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=6cm]{circular-sequence.ps}
+\caption{Circular sequence $C(t)$. The point where the arrow head touches the oval arrow is where the sequence is split. 
+To map a pattern $p$ of length $m$ to this sequence, the first $m-1$ symbols of the sequence are taken from 
+the point of the split starting at $t[0]$ and added to the end $t[n-1]$.}
+\label{fig:circular_seq}
+\end{center}
+\end{figure}
+
+REAL is based on a new, relatively simple, algorithm for the alignment of short
+reads to the reference sequence. It uses two-bits-per-base encoding of the DNA
+alphabet for both the reference and the short reads. It preprocesses the genomic
+sequence using word-level operations and radix-sort, by creating an index of sorted factors of 
+the genomic sequence based on the length of the reads. It then considers approximate 
+string matching by the well known procedure called \emph{filtration or partitioning into exact matches}~\cite{Navarro}. 
+Let $x \in \Sigma$ be a pattern of length $m$. We want to find occurrences of $x$ in the text $y$ 
+with up to $k$-mismatches. Partitioning into exact matches works as follows.
+
+We partition $x$ into $q > k$ fragments $x_0,\ldots,x_{q-1} \in \Sigma^+$. 
+We search the lists occurrences $X_i$ of $x_i$ . For each of the possibilities of choosing $q - k$ of the $q$
+fragments, we merge the respective lists of positions using the respective position
+offsets. This provides us with $\binom{q}{q - k}$ candidate position lists. The union $X$ of these
+merged lists is a superset of the positions of occurrences of $x$ in $y$ with up to
+$k$-mismatches. We obtain the list of occurrences of $x$ in $y$ by filtering $X$ using
+an online algorithm for testing if the candidate positions designate occurrences
+with at most $k$-mismatches.
+
+\begin{example}
+Consider searching for a pattern $x$ with at most one mismatch. We partition $x$ into three fragments: $x_0$ , $x_1$, and $x_2$. 
+We have to consider three pairs of fragments: $(x_0 , x_1 )$, $(x_1 , x_2 )$ and $(x_0 , x_2 )$. The first two combinations are
+easily found using an index for $y$. We need only to search for the patterns $x_0x_1$ and $x_1x_2$.
+The third requires merging of lists in the conventional scheme.
+\end{example}
+
+
+
+\section{Experimental Results} \label{sec:results}
+
+The proposed \emph{CPM} algorithm was implemented in \emph{Perl} and \emph{C++} programming language, and was developed under GNU/Linux operating system. 
+The algorithm is implemented in such a way that it does not necessarily load the whole genomic sequence in memory. Instead, it loads blocks of the genomic sequence 
+depending on the the physical memory of the individual machine. Concerning the storage used for indexing, no additional hard disk space is necessary, 
+as it does not store an index of the genomic sequence. The programme takes as input arguments, a file with the reference sequence, in FASTA format, 
+and a file with the short reads, either in FASTA or in FASTQ format, and then produces a SOAP-like tab-delimited text file with the hits, as output.
+
+In order to check the efficiency of \emph{CPM}, we compared its performance to the respective performance of SOAP2 (v$2.20$)~\cite{SOAP2}
+and Bowtie (v$0.2.17$)~\cite{Bowtie}, which are, up-to-date, two of the most popular and efficient known read aligners. 
+As a reference, we used the single circular chromosome of \emph{Bradyrhizobium japonicum} ($9,105,828$bp), obtained from~\cite{bra}. 
+The short reads were obtained by simulating $9,105,777$ $52$bp-long reads from the same sequence. 
+In each case, effort was made to make the two programmes run in as much similar 
+way as possible, so that the speed and sensitivity comparisons are fair. Thus, SOAP2 and Bowtie were always given the modifier 
+\texttt{-l <INT>}, to adjust the seed length to be equal to the seed length of \emph{CPM}. 
+Furthermore, the programmes were set to report only best (non-repetitive) hits, otherwise SOAP2 results would be chosen at random 
+between equal hits. In SOAP2, this was achieved with the use of \texttt{-M 4 -r 0} modifiers, and in Bowtie with the use of \texttt{--best}. 
+
+As it is demonstrated by the results in Table~\ref{tab:1}, \emph{CPM} and SOAP2 are able to complete the assignment much faster than Bowtie. 
+\emph{CPM} finished in 4m26s, SOAP2 in 4m13s, while Bowtie in 9m16s. In terms of sensitivity, \emph{CPM} reports a higher amount of aligned reads 
+compared to SOAP2 and Bowtie. Due to the fact that the reads are simulated, and hence, we are able to know the exact location they derived from, 
+we measured the accuracy of each programme, by checking whether the reads were mapped back to the exact same location.
+As it is demonstrated by the results in Table~\ref{tab:1}, \emph{CPM} and SOAP2 have higher accuracy than Bowtie.
+
+\begin{table}
+\caption{Mapping $9,105,777$ $52$bp-long simulated reads to the \emph{Bradyrhizobium japonicum} genome}
+\label{tab:1}
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|} \hline
+Program & \multicolumn{2}{|c|}{Total time} & Reads aligned & Accuracy\\ \cline{2-3}
+& Indexing & Mapping & &\\ \hline
+SOAP2                   & 0m22s & 3m51s & 8,746,116 & 99,99\% \\ \hline
+Bowtie                  & 0m16s & 9m00s & 8,248,842 & 98,78\% \\ \hline
+\emph{CPM}              & 0m00s & 4m26s & 8,747,172 & 99,99\% \\ \hline
+\end{tabular}
+\end{center}
+{\noindent\small{All programmes were run with $32$bp-long seed, with up to $3$ mismatches, and reported best hits only.}}
+\end{table}
+
+Similar results are obtained in Tables~\ref{tab:2}--\ref{tab:4}; in Table~\ref{tab:2}, for mapping $3,294,805$ $64$bp-long simulated reads to the 
+\emph{Brucella melitensis 16M} genome, obtained from~\cite{bru}, which consists of two circular chromosomes ($2,124,241$bp and $1,162,204$bp); in Table~\ref{tab:3}, for mapping 
+$6,264,333$ $72$bp-long simulated reads to the single circular chromosome of \emph{Pseudomonas aeruginosa PAO1} ($6,264,403$bp), obtained from~\cite{pse}; in Table~\ref{tab:4}, 
+for mapping $3,294,805$ $64$bp-long simulated reads to the single circular chromosome of \emph{Xylella fastidiosa M12} ($2,475,130$bp), obtained from~\cite{xyl}.
+
+\begin{table}
+\caption{Mapping $3,294,805$ $64$bp-long simulated reads to the \emph{Brucella melitensis 16M} genome}
+\label{tab:2}
+\begin{center}
+\begin{tabular}{|l|l|l|l|} \hline
+Program & \multicolumn{2}{|c|}{Total time} & Reads aligned \\ \cline{2-3}
+& Indexing & Mapping & \\ \hline
+SOAP2                   & 0m17s & 1m26s & 3,214,557 \\ \hline
+Bowtie                  & 0m05s & 2m56s & 2,962,644 \\ \hline
+\emph{CPM}              & 0m00s & 2m10s & 3,214,472 \\ \hline
+\end{tabular}
+\end{center}
+{\noindent\small{All programmes were run with $32$bp-long seed, with up to $3$ mismatches, and reported best hits only.}}
+\end{table}
+
+\begin{table}
+\caption{Mapping $6,264,333$ $72$bp-long simulated reads to the \emph{Pseudomonas aeruginosa PAO1} genome}
+\label{tab:3}
+\begin{center}
+\begin{tabular}{|l|l|l|l|} \hline
+Program & \multicolumn{2}{|c|}{Total time} & Reads aligned \\ \cline{2-3}
+& Indexing & Mapping & \\ \hline
+SOAP2                   & 0m19s & 3m36s & 6,035,526 \\ \hline
+Bowtie                  & 0m10s & 7m46s & 4,896,047 \\ \hline
+\emph{CPM}              & 0m00s & 3m17s & 6,037,765 \\ \hline
+\end{tabular}
+\end{center}
+{\noindent\small{All programmes were run with $32$bp-long seed, with up to $4$ mismatches, and reported best hits only.}}
+\end{table}
+
+\begin{table}
+\caption{Mapping $2,475,055$ $76$bp-long simulated reads to the \emph{Xylella fastidiosa M12} genome}
+\label{tab:4}
+\begin{center}
+\begin{tabular}{|l|l|l|l|} \hline
+Program & \multicolumn{2}{|c|}{Total time} & Reads aligned \\ \cline{2-3}
+& Indexing & Mapping & \\ \hline
+SOAP2                   & 0m15s & 1m14s & 2,255,798 \\ \hline
+Bowtie                  & 0m04s & 2m45s & 1,918,988 \\ \hline
+\emph{CPM}              & 0m00s & 1m13s & 2,257,124 \\ \hline
+\end{tabular}
+\end{center}
+{\noindent\small{All programmes were run with $32$bp-long seed, with up to $5$ mismatches, and reported best hits only.}}
+\end{table}
+
+As a last experiment, we compared the performance of \emph{CPM} to the respective performance of SOAP2 and Bowtie, 
+for mapping $5,288,154$ $36$bp-long real reads, obtained from European Nucleotide Archive, to the single circular chromosome of Escherichia coli str. K-12 substr. MG1655, 
+obtained from the GenBank database. By the results in Table~\ref{tab:5}, no difference is observed concerning the efficiency, while Bowtie appears to be more sensitive than 
+\emph{CPM} and SOAP2. 
+
+\begin{table}
+\caption{Mapping $5,288,154$ $36$bp-long reads to the \emph{Xylella fastidiosa M12} genome}
+\label{tab:5}
+\begin{center}
+\begin{tabular}{|l|l|l|l|} \hline
+Program & \multicolumn{2}{|c|}{Total time} & Reads aligned \\ \cline{2-3}
+& Indexing & Mapping & \\ \hline
+SOAP2                   & 0m18s & 2m14s & 3,532,761 \\ \hline
+Bowtie                  & 0m07s & 6m20s & 3,646,029 \\ \hline
+\emph{CPM}              & 0m00s & 2m30s & 3,255,228 \\ \hline
+\end{tabular}
+\end{center}
+{\noindent\small{All programmes were run with $32$bp-long seed, with up to $2$ mismatches, and reported best hits only.}}
+\end{table}
+
+The experiments were conducted on a desktop PC, using a single core of a 2.67GHz Intel Core i7 920 CPU and 8 GB of main memory, running 
+GNU/Linux operating system. The implementation is available at a website (\url{www.inf.kcl.ac.uk/pg/real}), which is set up 
+for maintaining the source code and the documentation. The datasets used in the presented experimental results are also available for further 
+testing on the same website.
+
+\section{Conclusion} \label{sec:conclusion}
+In this paper, we have presented an efficient method to tackle the problem of mapping an enormous amount of short reads, 
+produced by the next-generation sequencing technologies, to a bacterial genome.
+With our main goal being the mapping of these short reads to a genomic sequence with circular structure, 
+we devised a simple technique to transform a circular structured sequence to a linear form, allowing for the adaption of REAL for the mapping.
+
+The presented experimental results demonstrate that the proposed approach can gain performance in comparison to more traditional approaches.
+We have demonstrated that it can match or even outperform current popular software, such as SOAP2 and Bowtie, in terms of efficiency, sensitivity, 
+and accuracy. The presented experimental results are very promising, and they suggest that further research 
+and development in this direction is desirable. 
+ 
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%% References
+%%
+%% Following citation commands can be used in the body text:
+%% Usage of \cite is as follows:
+%%   \cite{key}          ==>>  [#]
+%%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
+%%   \citet{key}         ==>>  Author [#]
+
+%% References with bibTeX database:
+
+\bibliographystyle{model1-num-names}
+\bibliography{my_bib}
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use model1-num-names.bst.
+
+%% References without bibTeX database:
+
+% \begin{thebibliography}{00}
+
+%% \bibitem must have the following form:
+%%   \bibitem{key}...
+%%
+
+% \bibitem{}
+
+% \end{thebibliography}
+
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-1-num.tex'.

@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: 9MPR.aux
+The style file: abbrv.bst
+Database file #1: BIB.bib
+A bad cross reference---entry "DBLP:conf/birthday/ApostolicoB97"
+refers to entry "DBLP:conf/birthday/1997ehrenfeucht", which doesn't exist
+Warning--I didn't find a database entry for "DBLP:conf/birthday/1997ehrenfeucht"
+You've used 32 entries,
+            2118 wiz_defined-function locations,
+            732 strings with 9104 characters,
+and the built_in function-call counts, 11906 in all, are:
+= -- 1205
+> -- 570
+< -- 9
++ -- 222
+- -- 188
+* -- 863
+:= -- 1958
+add.period$ -- 109
+call.type$ -- 32
+change.case$ -- 183
+chr.to.int$ -- 0
+cite$ -- 32
+duplicate$ -- 451
+empty$ -- 911
+format.name$ -- 188
+if$ -- 2504
+int.to.chr$ -- 0
+int.to.str$ -- 32
+missing$ -- 33
+newline$ -- 167
+num.names$ -- 72
+pop$ -- 175
+preamble$ -- 1
+purify$ -- 155
+quote$ -- 0
+skip$ -- 312
+stack$ -- 0
+substring$ -- 771
+swap$ -- 104
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 120
+warning$ -- 0
+while$ -- 120
+width$ -- 34
+write$ -- 376
+(There was 1 error message)
