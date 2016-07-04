@@ -9,18 +9,14 @@
  */
 
 import java.util.*;
-
-import matlabcontrol.MatlabConnectionException;
-import matlabcontrol.MatlabProxy;
-import matlabcontrol.MatlabProxyFactory;
-import matlabcontrol.MatlabProxyFactoryOptions;
+import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
 import org.jgap.*;
 import org.jgap.gp.*;
 import org.jgap.gp.function.*;
 import org.jgap.gp.impl.*;
 import org.jgap.gp.terminal.*;
-import matlabcontrol.extensions.MatlabTypeConverter;
-
+import org.nfunk.jep.*;
+import org.lsmp.djep.xjep.*;
 
 /**
  * Example demonstrating Genetic Programming (GP) capabilities of JGAP.
@@ -37,20 +33,21 @@ import matlabcontrol.extensions.MatlabTypeConverter;
 public class MathProblem
         extends GPProblem {
 
-    private static Variable vx;
+    private static org.jgap.gp.terminal.Variable vx;
     private static int dataPoints = 50;
-    private static Float[] x = new Float[dataPoints];
-    private static float[] y = new float[dataPoints];
+    public static Float[] x = new Float[dataPoints];
+    public static float[] y = new float[dataPoints];
     private static int maxInitDepth = 4;
     private static int maxCrossoverDepth = 8;
     private static int Population = 1000;
     private static int Generations = 800;
     private float error = 0f;
-    static MatlabControl mc = new MatlabControl();
+    static XJep j = new XJep();
+    boolean done = false;
 
 
     public MathProblem(GPConfiguration a_conf)
-            throws InvalidConfigurationException, MatlabConnectionException {
+            throws InvalidConfigurationException {
         super(a_conf);
     }
 
@@ -98,7 +95,7 @@ public class MathProblem
         CommandGene[][] nodeSets = { {
                 // We use a variable that can be set in the fitness function.
                 // ----------------------------------------------------------
-                vx = Variable.create(conf, "X", CommandGene.FloatClass),
+                vx = org.jgap.gp.terminal.Variable.create(conf, "X", CommandGene.FloatClass),
                 new Multiply(conf, CommandGene.FloatClass),
                 new Multiply3(conf, CommandGene.FloatClass),
                 new Divide(conf, CommandGene.FloatClass),
@@ -141,9 +138,9 @@ public class MathProblem
             error+= Math.abs(x[i] - y[i]);
             System.out.println(i + ") " + x[i] + "   " + y[i]);
         }
+        done = true;
         System.out.println("error " + error/dataPoints);
-        Plot_Graph plot = new Plot_Graph();
-        plot.draw(x, y);
+
         // Create genotype with initial population. Here, we use the declarations
         // made above:
         // Use one result-producing chromosome (index 0) with return type float
@@ -158,11 +155,26 @@ public class MathProblem
                 dataPoints, true);
     }
 
-    public static void main(String[] args)
+    public  void start(String args)
             throws Exception {
-//
-        mc.eval(new String("x=5;"));
-//        mc.eval(new String("sqrt(x)"));
+        j.addStandardConstants();
+        j.addStandardFunctions();
+        j.addComplex();
+        j.setAllowUndeclared(true);
+        j.setImplicitMul(true);
+        j.setAllowAssignment(true);
+//        Node node=j.parse("2*1*x^1/.9*.89+0");
+//        j.println(node);
+//        Node simp=j.simplify(node);
+//        j.println(simp);
+        try {
+            Node node = j.parse("x = 3");
+            Node processed = j.preprocess(node);
+            Node simp = j.simplify(processed);
+            Object value = j.evaluate(simp);
+            System.out.println(value.toString());
+            j.println(simp);
+        } catch (ParseException e) {} catch (Exception e) {}
 
         // Setup the algorithm's parameters.
         // ---------------------------------
@@ -190,12 +202,15 @@ public class MathProblem
         gp.evolve(Generations);
         // Print the best solution so far to the console.
         // ----------------------------------------------
-        gp.outputSolution(gp.getAllTimeBest());
+        gp.outputSolution(gp.getAllTimeBest(), 0);
+        List sol = gp.getSolutionsString();
+
         // Create a graphical tree of the best solution's program and write it to
         // a PNG file.
         // ----------------------------------------------------------------------
         problem.showTree(gp.getAllTimeBest(), "mathproblem_best donw.png");
         System.out.println("DOME");
+
     }
 
     /**
@@ -254,9 +269,5 @@ public class MathProblem
             }
             return error;
         }
-    }
-
-    void printGraph() {
-
     }
 }

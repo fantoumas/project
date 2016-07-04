@@ -1,0 +1,11 @@
+// remove all class files 
+// S.Chekanov
+import jehep.ui.SetEnv; 
+
+suc=SetEnv.filesRemove(SetEnv.ProjDir,".class"); 
+if (suc) print("Project was cleaned successfully!");
+if (!suc) print("Error removing project files!");
+
+
+// refresh file browser
+SetEnv.win.refreshProjDir(); 

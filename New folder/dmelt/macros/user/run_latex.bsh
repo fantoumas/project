@@ -1,0 +1,12 @@
+// To run latex on current document
+
+compile="latex "+ DocName;
+exec( compile );
+exec( compile );
+
+dvips="dvips "+DocMasterName;
+exec( dvips );
+
+gv="gv "+DocMasterName+".ps";
+exec( gv );
+

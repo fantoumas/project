@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/points2.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Font
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> math  <span style="color: #3333CC"><b>import</b></span> sqrt;
+<span style="color: #3333CC"><b>from</b></span> java.text <span style="color: #3333CC"><b>import</b></span> DecimalFormat
+
+<span style="color: #1111CC"># make main canvas</span>
+c1 = HPlot(<span style="color: #115511">"Canvas"</span>,600,400,0.1, 2, 2)
+c1.visible(1)
+c1.setAutoRange()
+
+
+c1.viewHisto(0);  <span style="color: #1111CC"># make sure starts from 0</span>
+c1.gTitle(<span style="color: #115511">"How to read external files"</span>, Color.blue) <span style="color: #1111CC">#put title</span>
+c1.setDrawGrid(0,0)
+c1.setDrawGrid(1,0)
+
+
+
+
+<span style="color: #1111CC"># directory with the data files</span>
+DataDir=SystemDir+fSep+<span style="color: #115511">"macros"</span>+fSep+<span style="color: #115511">"examples"</span>+fSep+<span style="color: #115511">"data"</span>+fSep;
+
+
+
+<span style="color: #1111CC"># show points without errors</span>
+p1= P1D(<span style="color: #115511">"File data1.d"</span>, DataDir+<span style="color: #115511">"data1.d"</span>);
+p1.setColor(Color.blue)
+p1.setSymbolSize(4)
+c1.cd(1,1)
+c1.draw(p1)
+p1.toFile(<span style="color: #115511">"aaa.d"</span>)
+
+<span style="color: #1111CC"># show table</span>
+<span style="color: #1111CC"># HTable(p1)</span>
+
+<span style="color: #1111CC"># show points with statistical errors in  y</span>
+c1.cd(1,2)
+c1.setAutoRange()
+
+
+c1.setDrawGrid(0,0)
+c1.setDrawGrid(1,0)
+p2= P1D(<span style="color: #115511">"File data2.d"</span>, DataDir+<span style="color: #115511">"data2.d"</span>);
+p2.showErrors(1)
+c1.draw(p2)
+
+<span style="color: #1111CC"># show table</span>
+<span style="color: #1111CC"># HTable(p2)</span>
+
+
+<span style="color: #1111CC"># show points with statistical errors in x and y</span>
+c1.cd(2,1)
+c1.setAutoRange()
+
+c1.setDrawGrid(0,0)
+c1.setDrawGrid(1,0)
+p3= P1D(<span style="color: #115511">"File data3.d"</span>, DataDir+<span style="color: #115511">"data3.d"</span>);
+p3.showErrors(1)
+c1.draw(p3)
+
+<span style="color: #1111CC"># show table</span>
+<span style="color: #1111CC"># HTable(p3)</span>
+
+<span style="color: #1111CC"># show points with statistical and systematical errors</span>
+c1.cd(2,2)
+c1.setAutoRange()
+
+c1.setDrawGrid(0,0)
+c1.setDrawGrid(1,0)
+p4= P1D(<span style="color: #115511">"File data4.d"</span>, DataDir+<span style="color: #115511">"data4.d"</span>);
+p4.showErrors(1)
+p4.errX(1)
+p4.errY(1)
+p4.setColor(Color.blue)
+c1.draw(p4)
+
+<span style="color: #1111CC"># show table</span>
+<span style="color: #1111CC"># HTable(p4)</span>
+
+<span style="color: #1111CC"># show in spreadsheet</span>
+<span style="color: #1111CC"># SPsheet(p2)</span>
+
+
+<span style="color: #1111CC"># show in a LaTeX table </span>
+<span style="color: #1111CC"># xformat=DecimalFormat("##.####E00");</span>
+<span style="color: #1111CC"># yformat=xformat;</span>
+<span style="color: #1111CC"># p4.toFileAsLatex("ok",xformat,yformat)</span>
+
+
+<span style="color: #1111CC"># export to data file</span>
+<span style="color: #1111CC"># p4.toFile("file.d")</span>
+
+
+<span style="color: #1111CC"># export to some image (png,eps,pdf,jpeg...)</span>
+<span style="color: #1111CC"># c1.export(Editor.DocMasterName()+".png")</span>
+
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

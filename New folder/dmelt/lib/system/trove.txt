@@ -1,0 +1,4 @@
+Trove 3.0.3
+trove-3.0.3.jar
+Trove  GNU LESSER GENERAL PUBLIC LICENSE
+https://bitbucket.org/robeden/trove/downloads

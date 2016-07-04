@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/gui_root_objects.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># example to show ROOT objects</span>
+<span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> JButton, JDialog, JLabel, JPanel, JScrollPane
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> BorderLayout
+<span style="color: #3333CC"><b>from</b></span> java.io <span style="color: #3333CC"><b>import</b></span> File
+<span style="color: #3333CC"><b>from</b></span> java.awt.event <span style="color: #3333CC"><b>import</b></span> ActionListener, KeyEvent, KeyListener, MouseListener
+<span style="color: #3333CC"><b>from</b></span> hep.io.root.util <span style="color: #3333CC"><b>import</b></span> *
+
+
+<span style="color: #1111CC"># show ROOT objects</span>
+browser = RootObjectBrowser();
+file=SystemDir+fSep+<span style="color: #115511">"macros"</span>+fSep+<span style="color: #115511">"examples"</span>+fSep+<span style="color: #115511">"data"</span>+fSep+<span style="color: #115511">"Example.root"</span>
+browser.setRootFile( File(file)  );
+
+
+
+frame =JDialog();
+topPanel = JPanel();
+lowerPanel = JPanel();
+
+
+<span style="color: #3333CC"><b>def</b></span> exitme(event):
+       frame.dispose()     
+jB3 = JButton(<span style="color: #115511">"Exit"</span>, actionPerformed=exitme)
+lowerPanel.add(jB3)
+topPanel.setLayout(BorderLayout())
+
+<span style="color: #1111CC"># comments</span>
+jScrollPane1 = JScrollPane()
+jScrollPane1.getViewport().add( browser );
+topPanel.add(jScrollPane1,BorderLayout.CENTER);
+frame.add( topPanel,  BorderLayout.CENTER );
+frame.add( lowerPanel, BorderLayout.SOUTH );
+
+
+bounds = view.getBounds()
+ww = bounds.width
+hh=  bounds.height
+xx = bounds.x
+yy = bounds.y
+  
+frame.setLocation(xx+(int)(0.4*ww), yy+(int)(0.1*hh))
+frame.pack()
+frame.setSize( (int)(0.5*ww),(int)(0.8*hh) );
+frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE)
+frame.setVisible(1)
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

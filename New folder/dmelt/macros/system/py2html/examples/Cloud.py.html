@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/Cloud.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+
+af   = IAnalysisFactory.create();
+tree = af.createTreeFactory().create();
+hf   = af.createHistogramFactory(tree);
+
+r = Random()
+      
+cl1D = hf.createCloud1D( <span style="color: #115511">"cl1D"</span>, <span style="color: #115511">"1-Dimensional Cloud"</span>, 1500, <span style="color: #115511">""</span> );
+cl2D = hf.createCloud2D( <span style="color: #115511">"cl2D"</span>, <span style="color: #115511">"2-Dimensional Cloud"</span>, 1500, <span style="color: #115511">""</span> );
+      
+entries = 20000;
+      
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(20000):
+   xval = r.nextGaussian();
+   yval = r.nextGaussian();
+   w    = r.nextDouble();
+   cl1D.fill( xval, w );
+   cl2D.fill( xval, yval, w );
+
+      
+plotter = af.createPlotterFactory().create(<span style="color: #115511">"Cloud.py plot"</span>);
+plotter.createRegions(1,2,0);
+plotter.region(0).plot(cl1D);
+plotter.region(1).plot(cl2D);
+plotter.show();
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

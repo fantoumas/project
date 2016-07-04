@@ -1,3 +1,17 @@
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.renderer.xy.XYBubbleRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jgap.InvalidConfigurationException;
 import org.jgap.gp.impl.GPConfiguration;
 
@@ -8,6 +22,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import org.dmelt.*;
+import org.math.plot.*;
+
 
 /**
  * Created by Christina on 27/6/2016.
@@ -32,6 +49,59 @@ public class Screen extends JPanel{
     private JTextField inDepth;
     private MyVerifier verifier = new MyVerifier();
 
+    final static String DataPanel = "Data";
+    final static String OptionsPanel = "Options";
+    final static String ResultsPanel = "Results";
+    final static int extraWindowWidth = 100;
+
+    public void addComponentToPane(JFrame frame) {
+        createMenuBar(frame);
+        Container pane = frame.getContentPane();
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        //Create the "cards".
+        JPanel card1 = new JPanel() {
+            //Make the panel wider than it really needs, so
+            //the window's wide enough for the tabs to stay
+            //in one row.
+            public Dimension getPreferredSize() {
+                Dimension size = super.getPreferredSize();
+                size.width += extraWindowWidth;
+                return size;
+            }
+        };
+        card1.setBackground(Color.WHITE);
+
+        card1.add(new JTextField("TextField", 20));
+        JPanel card2 = new JPanel();
+        setupGUI(card2);
+
+        Plot2DPanel plot = new Plot2DPanel();
+        double[] x =new double[5];
+        double[] y =new double[5];
+
+        plot.addLinePlot("my plot", x, y);
+        tabbedPane.addTab(DataPanel, card1);
+        tabbedPane.addTab(OptionsPanel, card2);
+        tabbedPane.addTab(ResultsPanel, plot);
+        JPanel card4 = new JPanel();
+//        plot(card4);
+        tryAgain(card4);
+//        JFreeChart k = plot(card4);
+        tabbedPane.addTab(ResultsPanel, card4);
+        pane.add(tabbedPane, BorderLayout.CENTER);
+    }
+
+    public void tryAgain(JPanel panel) {
+        OverlaidPlot demo = new OverlaidPlot(" 2 Grpahs");
+        JLatex eq = new JLatex();
+        JPanel graph = demo.panel;
+        graph.setBounds (text_length,text_length, graph.getWidth(), graph.getHeight());
+        JLabel label = eq.printEquation("y=sin");
+        label.setBounds (text_length,text_length, label.getWidth(), label.getHeight());
+        panel.add(label);
+        panel.add(demo.start(demo));
+    }
 
     String createMenuBar(JFrame w)
     {
@@ -51,7 +121,9 @@ public class Screen extends JPanel{
                 GPConfiguration conf = new GPConfiguration();
                 try {
                     MathProblem fx = new MathProblem(conf);
-//                    fx.start(data_file);
+                    fx.start(data_file);
+                    if (fx.done)
+                        System.out.println("SONW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -67,15 +139,13 @@ public class Screen extends JPanel{
         file.add(exitMenuItem);
         menubar.add(file);
         w.setJMenuBar(menubar);
-        setupGUI(w);
         return data_file;
     }
 
-    private void setupGUI(JFrame w) {
+    private void setupGUI(JPanel panel1) {
         setUpFormats();
-        Container pane = w.getContentPane();
-        Insets insets = pane.getInsets();
-        pane.setLayout (null);
+        panel1.setLayout(null);
+        Insets insets = panel1.getInsets();
         // construct the Label component
         JButton submit = new JButton();
         JLabel evolutions = new JLabel("Evolutions");
@@ -124,35 +194,35 @@ public class Screen extends JPanel{
             if (Math.floorMod(counter[0],2) == 1)
             System.out.println("clicked sin");
         });
-        pane.add (initDepth);
+        panel1.add (initDepth);
         initDepth.setBounds (insets.left + text_length, insets.top + text_length, initDepth.getPreferredSize().width, initDepth.getPreferredSize().height);
-        pane.add (inDepth);
+        panel1.add (inDepth);
         inDepth.setBounds (initDepth.getX() + initDepth.getWidth() + text_length, insets.top + text_length, inDepth.getPreferredSize().width, inDepth.getPreferredSize().height);
-        pane.add (evolutions);
+        panel1.add (evolutions);
         evolutions.setBounds (insets.left + text_length,initDepth.getY()+ initDepth.getHeight(), evolutions.getPreferredSize().width, evolutions.getPreferredSize().height);
-        pane.add (evolve);
+        panel1.add (evolve);
         evolve.setBounds (evolutions.getX() + evolutions.getWidth() +text_length , initDepth.getY()+ initDepth.getHeight(), evolve.getPreferredSize().width, evolve.getPreferredSize().height);
-        pane.add (crossoverDepth);
+        panel1.add (crossoverDepth);
         crossoverDepth.setBounds(insets.left + text_length, evolutions.getY() + evolutions.getHeight(), crossoverDepth.getPreferredSize().width, crossoverDepth.getPreferredSize().height);
-        pane.add (crosDepth);
+        panel1.add (crosDepth);
         crosDepth.setBounds(crossoverDepth.getX() + evolutions.getWidth() +text_length , evolutions.getY() + evolutions.getHeight(), crosDepth.getPreferredSize().width, crosDepth.getPreferredSize().height);
-        pane.add (Functions);
+        panel1.add (Functions);
         Functions.setBounds(insets.left + text_length, crossoverDepth.getY() + evolutions.getHeight(), crosDepth.getPreferredSize().width, crosDepth.getPreferredSize().height);
-        pane.add (chkSin);
+        panel1.add (chkSin);
         chkSin.setBounds(insets.left + text_length*3, Functions.getY() + crosDepth.getHeight(), chkSin.getPreferredSize().width, chkSin.getPreferredSize().height);
-        pane.add (chkCos);
+        panel1.add (chkCos);
         chkCos.setBounds(insets.left + text_length*3, chkSin.getY() + chkSin.getHeight(), chkCos.getPreferredSize().width, chkCos.getPreferredSize().height);
-        pane.add (chkExp);
+        panel1.add (chkExp);
         chkExp.setBounds(insets.left + text_length*3, chkCos.getY() + chkCos.getHeight(), chkExp.getPreferredSize().width, chkExp.getPreferredSize().height);
-        pane.add (chkPower);
+        panel1.add (chkPower);
         chkPower.setBounds(insets.left + text_length*4 + chkSin.getWidth(), Functions.getY() + crosDepth.getHeight(), chkPower.getPreferredSize().width, chkPower.getPreferredSize().height);
-        pane.add (chkMultiply);
+        panel1.add (chkMultiply);
         chkMultiply.setBounds(insets.left + text_length*4 + chkSin.getWidth(), chkSin.getY() + chkSin.getHeight(), chkMultiply.getPreferredSize().width, chkMultiply.getPreferredSize().height);
-        pane.add (chkSubtrack);
+        panel1.add (chkSubtrack);
         chkSubtrack.setBounds(insets.left + text_length*4 + chkSin.getWidth(), chkCos.getY() + chkCos.getHeight(), chkSubtrack.getPreferredSize().width, chkSubtrack.getPreferredSize().height);
-        pane.add (chkSDivide);
+        panel1.add (chkSDivide);
         chkSDivide.setBounds(insets.left + text_length*4 + chkSin.getWidth(), chkExp.getY() + chkExp.getHeight(), chkSDivide.getPreferredSize().width, chkSDivide.getPreferredSize().height);
-        pane.add (submit);
+        panel1.add (submit);
         submit.setBounds(insets.left + text_length, 300, submit.getPreferredSize().width, submit.getPreferredSize().height);
         setVisible(true);
     }

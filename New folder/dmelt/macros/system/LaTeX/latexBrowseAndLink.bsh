@@ -1,0 +1,172 @@
+// latexBrowseAndLink.bsh - a BeanShell macro script for the jEdit text editor
+// Version 27-Oct-2004.
+//
+// This macro opens the file browser in order to insert links with relative path
+// in a LaTeXfile. It can be used for linking tex files, images (eps, gif, jpg,
+// pdf files) and bib files.
+//
+// Copyright (C) 2004 Jean-Francois Magni
+// E-mail: jfmagni_at_free_dot_fr
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with the jEdit application; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+import javax.swing.*;
+import java.awt.*;
+
+void latexBrowseAndLink()
+{
+// Full path to active buffer directory
+
+   String slash = System.getProperty( "file.separator" );
+   String splitslash = slash; // see split below
+   bufferPath = textArea.buffer.getPath();
+   int l1 = bufferPath.length();
+   for (i=0;i<l1-1;i++) {
+      if (bufferPath.substring(i,i+1).equals(slash))  bufferDir = bufferPath.substring(0,i+1);
+   }
+   
+// Check that the active buffer is TEX and that it has been named (for relative paths)
+
+   if (bufferPath.toLowerCase().matches(".*untitled- *\\d*")) { 
+      Macros.message(view,"You must save the active \nbuffer before using this macro");
+      return;
+   };
+   //if (!bufferPath.toLowerCase().endsWith(".html") && !bufferPath.toLowerCase().endsWith(".htm")) { 
+   if (!bufferPath.toLowerCase().matches(".*tex")) { 
+      Macros.message(view,"This is not a TeX file");
+      return;
+   };
+   
+// Select a file (browse from buffer directory)
+
+   VFSFileChooserDialog fileDialog =  new VFSFileChooserDialog(view,bufferDir,VFSBrowser.OPEN_DIALOG,true);
+   // false for non-multiple selections
+   String[] files = fileDialog.getSelectedFiles();
+   if (files == null) {
+     return;
+   }
+   String filPath = files[0]; 
+
+// File directory
+
+   for (i=0;i<filPath.length()-1;i++) {
+      if (filPath.substring(i,i+1).equals(slash))  filDir = filPath.substring(0,i+1);
+   }
+   // Of course all selected files are in the same directory
+   // -> filDir
+
+// Relative path to file directory from buffer directory
+
+   if (slash.equals("\\")) splitslash = slash+slash;
+   String[] buff = bufferPath.split(splitslash);
+   String[] imag = filPath.split(splitslash);
+   int lbuff = buff.length;
+   int limag = imag.length;
+   
+   i_min = Math.min(lbuff,limag);
+   
+   int i_same = 0;
+   for (i=0;i<i_min;i++) {if (buff[i].equals(imag[i])) i_same++;};
+   String relativePathToFil = "";
+   // Backward in directories tree
+   if (i_same < lbuff-1) {
+      for (i=i_same;i<lbuff-1;i++) { 
+         relativePathToFil = relativePathToFil + "../";
+      }
+   }
+   // Forward in directories tree
+   for (i=i_same;i<limag;i++) {
+      relativePathToDir = relativePathToFil;
+      relativePathToFil = relativePathToFil + imag[i] + "/";
+   }
+   // Remove last slash
+   boolean isSameFile = true;
+   if (relativePathToFil.length() > 0) {   
+      relativePathToFil = relativePathToFil.substring(0,relativePathToFil.length()-1);
+      isSameFile = false;
+   }
+
+// Selected text if any
+
+   String selected = textArea.getSelectedText();
+   if(selected == null) selected = "";
+   String selected2 = selected;
+
+// Loop for multiply selected files
+
+   boolean isNewline = false;
+   boolean isBib = false;
+   String towriteBib = "";
+   String towrite = "";
+   for (i=0;i<files.length;i++){
+      
+       // New line
+       if (isNewline) textArea.setSelectedText("\n\n");
+       isNewline = false;
+       
+       // Look for extension
+       String filPath = files[i];
+       String[] ext0 = filPath.split("\\."); 
+       String ext = ext0[ext0.length - 1];
+       String ext2=ext.toLowerCase();
+       
+       // Look for file mame
+       imin =  filDir.length();
+       String filName  = files[i].substring(imin,files[i].length());
+       String filName0 = filName.substring(0,filName.length()-ext.length()-1);
+
+       // Full relative path
+       relativePathToFil = relativePathToDir + filName;
+       
+       // Cases treated separately (list to be completed)
+       if (ext2.equals("eps") || ext2.equals("gif") || ext2.equals("pdf") || ext2.equals("jpg")){
+          // IMAGE
+          towrite =  "\\begin{center}\\begin{figure}[htbp]\n";
+          towrite += "\\includegraphics[width=15cm,height=10cm,angle=0]{";
+          towrite += relativePathToDir + filName0 + "}\n";
+          towrite += "\\caption{" + selected2 + "\\label{fig-" + filName0 + "}}\n";
+          towrite += "\\end{figure}\\end{center}\n";
+          textArea.setSelectedText(towrite);
+          isNewline = true;
+      
+       } else if (ext2.equals("bib")){
+          // BIB
+     isBib = true;
+          towriteBib += relativePathToDir + filName0 + ",";
+     
+       }  else if (ext2.equals("latex")){
+          // LATEX (from xfig)
+          towrite =  "\\begin{center}\\begin{figure}[htbp]\n";
+          towrite += "\\include{" + relativePathToDir + filName0 + "}\n";
+          towrite += "\\caption{" + selected2 + "\\label{fig-" + filName0 + "}}\n";
+          towrite += "\\end{figure}\\end{center}\n";
+          textArea.setSelectedText(towrite);
+          isNewline = true;
+          
+      }  else if (ext2.equals("tex")){
+          // TEX 
+          towrite =  "\\include{" + relativePathToDir + filName0 + "}\n";
+          textArea.setSelectedText(towrite);
+          isNewline = true;
+      }
+   }
+   if (isNewline) {textArea.setSelectedText("\n");};
+   if (isBib) {
+      towrite += "\\bibliography{" + towriteBib.substring(0,towriteBib.length()-1) + "}\n";
+      textArea.setSelectedText(towrite);
+   }
+}
+
+latexBrowseAndLink();

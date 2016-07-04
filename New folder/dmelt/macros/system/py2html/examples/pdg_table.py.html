@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/pdg_table.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># show PDG table using HHable class</span>
+<span style="color: #1111CC"># (c) S.Chekanov </span>
+<span style="color: #3333CC"><b>import</b></span> sys, math
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> jhplot <span style="color: #3333CC"><b>import</b></span> HTable
+
+
+file=SystemDir+fSep+<span style="color: #115511">"macros"</span>+fSep+<span style="color: #115511">"system"</span>
+file=file+fSep+<span style="color: #115511">"PDG"</span>+fSep+<span style="color: #115511">"mass_width_2004.csv"</span>
+
+
+<span style="color: #1111CC"># vector with names</span>
+v1 = Vector()
+v1.add(<span style="color: #115511">"Name"</span>)
+v1.add(<span style="color: #115511">"Mass"</span>)
+v1.add(<span style="color: #115511">"Err-"</span>)
+v1.add(<span style="color: #115511">"Err+"</span>)
+v1.add(<span style="color: #115511">"Width"</span>)
+v1.add(<span style="color: #115511">"Err-"</span>)
+v1.add(<span style="color: #115511">"Err+"</span>)
+v1.add(<span style="color: #115511">"I"</span>)
+v1.add(<span style="color: #115511">"J"</span>)
+v1.add(<span style="color: #115511">"ID"</span>)
+v1.add(<span style="color: #115511">"charge"</span>)
+v1.add(<span style="color: #115511">"quark"</span>)
+
+
+<span style="color: #1111CC"># data vector</span>
+v2 =Vector()
+
+<span style="color: #1111CC">############## Now open file for reading (example)</span>
+ifile = open (file,<span style="color: #115511">'r'</span>)
+lines = ifile.readlines()      <span style="color: #1111CC"># read file into list of lines</span>
+ifile.close()
+<span style="color: #1111CC"># go through each line and split line into x and y columns:</span>
+mass = [];  mass_up = []; mass_down=[];   <span style="color: #1111CC"># store data pairs in two lists x and y</span>
+width = []; width_up = []; width_down=[];
+I=[]  <span style="color: #1111CC"># isospin</span>
+G=[] <span style="color: #1111CC"># G parity</span>
+J=[] <span style="color: #1111CC"># J total spin</span>
+P=[] <span style="color: #1111CC"># P space parity</span>
+C=[] <span style="color: #1111CC">#  C charge conjugation parity</span>
+A=[] <span style="color: #1111CC"># A: antiparticle=|=particle flag</span>
+ID=[] <span style="color: #1111CC">#  PDG particle ID number</span>
+charge=[] <span style="color: #1111CC"># charge</span>
+R=[] <span style="color: #1111CC">#  Number of baryon stars - used only on baryons.</span>
+S=[] <span style="color: #1111CC"># particle status</span>
+name=[] <span style="color: #1111CC"># particle name</span>
+quark=[] <span style="color: #1111CC"># Quark contents  </span>
+<span style="color: #3333CC"><b>for</b></span> line <span style="color: #3333CC"><b>in</b></span> lines:
+     <span style="color: #3333CC"><b>if</b></span>  (line[0]==<span style="color: #115511">"*"</span> <span style="color: #3333CC"><b>or</b></span> line[0]==<span style="color: #115511">"#"</span>): <span style="color: #3333CC"><b>continue</b></span>  
+     mass,mass_up,mass_down,width,width_up,\
+     width_down,I,G,J,P,C,A,ID,charge,R,S,name,quark =line.split(<span style="color: #115511">","</span>)
+     quark = quark.replace(<span style="color: #115511">'\n'</span>, <span style="color: #115511">''</span>)
+     vv = Vector(12)
+     vv.add(name); 
+     vv.add(mass); vv.add(mass_down); vv.add(mass_up);  
+     vv.add(width);  vv.add(width_down); vv.add(width_up);
+     vv.add(I)
+     vv.add(J); vv.add(ID); 
+     vv.add(charge); vv.add(quark)
+     v2.add(vv)
+    
+<span style="color: #1111CC"># show PDG</span>
+b=HTable(<span style="color: #115511">"PDG 2004"</span>,v1,v2);
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/Scribble.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> BorderLayout as BL, Color, Button, Panel
+
+<span style="color: #3333CC"><b>class</b></span> Scribble(Panel):
+    <span style="color: #115511">""" A simple GUI example """</span>
+
+    <span style="color: #3333CC"><b>def</b></span> __init__ (self):  <span style="color: #1111CC"># constructor</span>
+        Panel.__init__(self, BL())
+        self.add(Button(<span style="color: #115511">'Clear'</span>, actionPerformed=self.doClear),
+                         BL.SOUTH)
+        self.mouseDragged = self.doDrag
+        self.mousePressed = self.doPress
+        self.__last = 0, 0
+
+    <span style="color: #3333CC"><b>def</b></span> doClear (self, event):
+        <span style="color: #115511">""" clear background """</span>
+        g = self.graphics
+        g.color = self.background  
+        g.fillRect(0, 0, self.size.width, self.size.height)
+
+    <span style="color: #3333CC"><b>def</b></span> doDrag (self, event):
+        <span style="color: #115511">""" draw line from last to here """</span>
+        g = self.graphics
+        g.color = Color.black
+        lx, ly = self.__last
+        x = event.x; y = event.y
+        g.drawLine(lx, ly, x, y)   <span style="color: #1111CC"># draw new line segment</span>
+        self.__last = x, y   <span style="color: #1111CC"># save coordinates</span>
+
+    <span style="color: #3333CC"><b>def</b></span> doPress (self, event):
+        <span style="color: #115511">""" save click point """</span>
+        self.__last = event.x, event.y 
+
+<span style="color: #3333CC"><b>if</b></span> __name__ == <span style="color: #115511">"__main__"</span>:
+    <span style="color: #3333CC"><b>def</b></span> doClose (event):
+        <span style="color: #3333CC"><b>import</b></span> sys
+        sys.exit()
+    <span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Frame
+    frame = Frame(<span style="color: #115511">"Scribble"</span>, windowClosing=doClose)
+    frame.add( Scribble() )
+    frame.size = 400, 300
+    frame.visible = 1
+
+<span style="color: #3333CC"><b>def</b></span> doClose (event):
+        frame.visible = 0
+
+<span style="color: #1111CC"># test</span>
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Frame
+frame = Frame(<span style="color: #115511">"Scribble"</span>, windowClosing=doClose)
+frame.add( Scribble() )
+frame.size = 400, 300
+frame.visible = 1
+
+
+
+
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/CreateAndFitDataPointSet.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+
+af   = IAnalysisFactory.create();
+tree = af.createTreeFactory().create();
+hf   = af.createHistogramFactory(tree);
+
+r = Random()
+
+dpf = af.createDataPointSetFactory(tree)
+dataPointSet = dpf.create(<span style="color: #115511">"dataPointSet"</span>,<span style="color: #115511">"two dimensional IDataPointSet"</span>,2)
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(20):
+    dataPointSet.addPoint()
+    dp = dataPointSet.point(i)
+    dp.coordinate(0).setValue(i)
+    dp.coordinate(1).setValue(i+r.nextDouble()-0.5)
+    dp.coordinate(1).setErrorPlus(1)
+    dp.coordinate(1).setErrorMinus(1)
+
+plotter = af.createPlotterFactory().create(<span style="color: #115511">"CreateAndFitDataPointSet.pnut plot"</span>)
+plotter.region(0).plot(dataPointSet)
+plotter.show()
+
+functionfact = af.createFunctionFactory(tree)
+line = functionfact.createFunctionByName(<span style="color: #115511">"line"</span>,<span style="color: #115511">"p1"</span>)
+
+ff = af.createFitFactory()
+fitter = ff.createFitter(<span style="color: #115511">"Chi2"</span>,<span style="color: #115511">"jminuit"</span>)
+result = fitter.fit(dataPointSet,line)
+plotter.region(0).plot(result.fittedFunction())
+
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Chi2 = "</span>, result.quality()
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

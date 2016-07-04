@@ -1,0 +1,12 @@
+How to use ScaViz for applets:
+
+1) Copy "lib" directory to this directory
+   or make a link: 
+     
+      ln -s ../../lib lib
+
+2) Compile applet if needed: ./a_compile.sh Example1.java
+
+3) Point the browser to file applet1.php or applet2.php 
+
+S.Chekanov

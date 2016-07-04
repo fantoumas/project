@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/histo2D.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> HPlot3D
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> H2D
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+
+c1 = HPlot3D(<span style="color: #115511">"Canvas"</span>,600,400)
+c1.setNameX(<span style="color: #115511">"Xaxis"</span>)
+c1.setNameY(<span style="color: #115511">"Yaxis"</span>)
+c1.visible(1)
+
+
+h1 = H2D(<span style="color: #115511">"My 2D Test"</span>,10,-2.0, 2.0, 15, -3.0, 3.0);
+rand = Random();
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(2000):
+               h1.fill(0.4*rand.nextGaussian(),rand.nextGaussian())
+c1.draw(h1);
+
+
+<span style="color: #1111CC"># export to some image (png,eps,pdf,jpeg...)</span>
+c1.export(Editor.DocMasterName()+<span style="color: #115511">".png"</span>)
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

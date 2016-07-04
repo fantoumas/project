@@ -1,0 +1,34 @@
+//
+// sample 
+//     regrep text file
+//
+//
+code = "Shift_JIS";
+infile = [FILE];
+outfile = "output.txt";
+
+rep_from = "aaa";
+rep_to = "bbb";
+
+import java.util.regex.*;
+
+Pattern pattern;
+Matcher matcher;
+
+pattern = Pattern.compile(rep_from);
+
+in_file = new FileInputStream(infile);
+in_r = new InputStreamReader(in_file,code);
+in = new BufferedReader(in_r);
+out_file = new FileOutputStream(outfile);
+out_w = new OutputStreamWriter(out_file,code);
+out = new PrintWriter(out_w);
+
+StringBuffer sbr  = new StringBuffer();
+while(in.ready()){
+  str = in.readLine();
+  matcher = pattern.matcher(str);
+  out.println(matcher.replaceAll(rep_to));
+}
+in.close();
+out.close();

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/HistogramArithmetic.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+
+af   = IAnalysisFactory.create();
+tree = af.createTreeFactory().create();
+hf   = af.createHistogramFactory(tree);
+
+r = Random(12345)
+      
+h1 = hf.createHistogram1D(<span style="color: #115511">"test 1d"</span>,50,-3,6);
+h2 = hf.createHistogram1D(<span style="color: #115511">"test 2d"</span>,50,-3,6);
+      
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(10000):
+   h1.fill(r.nextGaussian());
+   h2.fill(3+r.nextGaussian());
+
+plus = hf.add(<span style="color: #115511">"h1+h2"</span>,h1,h2);
+minus = hf.subtract(<span style="color: #115511">"h1-h2"</span>,h1,h2);
+mul = hf.multiply(<span style="color: #115511">"h1*h2"</span>,h1,h2);
+div = hf.divide(<span style="color: #115511">"h1 divded by h2"</span>,h1,h2);
+      
+plotter = af.createPlotterFactory().create(<span style="color: #115511">"HistogramArithmetic.py plot"</span>);
+plotter.createRegions(2,2,0);
+plotter.region(0).plot(plus);
+plotter.region(1).plot(minus);
+plotter.region(2).plot(mul);
+plotter.region(3).plot(div);
+plotter.show();
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

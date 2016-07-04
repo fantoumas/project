@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+#       To run LaTeX and BibTeX on a given LaTeX source file
+#       Author: S.Chekanov (ANL)
+#
+#-------------------------------------------------------------------------------
+#   Check arguments
+#-----------------------------------------------
+scp * chekanov@shell.sourceforge.net:/home/groups/j/je/jehep/htdocs/
+# echo "This is http://jehep.sourceforge.net/"
+# echo "To login:  ssh -l chekanov shell.sourceforge.net"
+# echo "copy to chekanov@shell.sourceforge.net:/home/groups/j/je/jehep/htdocs/"
+# scp -r Docs/*  chekanov@shell.sourceforge.net:/home/groups/j/je/jehep/htdocs/
+~
+~
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/histo1.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC">#  H1D histogram. Example  I</span>
+<span style="color: #1111CC"># S.Chekanov</span>
+
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> *
+
+
+c1 = HPlot(<span style="color: #115511">"Canvas"</span>,600,400,0.12,1, 1)
+c1.visible(1)
+c1.gTitle(<span style="color: #115511">"Global labels: F_{2} ,  x_{&amp;gamma;}  #bar{p}p F_{2}^{c#bar{c}}"</span>); <span style="color: #1111CC">#put title</span>
+c1.setAutoRange()
+
+h1 = H1D(<span style="color: #115511">"Simple1"</span>,20, -2.0, 2.0)
+rand = Random()
+<span style="color: #1111CC"># fill histogram</span>
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(100):
+      h1.fill(rand.nextGaussian())
+
+c1.draw(h1)
+h1.setPenWidthErr(2)
+c1.setNameX(<span style="color: #115511">"Xaxis"</span>)
+c1.setNameY(<span style="color: #115511">"Yaxis"</span>)
+c1.setName(<span style="color: #115511">"Canvas title"</span>)
+c1.drawStatBox(h1)
+
+
+<span style="color: #1111CC"># set HLabel in the normilised coordinate system</span>
+lab=HLabel(<span style="color: #115511">"HLabel in NDC"</span>, 0.15, 0.7, <span style="color: #115511">"NDC"</span>)
+lab.setColor(Color.blue)
+c1.add(lab)
+
+
+
+
+
+
+c1.update()
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

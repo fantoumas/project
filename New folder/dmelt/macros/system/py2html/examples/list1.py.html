@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/list1.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.awt.event <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> *
+
+
+<span style="color: #3333CC"><b>class</b></span> Scribble(JScrollPane):
+    <span style="color: #115511">""" A simple GUI example """</span>
+
+    <span style="color: #3333CC"><b>def</b></span> __init__ (self):  <span style="color: #1111CC"># constructor</span>
+        JScrollPane.__init__(self)
+        <span style="color: #1111CC"># self.size = 200, 300</span>
+
+        rows = \
+            [<span style="color: #115511">'apple'</span>, <span style="color: #115511">'battle'</span>, <span style="color: #115511">'cattle'</span>, <span style="color: #115511">'dawdle'</span>, <span style="color: #115511">'easel'</span>, <span style="color: #115511">'fizzle'</span>]
+        list=JList(rows)
+        
+        self.getViewport().add(list)
+        
+        list.selectionMode = \
+            ListSelectionModel.SINGLE_INTERVAL_SELECTION
+       
+        list.mousePressed = self.doPress
+       <span style="color: #1111CC"># self.__last = 0, 0</span>
+
+    <span style="color: #3333CC"><b>def</b></span> doPress (self, event):
+            <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"test"</span>;
+            <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"test"</span>;
+            a=JFrame(<span style="color: #115511">"test"</span>);
+            a.setVisible(1)
+            i = self.locationToIndex(event.point)
+
+<span style="color: #3333CC"><b>if</b></span> __name__ == <span style="color: #115511">"__main__"</span>:
+    <span style="color: #3333CC"><b>def</b></span> doClose (event):
+        frame.dispose()
+
+
+
+<span style="color: #3333CC"><b>def</b></span> doClose (event):
+        frame.visible = 0
+
+<span style="color: #1111CC"># test</span>
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Frame
+frame = JFrame(<span style="color: #115511">"Scribble"</span>, windowClosing=doClose)
+frame.contentPane.add( Scribble() )
+
+topPanel = JPanel();
+lowerPanel = JPanel();
+jB2 = JButton(<span style="color: #115511">"Exit"</span>, actionPerformed=doClose)
+lowerPanel.add(jB2)
+topPanel.setLayout(BorderLayout())
+topPanel.add(Scribble(),BorderLayout.CENTER);
+
+
+frame.add( topPanel,  BorderLayout.CENTER );
+frame.add( lowerPanel, BorderLayout.SOUTH );
+
+bounds = view.getBounds()
+ww = bounds.width
+hh=  bounds.height
+xx = bounds.x
+yy = bounds.y
+frame.setLocation(xx+(int)(0.1*ww), yy+(int)(0.1*hh))
+<span style="color: #1111CC"># frame.pack()</span>
+frame.setSize( (int)(0.2*ww),(int)(0.4*hh) );
+frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
+frame.setVisible(1)
+
+
+
+<span style="color: #1111CC"># frame.size = 200, 300</span>
+<span style="color: #1111CC"># frame.pack();</span>
+<span style="color: #1111CC"># frame.size = 200, 300</span>
+<span style="color: #1111CC"># frame.visible = 1</span>
+
+
+
+
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

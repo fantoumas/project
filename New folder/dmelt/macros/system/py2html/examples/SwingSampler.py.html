@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/SwingSampler.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC">#</span>
+<span style="color: #1111CC"># This code shows a sampler of common Java Swing widget types.  This is</span>
+<span style="color: #1111CC"># by no means all of the available widgets.  For documentation and tutorials</span>
+<span style="color: #1111CC"># on the underlying Java classes, see http://java.sun.com/products/jfc/</span>
+<span style="color: #1111CC">#</span>
+
+<span style="color: #1111CC">#</span>
+<span style="color: #1111CC"># We'll be using swing a lot, so import it as "swing". Swing is built using</span>
+<span style="color: #1111CC"># an older Java GUI toolkit called awt, so we'll need it too.  One of the</span>
+<span style="color: #1111CC"># examples here also uses the Java networking package (you're unlikely to</span>
+<span style="color: #1111CC"># need that for the project...)</span>
+<span style="color: #1111CC">#</span>
+<span style="color: #3333CC"><b>import</b></span> javax.swing as swing
+<span style="color: #3333CC"><b>import</b></span> java.awt as awt
+<span style="color: #3333CC"><b>import</b></span> java.net as net
+<span style="color: #3333CC"><b>import</b></span> sys
+
+<span style="color: #1111CC">#</span>
+<span style="color: #1111CC"># I've organized the sampler code into a single class, called SwingSampler.</span>
+<span style="color: #1111CC"># The __init__ function (called the "constructor") does all of the setup.</span>
+<span style="color: #1111CC"># Note that __init__, like all other functions in a class (called "methods")</span>
+<span style="color: #1111CC"># takes "self" as its first argument.</span>
+<span style="color: #1111CC">#</span>
+<span style="color: #3333CC"><b>class</b></span> SwingSampler:
+	<span style="color: #3333CC"><b>def</b></span> __init__(self):
+		<span style="color: #1111CC">#########################################################</span>
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># set up the overall frame (the window itself)</span>
+		<span style="color: #1111CC">#</span>
+		self.window = swing.JFrame(<span style="color: #115511">"Swing Sampler!"</span>)
+		self.window.windowClosing = self.goodbye
+		self.window.contentPane.layout = awt.BorderLayout()
+
+		<span style="color: #1111CC">#########################################################</span>
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># under this will be a tabbed pane; each tab is named</span>
+		<span style="color: #1111CC"># and contains a panel with other stuff in it.</span>
+		<span style="color: #1111CC">#</span>
+		tabbedPane = swing.JTabbedPane()
+		self.window.contentPane.add(<span style="color: #115511">"Center"</span>, tabbedPane);
+
+		<span style="color: #1111CC">#########################################################</span>
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># The first tabbed panel will be named "Some Basic</span>
+		<span style="color: #1111CC"># Widgets", and is referenced by variable 'firstTab'</span>
+		<span style="color: #1111CC">#</span>
+		firstTab = swing.JPanel()
+		firstTab.layout = awt.BorderLayout()
+		tabbedPane.addTab(<span style="color: #115511">"Some Basic Widgets"</span>, firstTab)
+
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># slap in some labels, a list, a text field, etc... Some</span>
+		<span style="color: #1111CC"># of these are contained in their own panels for</span>
+		<span style="color: #1111CC"># layout purposes.</span>
+		<span style="color: #1111CC">#</span>
+		tmpPanel = swing.JPanel()
+		tmpPanel.layout = awt.GridLayout(3, 1)
+		tmpPanel.border = swing.BorderFactory.createTitledBorder(<span style="color: #115511">"Labels are simple"</span>)
+		tmpPanel.add(swing.JLabel(<span style="color: #115511">"I am a label. I am quite boring."</span>))
+		tmpPanel.add(swing.JLabel(<span style="color: #115511">"&lt;HTML&gt;&lt;FONT COLOR='blue'&gt;HTML &lt;B&gt;labels&lt;/B&gt;&lt;/FONT&gt; are &lt;I&gt;somewhat&lt;/I&gt; &lt;U&gt;less boring&lt;/U&gt;.&lt;/HTML&gt;"</span>))
+		tmpPanel.add(swing.JLabel(<span style="color: #115511">"Labels can also be aligned"</span>, swing.JLabel.RIGHT))
+		firstTab.add(tmpPanel, <span style="color: #115511">"North"</span>)
+
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># Notice that the variable "tmpPanel" gets reused here.</span>
+		<span style="color: #1111CC"># This next line creates a new panel, but we reuse the</span>
+		<span style="color: #1111CC"># "tmpPanel" name to refer to it.  The panel that</span>
+		<span style="color: #1111CC"># tmpPanel used to refer to still exists, but we no</span>
+		<span style="color: #1111CC"># longer have a way to name it (but that's ok, since</span>
+		<span style="color: #1111CC"># we don't need to refer to it any more).</span>
+		<span style="color: #1111CC">#</span>
+		tmpPanel = swing.JPanel()
+		tmpPanel.layout = awt.BorderLayout()
+		tmpPanel.border = swing.BorderFactory.createTitledBorder(<span style="color: #115511">"Tasty tasty lists"</span>)
+
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># Note that here we stash a reference to the list in</span>
+		<span style="color: #1111CC"># "self.list".  This puts it in the scope of the object,</span>
+		<span style="color: #1111CC"># rather than this function.  This is because we'll be</span>
+		<span style="color: #1111CC"># referring to it later from outside this function, so</span>
+		<span style="color: #1111CC"># it needs to be "bumped up a level."</span>
+		<span style="color: #1111CC"># </span>
+		self.list = swing.JList()
+		self.list.listData = [ <span style="color: #115511">"January"</span>, <span style="color: #115511">"February"</span>, <span style="color: #115511">"March"</span>, 
+				       <span style="color: #115511">"April"</span>, <span style="color: #115511">"May"</span>, <span style="color: #115511">"June"</span>, <span style="color: #115511">"July"</span>, 
+				       <span style="color: #115511">"August"</span>, <span style="color: #115511">"September"</span>, <span style="color: #115511">"October"</span>, 
+				       <span style="color: #115511">"November"</span>, <span style="color: #115511">"December"</span> ]
+		tmpPanel.add(<span style="color: #115511">"Center"</span>, swing.JScrollPane(self.list))
+		button = swing.JButton(<span style="color: #115511">"What's Selected?"</span>)
+		button.actionPerformed = self.whatsSelectedCallback;
+		tmpPanel.add(<span style="color: #115511">"East"</span>, button)
+		firstTab.add(<span style="color: #115511">"Center"</span>, tmpPanel)
+
+		tmpPanel = swing.JPanel()
+		tmpPanel.layout = awt.BorderLayout()
+
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># The text field also goes in self, since the callback</span>
+		<span style="color: #1111CC"># that displays the contents will need to get at it.</span>
+		<span style="color: #1111CC"># </span>
+		<span style="color: #1111CC"># Also note that because the callback is a function inside</span>
+		<span style="color: #1111CC"># the SwingSampler object, you refer to it through self.</span>
+		<span style="color: #1111CC"># (The callback could potentially be outside the object,</span>
+		<span style="color: #1111CC"># as a top-level function. In that case you wouldn't</span>
+		<span style="color: #1111CC"># use the 'self' selector; any variables that it uses</span>
+		<span style="color: #1111CC"># would have to be in the global scope.</span>
+		<span style="color: #1111CC">#</span>
+		self.field = swing.JTextField()
+		tmpPanel.add(self.field)
+		tmpPanel.add(swing.JButton(<span style="color: #115511">"Click Me"</span>, actionPerformed=self.clickMeCallback), <span style="color: #115511">"East"</span>)
+		firstTab.add(tmpPanel, <span style="color: #115511">"South"</span>)
+
+		<span style="color: #1111CC">#########################################################</span>
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># The second tabbed panel is next...  This shows</span>
+		<span style="color: #1111CC"># how to build a basic web browser in about 20 lines.</span>
+		<span style="color: #1111CC">#</span>
+		secondTab = swing.JPanel()
+		secondTab.layout = awt.BorderLayout()
+		tabbedPane.addTab(<span style="color: #115511">"HTML Fanciness"</span>, secondTab)
+
+		tmpPanel = swing.JPanel()
+		tmpPanel.add(swing.JLabel(<span style="color: #115511">"Go to:"</span>))
+		self.urlField = swing.JTextField(40, actionPerformed=self.goToCallback)
+		tmpPanel.add(self.urlField)
+		tmpPanel.add(swing.JButton(<span style="color: #115511">"Go!"</span>, actionPerformed=self.goToCallback))
+		secondTab.add(tmpPanel, <span style="color: #115511">"North"</span>)
+
+		self.htmlPane = swing.JEditorPane(<span style="color: #115511">"http://www.cc.gatech.edu"</span>, editable=0, hyperlinkUpdate=self.followHyperlink, preferredSize=(400, 400))
+		secondTab.add(swing.JScrollPane(self.htmlPane), <span style="color: #115511">"Center"</span>)
+
+		self.statusLine = swing.JLabel(<span style="color: #115511">""</span>)
+
+		<span style="color: #1111CC">#########################################################</span>
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># The third tabbed panel is next... </span>
+		<span style="color: #1111CC">#</span>
+		thirdTab = swing.JPanel()
+		tabbedPane.addTab(<span style="color: #115511">"Other Widgets"</span>, thirdTab)
+
+		imageLabel = swing.JLabel(swing.ImageIcon(net.URL(<span style="color: #115511">"http://www.gatech.edu/images/logo-gatech.gif"</span>)))
+		imageLabel.toolTipText = <span style="color: #115511">"Labels can have images! Every widget can have a tooltip!"</span>
+		thirdTab.add(imageLabel)
+
+		tmpPanel = swing.JPanel()
+		tmpPanel.layout = awt.GridLayout(3, 2)
+		tmpPanel.border = swing.BorderFactory.createTitledBorder(<span style="color: #115511">"Travel Checklist"</span>)
+		tmpPanel.add(swing.JCheckBox(<span style="color: #115511">"Umbrella"</span>, actionPerformed=self.checkCallback))
+		tmpPanel.add(swing.JCheckBox(<span style="color: #115511">"Rain coat"</span>, actionPerformed=self.checkCallback))
+		tmpPanel.add(swing.JCheckBox(<span style="color: #115511">"Passport"</span>, actionPerformed=self.checkCallback))
+		tmpPanel.add(swing.JCheckBox(<span style="color: #115511">"Airline tickets"</span>, actionPerformed=self.checkCallback))
+		tmpPanel.add(swing.JCheckBox(<span style="color: #115511">"iPod"</span>, actionPerformed=self.checkCallback))
+		tmpPanel.add(swing.JCheckBox(<span style="color: #115511">"Laptop"</span>, actionPerformed=self.checkCallback))
+		thirdTab.add(tmpPanel)
+
+		tmpPanel = swing.JPanel()
+		tmpPanel.layout = awt.GridLayout(4, 1)
+		tmpPanel.border = swing.BorderFactory.createTitledBorder(<span style="color: #115511">"My Pets"</span>)
+		<span style="color: #1111CC">#</span>
+		<span style="color: #1111CC"># A ButtonGroup is used to indicate which radio buttons</span>
+		<span style="color: #1111CC"># go together.</span>
+		<span style="color: #1111CC">#</span>
+		buttonGroup = swing.ButtonGroup()
+
+		radioButton = swing.JRadioButton(<span style="color: #115511">"Dog"</span>, actionPerformed=self.radioCallback)
+		buttonGroup.add(radioButton)
+		tmpPanel.add(radioButton)
+
+		radioButton = swing.JRadioButton(<span style="color: #115511">"Cat"</span>, actionPerformed=self.radioCallback)
+		buttonGroup.add(radioButton)
+		tmpPanel.add(radioButton)
+		
+		radioButton = swing.JRadioButton(<span style="color: #115511">"Pig"</span>, actionPerformed=self.radioCallback)
+		buttonGroup.add(radioButton)
+		tmpPanel.add(radioButton)
+
+		radioButton = swing.JRadioButton(<span style="color: #115511">"Capybara"</span>, actionPerformed=self.radioCallback)
+		buttonGroup.add(radioButton)
+		tmpPanel.add(radioButton)
+
+		thirdTab.add(tmpPanel)
+	
+		self.window.pack()
+		self.window.show()
+
+	<span style="color: #1111CC">#</span>
+	<span style="color: #1111CC"># This is the callback that's run when the window closes.  Here</span>
+	<span style="color: #1111CC"># we just exit.  Note that either functions inside class</span>
+	<span style="color: #1111CC"># declarations or global functions can be callbacks.  When they're</span>
+	<span style="color: #1111CC"># inside a class they talk 'self' as the first argument.  Just</span>
+	<span style="color: #1111CC"># about all Swing callbacks also take an event argument as well.</span>
+	<span style="color: #1111CC">#</span>
+	<span style="color: #3333CC"><b>def</b></span> goodbye(self, event):
+		<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Goodbye!"</span>
+		sys.exit()
+
+	<span style="color: #1111CC">#</span>
+	<span style="color: #1111CC"># Callback for the "Click Me!" button on the first tab.  This</span>
+	<span style="color: #1111CC"># creates a new window to display what was in the text field,</span>
+	<span style="color: #1111CC"># and then clears the text field.</span>
+	<span style="color: #1111CC">#</span>
+	<span style="color: #3333CC"><b>def</b></span> clickMeCallback(self, event):
+		dialog = swing.JFrame(<span style="color: #115511">"You clicked the button!"</span>)
+		dialog.contentPane.layout = awt.BorderLayout()
+		dialog.contentPane.add(swing.JLabel(<span style="color: #115511">"Text was: "</span> + self.field.text))
+		dialog.size=(400, 200)
+		dialog.show()
+		<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Text is "</span>, self.field.text
+		self.field.text = <span style="color: #115511">""</span>
+
+	<span style="color: #1111CC">#</span>
+	<span style="color: #1111CC"># Callback for the "What's Selected?" button. This pops up a</span>
+	<span style="color: #1111CC"># window that shows the contents and index of the selected item.</span>
+	<span style="color: #1111CC">#</span>
+	<span style="color: #3333CC"><b>def</b></span> whatsSelectedCallback(self, event):
+		dialog = swing.JFrame(<span style="color: #115511">"Here's what's selected"</span>)
+		dialog.contentPane.layout = awt.GridLayout(2, 1)
+		dialog.contentPane.add(swing.JLabel(<span style="color: #115511">"Selected value = "</span> + str(self.list.selectedValue), swing.JLabel.CENTER))
+		dialog.contentPane.add(swing.JLabel(<span style="color: #115511">"Selected index = "</span> + str(self.list.selectedIndex), swing.JLabel.CENTER))
+		dialog.size=(400, 200)
+		dialog.show()
+		<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Selected value ="</span>, self.list.selectedValue, <span style="color: #115511">", selected index ="</span>, self.list.selectedIndex;
+
+	<span style="color: #1111CC">#</span>
+	<span style="color: #1111CC"># Callback for the "Go To" button; updates the contents of the</span>
+	<span style="color: #1111CC"># HTML pane.</span>
+	<span style="color: #1111CC">#</span>
+	<span style="color: #3333CC"><b>def</b></span> goToCallback(self, event):
+		self.htmlPane.setPage(self.urlField.text)
+
+	<span style="color: #1111CC">#</span>
+	<span style="color: #1111CC"># This callback is invoked whenever a link is clicked or moused</span>
+	<span style="color: #1111CC"># over.  The event is a HyperlinkEvent, which means that it</span>
+	<span style="color: #1111CC"># defines certain fields and operations, which we can use below.</span>
+	<span style="color: #1111CC">#	</span>
+	<span style="color: #3333CC"><b>def</b></span> followHyperlink(self, event):
+		<span style="color: #3333CC"><b>if</b></span> event.eventType == swing.event.HyperlinkEvent.EventType.ACTIVATED:
+			self.statusLine = event.URL.toString()
+			self.htmlPane.setPage(event.URL)
+		<span style="color: #3333CC"><b>elif</b></span> event.eventType == swing.event.HyperlinkEvent.EventType.ENTERED:
+			self.statusLine = event.URL.toString()
+		<span style="color: #3333CC"><b>elif</b></span> event.eventType == swing.event.HyperlinkEvent.EventType.EXITED:
+			self.statusLine = <span style="color: #115511">""</span>
+
+	<span style="color: #1111CC">#</span>
+	<span style="color: #1111CC"># This is a common technique when a bunch of widgets share a</span>
+	<span style="color: #1111CC"># single callback.  You can look at the "source" field on the</span>
+	<span style="color: #1111CC"># event argument to see which widget generated the event.</span>
+	<span style="color: #1111CC">#</span>
+	<span style="color: #3333CC"><b>def</b></span> checkCallback(self, event):
+		<span style="color: #3333CC"><b>if</b></span> event.source.selected:
+			<span style="color: #3333CC"><b>print</b></span> event.source.text + <span style="color: #115511">" was CHECKED"</span>
+		<span style="color: #3333CC"><b>else</b></span>:
+			<span style="color: #3333CC"><b>print</b></span> event.source.text + <span style="color: #115511">" was UNCHECKED"</span>
+
+	<span style="color: #1111CC"># </span>
+	<span style="color: #1111CC"># This is the callback for all the radio buttons.</span>
+	<span style="color: #1111CC">#</span>
+	<span style="color: #3333CC"><b>def</b></span> radioCallback(self, event):
+		<span style="color: #3333CC"><b>print</b></span> event.source.text + <span style="color: #115511">" was clicked ON"</span>
+
+
+<span style="color: #1111CC">#</span>
+<span style="color: #1111CC"># This is how you make the main entry point for your program in Python.</span>
+<span style="color: #1111CC"># The system variable __name__ will be set to the string __main__ if</span>
+<span style="color: #1111CC"># this file is passed directly on the command line to Jython.  </span>
+<span style="color: #1111CC">#</span>
+<span style="color: #1111CC"># Here, we simply create a SwingSampler, and it does everything from</span>
+<span style="color: #1111CC"># there.</span>
+<span style="color: #1111CC">#</span>
+<span style="color: #3333CC"><b>if</b></span> __name__ == <span style="color: #115511">"__main__"</span>:
+	sampler = SwingSampler()
+
+<span style="color: #1111CC"># test</span>
+test=SwingSampler()
+ 
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

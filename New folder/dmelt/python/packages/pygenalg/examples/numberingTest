@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+from pygenalg import *
+from pygenalg.gene import *
+from pygenalg.operator import *
+from pygenalg.modifier import *
+from pygenalg.choose import *
+import random
+random.seed()
+
+try:
+    import psyco
+    psyco.full()
+except Exception, e:
+    pass
+
+# Crazy fitness function
+class MyFit(FitnessFunction):
+    def __init__(self):
+        FitnessFunction.__init__(self)
+
+    def evaluate(self, chromossome):
+        genes = chromossome.getGenes()
+        if genes[0]:
+            multiplyBy = 10
+        else:
+            multiplyBy = 3
+
+        fit = 1
+        for i in genes[1:]:
+            fit *= i.getValue()
+        fit *= multiplyBy
+        return fit
+    # end :: evaluate
+# end :: MyFit
+
+
+genotype    = (BooleanGene, IntegerGene, FloatGene, FloatGene, FloatGene, FloatGene, IntegerGene, IntegerGene)
+minFloat    = 1.0
+maxFloat    = 500.0
+minInt      = 100
+maxInt      = 150
+initialPopulationSize = 150
+
+chromossomes = [    Chromossome(   (BooleanGene.getRandomInstance(),
+                                    IntegerGene.getRandomInstance(minInt, maxInt),
+                                    FloatGene.getRandomInstance(minFloat, maxFloat),
+                                    FloatGene.getRandomInstance(minFloat, maxFloat),
+                                    FloatGene.getRandomInstance(minFloat, maxFloat),
+                                    FloatGene.getRandomInstance(minFloat, maxFloat),
+                                    IntegerGene.getRandomInstance(minFloat, maxFloat),
+                                    IntegerGene.getRandomInstance(minFloat, maxFloat))
+                        )
+                    for i in xrange(0, initialPopulationSize)
+            ]
+
+population  = Population(chromossomes)
+fitnessFunc = MyFit()
+#chooser     = SimpleRouletChooser()
+#cross       = SimpleCrossoverOperator( int(len(genotype) / 2) )
+sort        = PopulationSorter(fitnessFunc)
+cross       = SimpleCrossover(position = int(len(genotype) / 2), rate = 0.8)
+eliteKeep   = ElitistKeeper(rate = 0.1)
+oldKeep     = PopulationKeeper(rate = 0.1)
+mutation    = Mutation(probability = 0.1)
+
+env = Environment(population, fitnessFunc, preModifiers = (sort, ), operators = (cross, eliteKeep, oldKeep), postModifiers = (mutation, ))
+
+
+#env = Environment(  cross, 
+#                    fitnessFunc,
+#                    chooser,
+#                    population,
+#                    crossoverRate = 0.9,
+#                    mutationRate  = 0.1,
+#                    keepMostAdapted = 10 )
+
+#print env.getActualPopulation()
+fit = fitnessFunc.evaluate(env.getMostAdapted())
+iterations = 0
+while fit < 1.2e+19:
+    try:
+        iterations += 1
+        env.doEvolution()
+        fit = fitnessFunc.evaluate(env.getMostAdapted())
+        print fit
+    except KeyboardInterrupt, e:
+        break
+
+print '\n\n# Found the solution in %d iterations!' % (iterations)

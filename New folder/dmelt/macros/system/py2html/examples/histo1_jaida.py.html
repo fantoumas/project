@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/histo1_jaida.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># example: make Jaida histogram and convert to jhepwork </span>
+<span style="color: #1111CC"># jaida</span>
+<span style="color: #3333CC"><b>from</b></span>  hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  hep.aida.dev <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  hep.aida.ref <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  hep.aida.ref.histogram <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  hep.aida.ref.histogram.binner <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  hep.aida.ref.root <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+<span style="color: #1111CC"># jhepwork stuff</span>
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> HPlot
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> H1D
+
+
+<span style="color: #1111CC">### your program here</span>
+<span style="color: #1111CC"># make JAIDA histograms</span>
+xAx =  FixedAxis(30, -2.0, 2.0);
+h1 = Histogram1D(<span style="color: #115511">"JAIDA histogram"</span>,<span style="color: #115511">"JAIDA histogram"</span>, xAx );
+
+
+
+rand = Random()
+<span style="color: #1111CC"># fill histogram</span>
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(1000):
+      h1.fill(rand.nextGaussian())
+
+<span style="color: #1111CC"># plot it</span>
+c1 = HPlot(<span style="color: #115511">"Canvas"</span>,600,400,0.12,1, 1)
+c1.setDrawGrid(0,0)
+c1.setDrawGrid(1,0)
+c1.visible(1)
+hh=H1D(h1)
+hh.setFill(1)
+c1.draw(hh)
+
+
+
+<span style="color: #1111CC"># export to some image (png,eps,pdf,jpeg...)</span>
+c1.export(Editor.DocMasterName()+<span style="color: #115511">".png"</span>);
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

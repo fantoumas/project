@@ -1,0 +1,23 @@
+Copyright © 2005-2015 S.Chekanov. jHepWork, SCaVis
+jeHep SCaVis License
+See: http://jwork.org/scavis/index.php/license
+
+
+jeHep is licensed by the GNU General Public License (GPL) v3 or later, and
+links many external libraries under the GPL license. Documentation libraries,
+examples, installer, code assist database, language files integrated into the
+SCaVis IDE software package are not licensed by the GPL license and free only
+for NON-COMMERCIAL purposes (academic research, science and education).
+Due to the GPL license restrictions, SCaVis Java libraries cannot be used in
+projects with closed-source code.
+
+If you use ScaVis for a COMMERCIAL purpose, you you should become a full
+member. This will allow to use SCaVis web services for a COMMERCIAL purpose.
+
+In order to use SCaVis Java libraries in a commercial programs with possibly
+closed-source environment, you will need to receive a redesigned version of
+this program suitable for commercial purpose.
+
+SCaVis language files, documentation, examples, installers, code-assist
+databases and certain third-party libraries are subject to the Creative
+Commons Attribution-Share Alike License 2.0 

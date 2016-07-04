@@ -1,0 +1,57 @@
+// latexLabelParser.bsh - a BeanShell macro script for the jEdit text editor
+// Version 27-Oct-2004.
+//
+// This macro lists all labels of a set of LaTeX files. This list is structured
+// so that labels can be identified. The user must "select/copy" and "paste"
+// references. This macro is invoked by the macro LaTeX.bsh.
+//
+// Copyright (C) 2004 Jean-Francois Magni
+// E-mail: jfmagni_at_free_dot_fr
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with the jEdit application; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+// Absolute path to script directory
+   String slash = System.getProperty( "file.separator" );
+   for (i=0;i<scriptPath.length()-1;i++) {
+      if (scriptPath.substring(i,i+1).equals(slash))  scriptDir = scriptPath.substring(0,i+1);
+   }
+
+// Absolute path to file directory
+   bufferPath = buffer.getPath();
+   for (i=0;i<textArea.buffer.getPath().length()-1;i++) {
+      if (bufferPath.substring(i,i+1).equals(slash))  bufferDir = bufferPath.substring(0,i+1);
+   }
+
+// Check that the active buffer is TEX and that it has been named (for relative paths)
+   if (!bufferPath.toLowerCase().matches(".*tex")) {
+      Macros.message(view,"This is not a TeX file");
+      return;
+   };
+
+// Run Perl script and open/reload buffer containing label references
+   //jEdit.closeBuffer(view,bufferDir + slash + ".labelTeX.tex");
+   runCommandInConsole(view,"System","cd $d"); // chdir for creating the label file
+   // FOR SH SHELL USE THE FOLLOWING LINE:
+   // runCommandInConsole(view,"System","\"perl " + scriptDir + slash + "latexLabelParser.pl $f\"");
+   // FOR BASH SHELL USE THE FOLLOWING LINE:
+   // runCommandInConsole(view,"System","perl " + scriptDir + slash + "latexLabelParser.pl $f &");
+   // SEEMS TO WORK Unix/bash and Windows/osdefault:
+   runCommandInConsole(view,"System","perl \"" + scriptDir + slash + "latexLabelParser.pl\" $f &");
+   waitForConsole(view);
+   jEdit.openFile(view,bufferDir + slash + ".labelTeX.tex");
+   waitForConsole(view);
+   buffer.reload(view);
+   // Assuming that the console is at the bottom
+   Macros.getMacro("Interface/Toggle_Bottom_Docking_Area").invoke(view);

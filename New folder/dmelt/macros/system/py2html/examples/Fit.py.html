@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/Fit.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+
+af   = IAnalysisFactory.create();
+tree = af.createTreeFactory().create();
+hf   = af.createHistogramFactory(tree);
+
+h1 = hf.createHistogram1D(<span style="color: #115511">"Histogram 1D"</span>,50,-3,3)
+
+r = Random()
+
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(100000):
+    h1.fill(r.nextGaussian())
+    h1.fill(r.nextDouble()*10-5)
+
+functionfact = af.createFunctionFactory(tree)
+gauss = functionfact.createFunctionFromScript(<span style="color: #115511">"gauss"</span>,1,<span style="color: #115511">"background+a*exp(-(x[0]-mean)*(x[0]-mean)/sigma/sigma)"</span>,<span style="color: #115511">"a,mean,sigma,background"</span>,<span style="color: #115511">"A Gaussian"</span>)
+gauss.setParameter(<span style="color: #115511">"a"</span>,h1.maxBinHeight())
+gauss.setParameter(<span style="color: #115511">"mean"</span>,h1.mean())
+gauss.setParameter(<span style="color: #115511">"sigma"</span>,h1.rms())
+
+plotter = af.createPlotterFactory().create(<span style="color: #115511">"Fit.py Plot"</span>)
+plotter.region(0).plot(h1)
+plotter.region(0).plot(gauss)
+
+
+ff = af.createFitFactory()
+jminuit = ff.createFitter(<span style="color: #115511">"Chi2"</span>,<span style="color: #115511">"jminuit"</span>)
+uncmin = ff.createFitter(<span style="color: #115511">"Chi2"</span>,<span style="color: #115511">"uncmin"</span>)
+jminuitResult = jminuit.fit(h1,gauss)
+uncminResult = uncmin.fit(h1,gauss)
+plotter.region(0).plot(jminuitResult.fittedFunction())
+plotter.region(0).plot(uncminResult.fittedFunction())
+plotter.show()
+
+functionfact.cloneFunction(<span style="color: #115511">"fitted gauss (jminuit)"</span>,jminuitResult.fittedFunction())
+functionfact.cloneFunction(<span style="color: #115511">"fitted gauss (Uncmin)"</span>,uncminResult.fittedFunction())
+
+
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"jminuit Chi2 = "</span>, jminuitResult.quality()
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Uncmin Chi2 = "</span>, uncminResult.quality()
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

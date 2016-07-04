@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/ShowDemo.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.awt.event <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> *
+ 
+<span style="color: #3333CC"><b>class</b></span> ExtendedListSelector(MouseListener, MouseMotionListener):
+    <span style="color: #115511">'''
+    Helper class for extended list selections.
+    Click + drag to select range of entries.
+    Ctrl + click + drag for non-contiguous ranges.
+    '''</span>
+    <span style="color: #3333CC"><b>def</b></span> __init__(self, list):
+        self.list = list
+        <span style="color: #1111CC"># self.selstartindex = -1</span>
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span> 
+   
+    <span style="color: #3333CC"><b>def</b></span> mouseClicked(self, evt):
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span>    
+        <span style="color: #1111CC"># pass</span>
+    <span style="color: #3333CC"><b>def</b></span> mouseEntered(self, evt):      
+          <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span>  
+         <span style="color: #1111CC"># pass</span>
+    <span style="color: #3333CC"><b>def</b></span> mouseExited(self, evt):
+          <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span>  
+        <span style="color: #1111CC"># pass</span>
+    <span style="color: #3333CC"><b>def</b></span> mousePressed(self, evt):
+        a=JFrame(<span style="color: #115511">"test"</span>);
+        a.setVisible(1)
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span> 
+        <span style="color: #1111CC"># self.selstartindex = self.list.locationToIndex(evt.point)</span>
+       <span style="color: #1111CC"># print "OOO"</span>
+    <span style="color: #3333CC"><b>def</b></span> mouseReleased(self, evt):
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span>
+        self.selstartindex = -1
+        <span style="color: #1111CC"># pass</span>
+    <span style="color: #3333CC"><b>def</b></span> mouseDragged(self, evt):
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span>
+        <span style="color: #1111CC"># pass</span>
+        <span style="color: #1111CC"># i = self.list.locationToIndex(evt.point)</span>
+        <span style="color: #1111CC"># self.list.addSelectionInterval(self.selstartindex, i)</span>
+    <span style="color: #3333CC"><b>def</b></span> mouseMoved(self, evt):
+         <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span>
+        <span style="color: #1111CC"># pass</span>
+
+<span style="color: #3333CC"><b>def</b></span>  test(self, list):
+        self.list = list
+        <span style="color: #1111CC"># self.selstartindex = -1</span>
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"OK"</span> 
+    
+<span style="color: #3333CC"><b>class</b></span> ListTest(JFrame):
+    <span style="color: #3333CC"><b>def</b></span> __init__(self):
+        rows = \
+            [<span style="color: #115511">'apple'</span>, <span style="color: #115511">'battle'</span>, <span style="color: #115511">'cattle'</span>, <span style="color: #115511">'dawdle'</span>, <span style="color: #115511">'easel'</span>, <span style="color: #115511">'fizzle'</span>]
+
+       <span style="color: #1111CC"># list = JList(rows,mouseListener=test)</span>
+        list = JList(rows)
+        list.selectionMode = \
+            ListSelectionModel.SINGLE_INTERVAL_SELECTION
+        
+         
+       <span style="color: #1111CC">#  listselector = ExtendedListSelector(list)</span>
+       <span style="color: #1111CC">#  list.addMouseListener(listselector)</span>
+       <span style="color: #1111CC"># list.addMouseMotionListener(listselector)</span>
+        s = JScrollPane(list)
+        self.contentPane.add(s)
+        
+        self.size = 200, 300
+        
+ 
+<span style="color: #3333CC"><b>if</b></span> __name__ == <span style="color: #115511">'__main__'</span>:
+    lt = ListTest()
+    lt.visible = 1
+
+
+
+lt=ListTest()
+lt.setVisible(1)
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/clustering.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># Clustering. Run all posiible cluster algorithms</span>
+<span style="color: #1111CC"># S.Chekanov</span>
+<span style="color: #1111CC">#</span>
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> jminhep.cluster <span style="color: #3333CC"><b>import</b></span> *
+
+
+
+<span style="color: #1111CC"># create a data holder</span>
+data = DataHolder(<span style="color: #115511">"Example"</span>)
+
+<span style="color: #1111CC"># fill 3D data with Gaussian random numbers</span>
+rand = Random()
+<span style="color: #1111CC"># make first cluster</span>
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(20):
+      a =[]
+      a.append( -2*rand.nextGaussian()-8)
+      a.append( 2*rand.nextGaussian()+5 )
+      a.append( 3*rand.nextGaussian()+10 )
+      data.add( DataPoint(a) )
+      <span style="color: #3333CC"><b>del</b></span> a
+
+<span style="color: #1111CC"># make second cluster</span>
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(30):
+      a =[]
+      a.append( 10*rand.nextGaussian() +10)
+      a.append( 2*rand.nextGaussian()+20 )
+      a.append( 10*rand.nextGaussian()+5 )
+      data.add( DataPoint(a) )
+      <span style="color: #3333CC"><b>del</b></span> a
+
+<span style="color: #1111CC"># make 3rd cluster</span>
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(10):
+      a =[]
+      a.append( 3*rand.nextGaussian() +10)
+      a.append( 2*rand.nextGaussian()+1 )
+      a.append( 2*rand.nextGaussian()+20 )
+      data.add( DataPoint(a) )
+      <span style="color: #3333CC"><b>del</b></span> a
+
+
+
+
+
+c1=HPlot()
+c1.setAutoRange()
+p1=P1D(data,0,1) <span style="color: #1111CC"># show 1st and 2nd component</span>
+
+<span style="color: #1111CC"># show the table</span>
+<span style="color: #1111CC"># HTable(p1)</span>
+
+c1.draw(p1)
+c1.visible(1)
+
+
+
+<span style="color: #1111CC"># initialte partitioner</span>
+pat = Partition(data)
+
+<span style="color: #1111CC"># set mode</span>
+pat.set(3, 0.001, 1.7, 1000)
+
+<span style="color: #1111CC"># probability for membership (only for Fuzzy algorithm)</span>
+pat.setProbab(0.68)
+
+pat.run(131)
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"algorithm: "</span> + pat.getName()
+<span style="color: #1111CC"># print "Compactness: " + str(pat.getCompactness())</span>
+<span style="color: #1111CC"># print "No of final clusters: " + str(pat.getNclusters())</span>
+Centers = pat.getCenters()
+p2=P1D(Centers,<span style="color: #115511">"Centroids of clusters"</span>,0,1) <span style="color: #1111CC"># show 1st and 2nd component</span>
+p2.setColor(Color.red)
+c1.draw(p2);
+<span style="color: #1111CC"># HTable(Centers)</span>
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

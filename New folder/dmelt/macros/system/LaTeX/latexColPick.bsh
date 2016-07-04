@@ -1,0 +1,47 @@
+// latexColPick.bsh - a BeanShell macro script for the jEdit text editor
+// Version 27-Oct-2004.
+//
+// This macro displays the color picker and inserts the selected color
+// using the syntax of the LaTeX package "color"
+//
+// Copyright (C) 2004 Jean-Francois Magni
+// E-mail: jfmagni_at_free_dot_fr
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with the jEdit application; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+color = null;
+color = JColorChooser.showDialog(view, "LaTeX Color Picker", color);
+
+if (color != null){
+   
+   String mycolorstr = color.toString();
+   mycolorstr = mycolorstr.substring(15,mycolorstr.length()-1);
+   String[] rgb = mycolorstr.split(",");
+   
+   eval(rgb[0]);
+   eval(rgb[1]);
+   eval(rgb[2]);
+   
+   r = Math.round(0.3922*r)/100.0;
+   g = Math.round(0.3922*g)/100.0;
+   b = Math.round(0.3922*b)/100.0;
+   
+   String mycolor = Macros.input(view,"Enter color name");
+   String towrite =  "\\definecolor{"+ mycolor +"}{rgb}{" + r.toString() + "," + g.toString() + "," + b.toString()+"}";
+
+   textArea.setSelectedText(towrite);
+}
+
+

@@ -1,0 +1,27 @@
+Copyright © 2005-2015 S.Chekanov. jHepWork, DataMelt
+DataMelt License
+See: http://jwork.org/scavis/index.php/license
+
+
+DataMelt is licensed by the GNU General Public License (GPL) v3 or later, and
+links many external libraries under the GPL license. Documentation libraries,
+examples, installer, code assist database, language files integrated into the
+DataMelt IDE software package are not licensed by the GPL license and free only
+for NON-COMMERCIAL purposes (academic research, science and education).
+Due to the GPL license restrictions, DataMelt Java libraries cannot be used in
+projects with closed-source code.
+
+If you use DataMelt for a COMMERCIAL purpose, you you should become a full
+member. This will allow to use DataMelt web services for a COMMERCIAL purpose.
+
+In order to use DataMelt Java libraries in a commercial programs with possibly
+closed-source environment, you will need to receive a redesigned version of
+this program suitable for commercial purpose.
+
+
+DataMelt language files, documentation, examples, installers, code-assist
+databases and certain third-party libraries are subject to the Creative
+Commons Attribution-Share Alike License 2.0 
+
+Third-party licenses and licenses for separate DataMelt libraries 
+are archived in the file lib/licenses.jar

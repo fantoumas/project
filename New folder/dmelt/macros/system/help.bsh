@@ -1,0 +1,61 @@
+import jehep.ui.SetEnv; 
+import jehep.ui.Editor; 
+
+help() {
+
+// Pop up a frame with a button in it
+   frame = new JDialog();
+
+        JPanel topPanel = new JPanel();
+        JPanel lowerPanel = new JPanel();
+        JTextArea jDescription = new JTextArea(80, 100);
+        String helpFile=SetEnv.DirPath+SetEnv.fSep+"Docs"+SetEnv.fSep+"HelpBeanShell.txt";
+        String text=SetEnv.readFile(helpFile);
+        jDescription.setText(text);
+
+        jDescription.setCaretPosition(0);
+        jDescription.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        jDescription.setEditable(false);
+
+
+        jB2 = new JButton();
+        jB2.setText("Exit");
+        jB2.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+         
+          frame.dispose(); // setVisible(false);
+         
+        }  });
+
+       
+       lowerPanel.add(jB2, null);
+       topPanel.setLayout(new BorderLayout());
+
+ // comments
+         jScrollPane1 = new JScrollPane();
+
+         jScrollPane1.getViewport().add( jDescription );
+         topPanel.add(jScrollPane1,BorderLayout.CENTER);
+
+
+         jDescription.setLineWrap(true);
+         jDescription.setWrapStyleWord(true);
+         jDescription.setCaretColor(Color.red);
+   
+         frame.add( topPanel, java.awt.BorderLayout.CENTER );
+         frame.add( lowerPanel, java.awt.BorderLayout.SOUTH );
+
+
+   bounds = view.getBounds();
+   ww = bounds.width;
+   hh=  bounds.height;
+   xx = bounds.x;
+   yy = bounds.y;
+  
+   frame.setLocation(xx+(int)(0.4*ww), yy+(int)(0.1*hh));
+   frame.pack();
+   frame.setSize( (int)(0.5*ww),(int)(0.8*hh) );
+   frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+   frame.setVisible(true);
+
+}

@@ -1,0 +1,263 @@
+<!--
+ANT build script (ANT is a Java & XML based cross-platform build tool
+and available at http://jakarta.apache.org/ant/).
+
+author: S.Chekanov 
+See the target "usage" further below for instructions on how to build the software.
+-->
+
+
+
+
+
+
+<project name="jhepwork" default="help" basedir=".">
+    <description>
+        jHepWork build file
+    </description>
+
+
+
+  <!-- set jHepWork directory here -->
+  <property name="jhepwork" location="../../" />
+
+
+  <!-- DO NOT MODIFY  THIS  -->
+  <!-- set global properties for this build -->
+  <!-- Read system environment vars into properties prefixed with "env". -->
+  <property environment="env"/>
+  <property name="version" value="1.1.0"/>
+  <property name="src" location="src" />
+  <property name="build" location="build" />
+  <property name="dist"  location="dist" />
+  <property name="lib.dir" value="${jhepwork}/lib"/>
+  <property name="my.name" value="S.Chekanov"/>
+  <property name="my.lib" value="private"/>
+  <property name="jythonc" value="${jhepwork}/lib/jython/jythonc"/>
+  <property name="jythoncpy" value="${jhepwork}/lib/jython/Tools/jythonc/jythonc.py"/>
+  <property name="macro" value="${M}.py"/>
+  <property name="macrojar" value="${M}.jar"/>
+
+ 
+  <path id="classpath">
+       <fileset dir="${jhepwork}" includes="**/*.jar"/>
+  </path>
+
+
+
+
+<!-- ================================================================= -->
+<!-- Default target                                                    -->
+<!-- ================================================================= -->
+<target name="help">
+<echo>
+This build file is assumed to run in this directory.
+If you want to run your script in another directory,
+copy this build.xml script and set the location of
+the main jHepWork directory:  
+
+  property name="jhepwork" 
+  location="${jhepwork}"
+
+  such that ${jhepwork}/jehep.jar 
+  can be found by this script
+ 
+
+Then use one of the following:
+-------------------------------
+ 
+ ant -help              - Print help on general ant usage
+ ant help               - Print this help text
+
+ ant jarjava            - Compile and generate jars from java source files.
+                          You should put all *.java source files
+                          to src directory  
+
+ ant run -DM=file      -  run jHepWork jython sript: file.py 
+ ant run -DM="file"    -  same as before
+ ant run -DM file      -  same as before
+
+ ant jarpy  -DM file   -  compile jython macro "file.py" 
+                          to jar library "file.jar" 
+ 
+
+</echo>
+</target>
+
+
+
+
+
+<!-- Check the file -->
+<target name="check-macro">
+  <available file="${macro}" property="isFileAvail">
+  </available>
+  <fail unless="isFileAvail" message="File ${macro} doesn't exist!">
+  </fail>
+</target>
+
+
+
+<!-- Check the file -->
+<target name="check-installation">
+  <available file="${jhepwork}/jehep.jar" property="isInstalled">
+  </available>
+  <fail unless="isInstalled" message="You did not set up jhepwork
+   installation correctly in the build.xml file.
+   I cannot find ${jhepwork}/jehep.jar">
+  </fail>
+</target>
+
+
+
+
+<!-- Check the extension of jythonc compiler -->
+<condition property="jythonext" value=".bat">
+    <os family="windows" />
+  </condition>
+  <condition property="jythonext" value="">
+    <not>
+      <os family="windows" />
+    </not>
+  </condition>
+
+
+
+   <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+    
+  <target name="copybeforecompile" depends="init">
+
+    <!-- prepare library directory -->
+    <mkdir dir="${dist}/lib"/>
+
+
+  <!-- make necessary manifest -->
+  <manifest file="${src}/MANIFEST.MF">
+   <attribute name="Built-By" value="${my.name}"/>
+   <attribute name="Main-Class" value=""/>
+   <attribute name="Class-Path" value=""/>
+  </manifest>
+
+
+    <!-- copy directory -->
+    <copy todir="${build}">
+      <fileset dir="${src}">
+        <patternset>
+          <exclude name="**/*.java" />
+          <exclude name="**/*.*~" />
+          <exclude name="**/*.bak" />
+        </patternset>
+      </fileset>
+    </copy>
+  </target>
+ 
+
+ 
+  <target name="compile" depends="init,copybeforecompile"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}"
+          debug="on"  deprecation="off"  optimize="on" 
+          source="1.5" target="1.5" 
+          classpathref="classpath">
+    </javac>
+  </target>
+
+
+
+  <target name="jarjava" depends="compile"
+        description="generate the distribution" >
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/lib/${my.lib}-${DSTAMP}.jar" 
+         basedir="${build}" 
+         manifest="${build}/MANIFEST.MF"/>
+  <copy file="${dist}/lib/${my.lib}-${DSTAMP}.jar" tofile="${my.lib}.jar"/>
+  </target>
+
+
+
+
+
+<!-- Run jHepWork script -->
+<target name="run" depends="check-macro,check-installation" if="isFileAvail" >
+   <echo>Run ${macro} script </echo>
+   <java classname="org.python.util.jython"
+           fork="true"
+           failonerror="true"
+           maxmemory="256m"
+           >
+          <arg value="${macro}"/>
+         <classpath>
+         <pathelement path="${java.class.path}"/>
+         <fileset dir="${jhepwork}">
+            <include name="**/*.jar"/>
+        </fileset>
+   </classpath>
+       </java>
+  </target>
+
+
+<!--
+ <target name="jarpy" depends="check-macro" if="isFileAvail">
+    <echo>Compiling ${macro} script to ${macrojar}</echo> 
+    <delete file="${macrojar}"/>
+    <exec 
+      executable="${jythonc}${jythonext}"
+      dir=".">
+      <arg value="-a"/>
+      <arg value="-j"/>
+      <arg value="${macrojar}"/>
+      <arg value="${macro}"/>
+    </exec>
+  </target>
+-->
+
+
+<!-- Run jHepWork script -->
+<target name="jarpy" depends="check-macro,check-installation" 
+      if="isFileAvail" >
+   <echo>Run ${macro} script </echo>
+   <java classname="org.python.util.jython"
+           fork="true"
+           failonerror="true"
+           maxmemory="256m"
+           >
+
+      <arg value="${jythoncpy}"/>
+      <arg value="-a"/>
+      <arg value="-j"/>
+      <arg value="${macrojar}"/>
+      <arg value="${macro}"/>
+
+       <classpath>
+         <pathelement path="${java.class.path}"/>
+         <fileset dir="${jhepwork}">
+            <include name="lib/jython/*.jar"/>
+        </fileset>
+      </classpath>
+
+
+       </java>
+  </target>
+
+
+
+
+   <!-- Delete the ${build} and ${dist} directory trees -->
+  <target name="clean,check-installation"
+        description="clean up" >
+    <delete dir="${build}"/>
+    <delete dir="jpywork"/> 
+    <delete dir="${dist}"/>
+  </target>
+
+
+
+
+
+</project>

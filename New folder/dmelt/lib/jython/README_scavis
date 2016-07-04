@@ -1,0 +1,3 @@
+Custom-built jython. Skims not needed packages from caching.
+Removed some library which are already available from other packages
+S.Chekanov (2014)

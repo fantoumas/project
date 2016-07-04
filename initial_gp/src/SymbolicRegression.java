@@ -1265,7 +1265,7 @@ public class SymbolicRegression
         for (gen = 0; gen < numEvolutions2; gen++) {
 
             gp.evolve(); // evolve one generation
-            gp.calcFitness();
+            gp.calcFitness(gen);
             GPPopulation pop = gp.getGPPopulation();
 
             IGPProgram thisFittest = pop.determineFittestProgram();

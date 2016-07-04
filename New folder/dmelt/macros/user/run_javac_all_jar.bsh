@@ -1,0 +1,67 @@
+// compile the current file
+import jehep.ui.SetEnv; 
+import jehep.ui.Editor;
+import java.io.File;
+
+// clear the project
+suc=SetEnv.filesRemove(SetEnv.ProjDir,".class");
+// if (suc) print("Project was cleaned successfully!");
+if (!suc) print("Error removing project files!");
+
+// keep full path, remove the extension
+DocName=Editor.DocMasterName();
+// full path to this file
+DocDir=Editor.DocDir();
+// file without path and extension
+DocNameShort=Editor.DocMasterNameShort();
+fsep=SetEnv.fSep; // file separator
+psep=File.pathSeparator; // path separator
+// user defined jar in the project directory
+user=SetEnv.ProjDir+SetEnv.fSep+"classes.jar";
+
+
+JAVAHOME=System.getenv("JAVA_HOME");
+if (JAVAHOME != null) {
+    //print("JAVAHOME="+System.getenv("JAVA_HOME"));
+    cmd=JAVAHOME+fsep+"bin"+fsep+javac -cp "+SetEnv.ClassPath+psep+user+" "+SetEnv.filesList(SetEnv.ProjDir,".java");
+    print("Process macros/user/run_java_all_jar.bsh  ..");
+    exec( cmd );
+} else  {
+    // print("JAVA_HOME is not set! Try java..");
+    cmd="javac -cp "+SetEnv.ClassPath+psep+user+" "+SetEnv.filesList(SetEnv.ProjDir,".java");
+    print("Process macros/user/run_java_all_jar.bsh  ..");
+    exec( cmd );
+}
+
+
+files=SetEnv.jarDirectories(SetEnv.ProjDir); 
+// files=SetEnv.filesListStrip(SetEnv.ProjDir,".class");
+// print ("jar:"+files); 
+
+if (JAVAHOME != null) {
+    cmd=JAVAHOME+fsep+"bin"+fsep+"jar cf "+SetEnv.ProjDir+SetEnv.fSep+"classes.jar "+files;
+    // print("Process macros/user/run_java_all_jar.bsh  ..");
+    exec( cmd );
+} else  {
+    cmd="jar cf "+SetEnv.ProjDir+SetEnv.fSep+"classes.jar "+files;
+    print("Process macros/user/run_java_all_jar.bsh  ..");
+    exec( cmd );
+}
+
+// clear
+// suc=SetEnv.filesRemove(SetEnv.ProjDir,".class");
+// if (suc) print("Project was cleaned successfully!");
+// if (!suc) print("Error removing project files!");
+
+
+// refresh files
+SetEnv.win.refreshProjDir();
+
+
+// clear BeanShell console
+// SetEnv.RefreshBS();
+
+
+// clear Jython console
+SetEnv.RefreshJSsoft();
+

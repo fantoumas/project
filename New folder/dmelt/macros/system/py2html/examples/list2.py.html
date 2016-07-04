@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/list2.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.awt.event <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> *
+
+
+<span style="color: #3333CC"><b>class</b></span> Scribble( JPanel ):
+    <span style="color: #115511">""" A simple GUI example """</span>
+
+    <span style="color: #3333CC"><b>def</b></span> __init__ (self):  <span style="color: #1111CC"># constructor</span>
+        JPanel.__init__(self)
+
+        rows = \
+            [<span style="color: #115511">'apple'</span>, <span style="color: #115511">'battle'</span>, <span style="color: #115511">'cattle'</span>, <span style="color: #115511">'dawdle'</span>, <span style="color: #115511">'easel'</span>, <span style="color: #115511">'fizzle'</span>]
+        
+        list=JList(rows)
+        self.add(list)
+       <span style="color: #1111CC"># self.add(JList(rows))</span>
+        list.mousePressed = self.doPress
+       <span style="color: #1111CC"># self.__last = 0, 0</span>
+
+    <span style="color: #3333CC"><b>def</b></span> doPress (self, event):
+            <span style="color: #3333CC"><b>print</b></span>(<span style="color: #115511">"OK"</span>)
+            a=JFrame(<span style="color: #115511">"test"</span>);
+            a.setVisible(1)
+
+<span style="color: #3333CC"><b>if</b></span> __name__ == <span style="color: #115511">"__main__"</span>:
+    <span style="color: #3333CC"><b>def</b></span> doClose (event):
+        <span style="color: #3333CC"><b>import</b></span> sys
+        sys.exit()
+
+
+
+<span style="color: #3333CC"><b>def</b></span> doClose (event):
+        frame.visible = 0
+
+<span style="color: #1111CC"># test</span>
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Frame
+frame = JFrame(<span style="color: #115511">"Scribble"</span>, windowClosing=doClose)
+frame.add( Scribble() )
+frame.size = 200, 300
+frame.visible = 1
+
+
+
+
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

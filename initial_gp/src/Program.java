@@ -19,13 +19,16 @@ public class Program {
     }
 
     private void run() throws Exception {
-        JFrame w = new JFrame("Demo");
+
+        JFrame frame = new JFrame("Demo");
         Screen screen = new Screen();
-        w.setDefaultCloseOperation(w.EXIT_ON_CLOSE);
-        w.setPreferredSize(new Dimension(800, 662));
-        w.pack();
-        w.setLocationByPlatform(true);
-        w.setVisible(true);
-        screen.createMenuBar(w);
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setVisible(true);
+        screen.addComponentToPane(frame);
+        screen.createMenuBar(frame);
+//        OverlaidPlot plot = new OverlaidPlot("son");
+
+//        frame.add(plot);
     }
 }

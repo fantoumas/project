@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/points_oper.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># example for P1D class</span>
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Font
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> math  <span style="color: #3333CC"><b>import</b></span> sqrt;
+
+c1 = HPlot(<span style="color: #115511">"Canvas"</span>,800,400,0.1, 1, 3)
+c1.gTitle(<span style="color: #115511">"x-sections"</span>, Color.blue) <span style="color: #1111CC">#put title</span>
+c1.visible(1)
+c1.setAutoRange()
+
+
+c1.setLegendFont( Font(<span style="color: #115511">"Lucida Sans"</span>, Font.BOLD, 12)  )
+c1.setTicFont(Font(<span style="color: #115511">"Lucida Sans"</span>, Font.BOLD, 10)  )
+c1.setNameX(<span style="color: #115511">"P_{T} / M"</span>)
+c1.setNameY(<span style="color: #115511">"d /p"</span>)
+
+p1= P1D(<span style="color: #115511">"d/p T.M."</span>)
+p1.add(0.35,2.46,0.33)
+p1.add(0.45,1.02,0.19)
+p1.add(0.55,1.32,0.32)
+p1.add(0.65,0.88,1.07)
+p1.setColor(Color.red)
+p1=p1.oper(0.001)
+c1.draw(p1)
+
+
+s1= P1D(<span style="color: #115511">"d/p S.C."</span>)
+s1.setSymbol(5)
+s1.add(0.36,2.64,0.48)
+s1.add(0.46,1.23,0.29)
+s1.add(0.56,1.44,0.39)
+s1.add(0.66,1.02,1.28)
+s1=s1.oper(0.001)
+s1.setColor(Color.blue)
+c1.draw(s1)
+
+
+
+
+
+
+c1.cd(1,2)
+c1.setAutoRange()
+
+p2= P1D(<span style="color: #115511">"d x-section T.M."</span>)
+p2.add(0.35,3.29,0.43)
+p2.add(0.45,1.39,0.26)
+p2.add(0.55,1.16,0.28)
+p2.add(0.65,0.33,0.40)
+p2=p2.oper(0.00001)
+p2.setColor(Color.red)
+c1.setNameX(<span style="color: #115511">"P_{T} / M"</span>)
+c1.setNameY(<span style="color: #115511">"1/&amp;sigma;&amp;gamma;d^{3}&amp;sigma;/d^{3}(p/M)"</span>)
+c1.draw(p2)
+
+s2= P1D(<span style="color: #115511">"d/p S.C."</span>)
+s2.add(0.36,3.57,0.65)
+s2.add(0.46,1.71,0.34)
+s2.add(0.56,1.24,0.39)
+s2.add(0.66,0.12,0.32)
+s2=s2.oper(0.00001)
+s2.setSymbol(5)
+s2.setColor(Color.blue)
+c1.draw(s2)
+
+
+
+<span style="color: #1111CC"># calculate B2</span>
+c1.cd(1,3)
+
+Mp=0.938272
+Md = 1.87561339
+fac=(Mp**4) / (Md**2)
+<span style="color: #3333CC"><b>print</b></span> fac
+p1=p1.oper(p1,<span style="color: #115511">"p/d  squared"</span>, <span style="color: #115511">"*"</span>)
+p1=p1.oper(fac)
+p3=p1.oper(p2,<span style="color: #115511">"B_{2}, T.M."</span>,<span style="color: #115511">"/"</span>)
+c1.setRange(0.3,0.7,0.0,0.2) 
+c1.draw(p3)
+
+
+s1=s1.oper(s1,<span style="color: #115511">"p/d  squared"</span>, <span style="color: #115511">"*"</span>)
+s1=s1.oper(fac)
+s3=s1.oper(s2,<span style="color: #115511">"B_{2}, S.C."</span>,<span style="color: #115511">"/"</span>)
+c1.setNameX(<span style="color: #115511">"P_{T}/M"</span>)
+c1.setNameY(<span style="color: #115511">"B_{2} (GeV^{2})"</span>)
+
+c1.setRange(0.3,0.7,0.0,0.15) 
+c1.draw(s3)
+c1.visible(1)
+
+
+<span style="color: #1111CC"># calculate coalescense parameter</span>
+
+
+<span style="color: #1111CC"># p1.add(0.35,0.000246,0.000033,0.000033)</span>
+<span style="color: #1111CC"># p1.add(0.45,0.00102,0.000019,0.000019)</span>
+<span style="color: #1111CC"># p1.add(0.55,0.00132,0.000032,0.000032)</span>
+<span style="color: #1111CC"># p1.add(0.65,0.00088,0.00107,0.00107)</span>
+
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

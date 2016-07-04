@@ -1,0 +1,75 @@
+#!/usr/bin/env python
+from pygenalg import *
+from pygenalg.gene import *
+from pygenalg.operator import *
+from pygenalg.modifier import *
+from pygenalg.choose import *
+import random
+import sys
+
+try:
+    import psyco
+    psyco.full()
+except Exception, e:
+    print >> sys.stderr, '** WARNING: Could not import psyco. This may slow down this process. Consider installing Psyco! **'
+
+
+# Fitness function: find the best chromossome that has more Trues before the last gene
+class MyFit(FitnessFunction):
+    def __init__(self):
+        FitnessFunction.__init__(self)
+
+    def evaluate(self, chromossome):
+        genes = chromossome.getGenes()
+        bestSolution = float(len(genes))
+        fit = float(len([i for i in genes if i.getValue()]))
+
+        return fit / bestSolution
+    # end :: evaluate
+# end :: MyFit
+
+
+genotype    = tuple( [BooleanGene for i in xrange(0,100)] )
+population  = Population.getRandomPopulation(10, genotype)
+fitnessFunc = MyFit()
+
+# Operations sequence:
+#       1- Save the best chromossomes
+#       2- offspring = crossovered + some of the bests in actual population + some old chromossome
+#       3- Mutate some individuals of new population
+#       4- truncate the new population to the max size
+#       5- Restore the best chromossomes to the new generation
+
+# operators
+#cross       = SimpleCrossover(position = int(len(genotype) / 2), rate = 1.5)
+#cross       = MultiPointCrossover(points = (30,60), rate = 1.5)
+spcross     = SimpleCrossover(position = int(len(genotype) / 2), rate = 0.1)
+mpcross     = MultiPointCrossover(points = 2, rate = 0.9)
+eliteKeep   = ElitistKeeper(rate = 0.3)
+oldKeep     = PopulationKeeper(rate = 0.2, chooser = RandomChooser())
+
+# pre and post modifiers
+sortPopulation  = PopulationSorter(fitnessFunc)
+saveBest        = BestChromossomeSaver(save = 2)
+restoreBest     = BestChromossomeRestorer( saveBest )
+mutate          = Mutation(probability = 0.2)
+truncate        = PopulationTruncateSize(maxSize = 10, chooser = SimpleRouletChooser())
+
+env = Environment(  population, 
+                    fitnessFunc, 
+                    preModifiers = (saveBest, sortPopulation),
+                    operators = (spcross, mpcross, eliteKeep, oldKeep), 
+                    postModifiers = (mutate, sortPopulation, truncate, restoreBest) )
+
+#print env.getActualPopulation()
+fit = fitnessFunc.evaluate(env.getMostAdapted())
+iterations = 0
+while fit < .99:
+    iterations += 1
+    env.doEvolution()
+    #fit = fitnessFunc.evaluate(env.getMostAdapted())
+    fit = env.getMostAdapted().getFitness()
+    print iterations, '-', fit, 'is the best of', len(env.getActualPopulation()), 'individuals'
+
+print '\n\n# Found the solution in %d iterations!' % (iterations)
+print [i.getValue() for i in env.getMostAdapted().getGenes()]

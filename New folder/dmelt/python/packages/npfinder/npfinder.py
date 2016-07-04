@@ -1,0 +1,462 @@
+import sys, random
+from classes import Point, Peak
+from math import tan, atan, exp, sqrt
+from copy import deepcopy
+from jhplot import*
+
+
+
+def FakeGaussian(hist, mu, sigma, rng):
+    """
+    Generates a fake signal for given histogram (hist)
+    with gaussian parameters mu and sigma
+    over a range (rng)
+    """
+    random.seed(2)
+    for i in xrange(rng):
+        y=random.gauss(mu, sigma)
+        hist.fill(y)
+
+def Gauss(hist, mu, sigma, rng):
+    """
+    Similar to FakeGauss. Generates a fake signal for given histogram (hist)
+    with gaussian parameters mu and sigma
+    over a range (rng)
+    """
+    random.seed(2)
+    for i in xrange(rng):
+        y=random.gauss(mu, sigma)
+        hist.fill(y)
+
+
+
+def GetData(histogram, get_alphas = True):
+    """
+    Gets data from histogram and stores it as a list of Point objects
+    Optionally gets alpha values as well for each point (default=True)
+    """
+   
+    g = P1D(histogram) 
+ 
+    points_list = []
+    for i in range(g.size()):
+        pnt = Point(i, g.getX(i), g.getY(i))
+        pnt.SetYErrLow(g.getYlower(i))
+        pnt.SetYErrHigh(g.getYupper(i))
+        # print pnt.getX(), pnt.getY(), pnt.getYlower(), pnt.getYupper()
+        #print g.GetX()[i], g.GetY()[i], g.GetErrorYlow(i), g.GetErrorYhigh(i)
+        #print '--------'
+        points_list.append(pnt)
+    
+    #option to get alpha values as well 
+    #alpha1 -> slope between current point and previous point
+    #alpha2 -> slope between current point and next point
+    if get_alphas == True:
+        for i in range(1, len(points_list)):
+            
+            x1 = points_list[i-1].GetX()
+            y1 = points_list[i-1].GetY()
+            x2 = points_list[i].GetX()
+            y2 = points_list[i].GetY()
+            
+            
+            y2_err_low = points_list[i].GetYErrLow()
+            y2_err_high = points_list[i].GetYErrHigh()
+            
+            #get alpha1(i) and alpha2(i-1) with respect to upper or lower error depending on whether y2 is above or below y1
+            if y2 > y1:
+    	        points_list[i-1].SetAlpha2( atan((y2 - y2_err_low - y1)/(x2 - x1)) )
+    	        points_list[i].SetAlpha1( atan((y2 - y2_err_low - y1)/(x2 - x1)) )
+            elif y2 < y1:
+    	        points_list[i-1].SetAlpha2( atan((y2 + y2_err_high - y1)/(x2 - x1)) )
+    	        points_list[i].SetAlpha1( atan((y2 + y2_err_high - y1)/(x2 - x1)) )
+    	    elif y2 == y1:
+    	        points_list[i-1].SetAlpha2(0)
+                points_list[i].SetAlpha1(0)
+    	    
+    	    """    
+            p = points_list[i-1]
+            if p.GetPointNumber() == 0:
+                print p.GetPointNumber(), p.GetX(), p.GetY(), p.GetYErrLow(), p.GetYErrHigh(), p.GetAlpha2()
+            elif p.GetPointNumber() == len(points_list):
+                print p.GetPointNumber(), p.GetX(), p.GetY(), p.GetYErrLow(), p.GetYErrHigh(), p.GetAlpha1()
+            else:
+                print p.GetPointNumber(), p.GetX(), p.GetY(), p.GetYErrLow(), p.GetYErrHigh(), p.GetAlpha1(), p.GetAlpha2()
+            """
+            
+        # print 'Data retrieved from', histogram.getTitle()
+        
+    return points_list
+
+    
+def FindPeaks(points_list, sigma_val, maxSig, points_in_background = 'all', get_sig = True):
+    
+    """
+    Peak detection function
+    
+    Inputs:
+        points_list -> input data as list of Point objects (see classes.py)
+        sigma_val -> initial input value for sigma (sensitivity)
+        maxSig -> function stores and draws peaks with statistical significance above maxSig
+        points_in_background -> how many points to use for the local background: 'all' specifies to use all points in histogram
+        get_sig -> specifies whether the function gets statistical significance of peaks
+    """
+    
+    #create a new list to store peaks
+    peaks_list = []
+    
+    x = [0, 0, 0]
+    y = [0, 0, 0]
+    yUP = [0, 0, 0]
+    yDW = [0, 0, 0]
+    alpha = [0, 0, 0]
+    
+    # get the average 1st derivative for entire histogram, store as aveAlphaTot
+    alphaSumTot = 0
+    for i in range(len(points_list) - 1):
+        a = points_list[i].GetAlpha2()
+        alphaSumTot += a
+    
+    aveAlphaTot = alphaSumTot / len(points_list)
+    
+    #some initial settings
+    peak_status = 'outsidePeak' # peak_status has four possible values: outsidePeak, preMax, Max, postMax which refer to position inside or outside peak
+    sumAlpha = 0
+    sumOutPeak = 0
+    aveOutPeak = aveAlphaTot # to start, aveOutPeak is the averages of all slopes in the histogram
+    pts_count = 0
+    j=0    
+    
+    #main peak detection loop
+    for i in range(1, len(points_list) - 2): # i starts at 1 and ends two points before the end of the histogram
+        
+        # get values for points i-1, i, and i+1
+        x[0] = points_list[i-1].GetX()
+        x[1] = points_list[i].GetX()
+        x[2] = points_list[i+1].GetX()
+        
+        y[0] = points_list[i-1].GetY()
+        y[1] = points_list[i].GetY()
+        y[2] = points_list[i+1].GetY()
+        
+        yDW[0] = points_list[i-1].GetYErrLow()
+        yDW[1] = points_list[i].GetYErrLow()
+        yDW[2] = points_list[i+1].GetYErrLow()
+        
+        yUP[0] = points_list[i-1].GetYErrHigh()
+        yUP[1] = points_list[i].GetYErrHigh()
+        yUP[2] = points_list[i+1].GetYErrHigh()
+        
+        alpha[0] = points_list[i-1].GetAlpha2()
+        alpha[1] = points_list[i].GetAlpha2()
+        alpha[2] = points_list[i+1].GetAlpha2()
+        
+        #print x[1], y[1], alpha[1], aveOutPeak
+        
+        # local background generation
+        if points_in_background != 'all': # only generate local background if asked to do so by user
+            
+            if peak_status == 'outsidePeak':
+                sumAlpha = 0
+                for k in range(points_in_background):
+                    point_in_peak = PointInAPeak(points_list[i-k], peaks_list)[0] #check if point is in a peak
+                    peak_number = PointInAPeak(points_list[i-k], peaks_list)[1] #get number of that peak
+                    
+                    if i-k < 1: # don't try to use points that don't exist (points before point 1)
+                        aveOutPeak = aveAlphaTot
+                        break
+                    elif point_in_peak == True:
+                        # if point is in peak, get corresponding linearly regressed point and add to background list
+                        # uses linearly regressed points from previous peaks for local background -> improves accuracy
+                        points = peaks_list[peak_number].GetPoints()
+                        point_index = points.index(points_list[i-k])
+                        linreg_points = peaks_list[peak_number].GetPoints()
+                        linreg_point = linreg_points[point_index]
+                        
+                        alpha_bckg = linreg_point.GetAlpha2()
+                        sumAlpha += alpha_bckg
+                    else:
+                        # if point is not in peak, just use alpha value for current peak
+                        alpha_bckg = points_list[i-k].GetAlpha2()
+                        sumAlpha += alpha_bckg
+                    
+                    aveOutPeak = sumAlpha / (k + 1)
+                    print 'Point:', i, aveOutPeak
+        else: # otherwise generate background by averaging all first derivatives between points so far
+            if peak_status == 'outsidePeak':
+                sumAlpha += alpha[0]
+                aveOutPeak = sumAlpha / i    
+        
+        #set relative error
+        relative_error = 1
+    	if (y[2] > 0 and y[1] > 0 ):
+    	    relative_error = 0.5*( yUP[2] / y[2] + yUP[1] / yUP[1] )
+    
+    
+        #set value for sensitivity parameter sigma (free parameter)
+        sigma = sigma_val
+        #sigma = sigma_val * exp(-1 * sqrt(relative_error)) #sigma should decrease as you progress down the histogram
+        #sigma = aveAlpha * exp(1 * sqrt(relative_error))
+    
+ 
+        #begin selection process for Peaks
+        if (alpha[1] > aveOutPeak + sigma) and (alpha[2] > aveOutPeak + sigma) and peak_status == 'outsidePeak':
+            peak_status = 'preMax'
+            j+=1
+            peak = Peak(j) #create a new Peak object
+            
+        if peak_status == 'preMax': # point is in peak but before the maximum
+            peak.AddPoint(points_list[i])
+            pts_count += 1
+            if alpha[1] < 0 and alpha[2] < 0:
+                peak_status = 'Max'
+
+        elif peak_status == 'Max': # point is the maximum
+            peak_status = 'postMax'
+            peak.AddPoint(points_list[i])
+                               
+        elif peak_status == 'postMax': #point is in peak but after maximum
+            peak.AddPoint(points_list[i])
+            pts_count -= 1
+            if pts_count == 0: # once all symmetrical points have been added, set peak_status to 'outsidePeak'
+                peak_status = 'outsidePeak'
+                peaks_list.append(peak) #add filled Peak object to peaks_list
+                
+                LinearRegression(peak) #forms linear regression for Peak object
+                Residuals(peak) #calculates residuals for Peak object
+                StatisticalSignificance(peak) #calculates statistical significance of Peak object
+                
+        
+    # if get sig is true and peaks_list is not empty, draw the peaks and their statistical significance
+    """
+    if get_sig == True and peaks_list != []:
+        #draw stat sig for peaks with stat sig more than maxSig    
+        for i in range(len(peaks_list)):
+            if peaks_list[i].GetStatSig() > maxSig:
+                l = TLatex()
+                x = peaks_list[i].GetPeakEnd().GetX()
+                y = peaks_list[i].GetPeakEnd().GetY()
+                ssig = '#sigma = ' + str(round(peaks_list[i].GetStatSig(), 1))
+                l.DrawLatex(x + 100, y + 100, ssig)
+    """
+    return peaks_list
+
+
+def LinearRegression(peak):
+    """
+    Takes a Peak object and linearly regresses its points to form a background
+    """
+    
+    points = deepcopy(peak.GetPoints())
+    peak_start = peak.GetPeakStart()
+    peak_end = peak.GetPeakEnd()
+    
+    x1 = peak_start.GetX()
+    y1 = peak_start.GetY()
+    y1_err = peak_start.GetYErrHigh()
+        
+    x2 = peak_end.GetX()
+    y2 = peak_end.GetY()
+    y2_err = peak_end.GetYErrHigh()
+        
+    m = ((y2 + y2_err) - (y1 + y1_err))/(x2 - x1)
+    b = y1 + y1_err - (m * x1)
+        
+    for j in range(len(points)):
+            
+        linreg_point = deepcopy(points[j]) #copy all attributes of the point to the linearly regressed point
+        x = points[j].GetX()
+        y_new = (m * x) + b #calculate new y value for linearly regressed point
+        linreg_point.SetY(y_new) # set new y value
+        peak.AddLinRegPoint(linreg_point)
+        
+    #set new alpha values for linearly regressed points (since at this point they still have original points alpha values)
+    linreg_points = peak.GetLinRegPoints()
+    for j in range(1, len(linreg_points)):
+      
+        x1 = linreg_points[j-1].GetX()
+        y1 = linreg_points[j-1].GetY()
+        x2 = linreg_points[j].GetX()
+        y2 = linreg_points[j].GetY()
+                 
+        y2_err_low = linreg_points[j].GetYErrLow()
+        y2_err_high = linreg_points[j].GetYErrHigh()
+            
+        #get alpha1(j) and alpha2(j-1) with respect to upper or lower error depending on whether y2 is above or below y1
+        if y2 > y1:
+    	    linreg_points[j-1].SetAlpha2( atan((y2 - y2_err_low - y1)/(x2 - x1)) )
+    	    linreg_points[j].SetAlpha1( atan((y2 - y2_err_low - y1)/(x2 - x1)) )
+        elif y2 < y1:
+    	    linreg_points[j-1].SetAlpha2( atan((y2 + y2_err_high - y1)/(x2 - x1)) )
+    	    linreg_points[j].SetAlpha1( atan((y2 + y2_err_high - y1)/(x2 - x1)) )
+    	elif y2 == y1:
+    	    linreg_points[j-1].SetAlpha2(0)
+            linreg_points[j].SetAlpha1(0)  
+              
+
+def NonlinearRegression(peaks_list):
+    """
+    Takes a list of Peak objects and performs a nonlinear regression for each point to generate a background
+    
+    Does not work in current form!
+    
+    """
+    
+    for i in range(len(peaks_list)):
+        points = deepcopy(peaks_list[i].GetPoints())
+        peak_start = peaks_list[i].GetPeakStart()
+        peak_end = peaks_list[i].GetPeakEnd()
+        alpha_start = peak_start.GetAlpha1()
+        alpha_end = peak_end.GetAlpha2()
+        num_points = peaks_list[i].GetNumberOfPoints()
+        
+        alpha = alpha_start
+        y1 = peak_start.GetY()
+        
+        #print 'Alpha Start:', alpha_start, 'Alpha End:', alpha_end, 'dAlpha"', da
+        
+        for j in range(len(points)):
+            
+            linreg_point = deepcopy(points[j])
+            
+            if points[j] == points[0]:
+                peaks_list[i].AddLinRegPoint(linreg_point)
+                print 'NLR:', points[j].GetPointNumber()
+            elif points[j] == points[len(points) - 1]:
+                peaks_list[i].AddLinRegPoint(linreg_point)
+                print 'NLR:', points[j].GetPointNumber()
+            else:
+                x1 = points[j-1].GetX()
+                x2 = points[j].GetX()
+                dx = x2 - x1
+                print 'NLR:', points[j].GetPointNumber(), x1, x2
+                da = (alpha_end - alpha) / (num_points - 1 - j)
+                alpha += da
+                dy = dx * tan(alpha)
+                y2 = y1 + dy
+                y1 = y2
+                linreg_point.SetY(y2)
+                peaks_list[i].AddLinRegPoint(linreg_point)
+            
+    
+
+def Residuals(peak):
+    """
+    Takes a Peak object and calculates the residuals between its original Point objects and the regressed Point objects
+    """ 
+    
+    points =  deepcopy(peak.GetPoints())  
+    linreg_points =  deepcopy(peak.GetLinRegPoints())
+        
+    for j in range(len(points)):
+        y = points[j].GetY()
+        y_err = points[j].GetYErrLow()
+        linreg_y = linreg_points[j].GetY()
+            
+        residual = y - y_err - linreg_y
+        peak.AddResidual(residual)
+  
+            
+def StatisticalSignificance(peak):
+    """
+    Takes a Peak object and calculates its the statistical significance wrt background points
+    """
+
+    residuals = peak.GetResiduals()
+    N = 0 #reset dA value (sum of residuals)
+            
+    for j in range(len(residuals)):
+        N += residuals[j]
+                
+    if N <= 0:
+        peak.SetStatSig(0)   
+    else:
+        peak.SetStatSig( N / sqrt(N) )
+    
+    
+def MakeGraph(peaks_list):
+    """
+    Takes a list of Peak objects and makes a graph out of them
+    
+    Also checks if there are any peaks in the given graph and stores them as a separate graph
+    """
+   
+    peak=[]
+    lreg=[] 
+    
+    for i in range(len(peaks_list)):
+        
+        points = peaks_list[i].GetPoints()
+        linreg_points = peaks_list[i].GetLinRegPoints()
+
+        peaksGraph = P1D("peaks")
+        linregGraph = P1D("linreg")
+    
+        point_number=0 
+        for j in range(len(points)):
+            # point_number = points[j].GetPointNumber()
+            x = points[j].GetX()
+            y = points[j].GetY()
+            y_err = points[j].GetYErrLow()
+            y_linreg = linreg_points[j].GetY()
+
+            if (y>0 and y_linreg>0): 
+              peaksGraph.add(x, y, y_err)
+              linregGraph.add(x, y_linreg)
+              point_number=point_number+1
+
+        peak.append(peaksGraph)
+        lreg.append(linregGraph)
+
+     
+    return peak,lreg 
+    
+    
+def PointInAPeak(point, peaks_list):
+    """
+    Accepts a Point object and a list of Peak objects
+        -> returns True, peak_number if Point object is in list of Peak objects
+        -> returns False, -1 if it isn't
+    """
+    
+    point_in_peak = False
+    x = point.GetX()
+    
+    if peaks_list == []:
+        return False, -1
+    
+    for i in range(len(peaks_list)):
+        points = peaks_list[i].GetPoints()
+        for j in range(len(points)):
+            if x == points[j].GetX():
+                point_in_peak = True
+                peak_number = peaks_list[i].GetPeakNumber()
+
+    
+    if point_in_peak == True:
+        return True, peak_number - 1
+    else:
+        return False, -1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

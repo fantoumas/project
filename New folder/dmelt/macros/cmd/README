@@ -1,0 +1,20 @@
+
+Command-line tool to run or build jython scripts created by jHepWork.
+--------------------------------------------------------------------
+
+First, make sure that "ANT" is installed .
+ANT build script (ANT is a Java & XML based cross-platform build tool
+and available at http://jakarta.apache.org/ant/).
+
+Type in the prompt: 
+
+> ant -version" 
+
+Then run "ant"
+You will see options to run/compile the scripts
+
+For example, you can run "histo1.py" as:
+>  ant run -DM histo1
+ 
+
+S.Chekanov (ANL)

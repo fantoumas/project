@@ -1,0 +1,386 @@
+// LaTeX.bsh - a BeanShell macro script for the jEdit text editor
+// Version 15-May-2006
+//
+// This macro is very similar to the clipper plugin. It is expected
+// to be more convenient because using tabs and icons, the number
+// of visible commands is much larger than using the clipper plugin
+// (all commands can be attained with at most two mouse clicks).
+//
+// It is designed for use with LaTeX. In particular there is a command pannel
+// for launching latex, pdflatex... If the master document is not indicated
+// at the end of the file being processed, a dialog window will pop up for
+// entering (only once) this information.
+//
+// Getting started: For a first use of this macro with the default clipper
+// libraries just customize the paths to standard LaTeX commands:
+// go to find "paths to standard LaTeX commands" and read...
+//
+// Copyright (C) 2004 Jean-Francois Magni
+// E-mail: jfmagni_at_free_dot_fr
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with the jEdit application; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+   import javax.swing.border.EmptyBorder;
+   var smallBorder = new EmptyBorder(1,0,1,0);
+
+   // Script directoty
+   String slash = System.getProperty( "file.separator" );
+ 
+ 
+    scriptDir=SystemMacrosDir+slash+"LaTeX";
+    scriptPath2 = scriptDir +slash+ "LaTeX.js";
+    source(scriptPath2);
+
+////////////////////////////////////////////////////////////////////////////////
+// No customization below
+////////////////////////////////////////////////////////////////////////////////
+// number of columns ignored !
+int[] nbcol = {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4};
+
+void taskbar() {
+
+   // Absolute path to icons
+  //  ppp  = scriptDir + path2icons + slash;
+    
+    // print(pp)
+    ppp  = scriptDir  + slash + "imagescol"+slash;
+    // print(ppp);
+////////////////////////////////////////////////////////////////////////////////
+// Building the panels of buttons: clipper librarie panels and command panel
+////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// Building the tabbed pane
+// Loop i for tabs
+// Loop j for buttons
+// Syntax ".t" text -> JButton
+//        ".i" icon -> JButton
+//        "e." empty -> JLabel
+
+   JTabbedPane jtp = new JTabbedPane();
+
+   // TABS LOOP
+   for (i=0; i < tabx.length; i++) {
+
+     JPanel panel = new JPanel(new GridLayout(nbrow, nbcol[i]));
+
+     // BUTTONS LOOP
+     for (j=0; j < tabx[i].length; j++) {
+
+        String arg0 = tabx[i][j][0].substring(0,1);
+        String arg1 = tabx[i][j][0].substring(1,2);
+        String imOrStr = tabx[i][j][2];
+
+        if (arg0.equals("e")) {
+           // No button case
+           f[i][j] = new JLabel("",JLabel.CENTER);
+           f[i][j].setOpaque(true);
+        } else {
+           // Button case
+           f[i][j] = new JButton();
+        }
+
+        if (arg1.equals("t")) {
+           // Text case
+           f[i][j].setText(imOrStr);
+           // Foreground color
+           if (tabx[i][j].length > 3)  {
+              String toevaluate = "f[i][j].setForeground(Color." + tabx[i][j][3] + ")";
+              eval(toevaluate);
+              // Background color
+              if (tabx[i][j].length > 4)  {
+                String toevaluate = "f[i][j].setBackground(Color." + tabx[i][j][4] + ")";
+                eval(toevaluate);
+              }
+           }
+        } else if (arg1.equals("i")) {
+           // Icon case
+           ImageIcon im = new ImageIcon(ppp + imOrStr + ".gif" );
+           f[i][j].setIcon(im);
+           if (tabx[i][j].length > 3)  {
+            String toevaluate = "f[i][j].setBackground(Color." + tabx[i][j][3] + ")";
+            eval(toevaluate);
+           }
+        } else {
+           // Bad syntax case
+            Macros.message(view, "Tab " + (i+1).toString() + " button " +  (j+1).toString() + " has invalid first entry");
+            tabx[i][j][0] = "e" + arg1;
+            arg0 =  "e";
+            f[i][j] = new JLabel();
+        }
+
+        // Components border and action listener
+        f[i][j].Border = smallBorder;
+        panel.add(f[i][j]);
+        if (!arg0.equals("e")) {f[i][j].addActionListener(this); };
+
+     }
+     jtp.add(tabn[i], panel);
+   }
+
+////////////////////////////////////////////////////////////////////////////////
+// Display
+////////////////////////////////////////////////////////////////////////////////
+
+   ww=400;
+   xx=100;
+   yy=200;
+
+   bounds = view.getBounds();
+   ww = bounds.width;
+   xx = bounds.x;
+   yy = bounds.y;
+   if (d_position.substring(0,1).equals("l")) {ww = 220;};
+   if (d_position.substring(0,1).equals("b")) {ww = 220; yy = bounds.height - d_height - 130;};
+
+   frame.getContentPane().add(jtp);
+   frame.setLocation(ww+xx-200, yy+130);
+   frame.setLocation(ww+xx-100, yy+130);
+   frame.pack();
+   frame.setSize(d_width,d_height);
+   frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+   frame.setVisible(true);
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Action performed, clipper libraries and command panel
+////////////////////////////////////////////////////////////////////////////////
+
+void actionPerformed(e)  {
+
+
+
+   // TABS LOOP
+   for (i=0; i < tabx.length; i++) {
+
+      // BUTTONS LOOP
+      for (j=0; j < tabx[i].length; j++) {
+
+         if (e.getSource() == f[i][j])  {
+
+            // Replacement of "null" by an empty string
+            String selected = textArea.getSelectedText();
+            if(selected == null) selected = "";
+
+            String arg0 = tabx[i][j][0].substring(0,1);
+            String arg1 = tabx[i][j][0].substring(1,2);
+            String commandstr = tabx[i][j][1];
+
+
+           // print(commandstr);
+
+
+            if (arg0.equals("c")) {
+            // CLIPPER COMMAND all "|" replaced by selected text
+               // Caret position
+               int posini = textArea.getCaretPosition();
+               // Replacement of | and \|
+               String[] repacedAndCaretPos = replace(commandstr,selected);
+               towrite = repacedAndCaretPos[0];
+               cc = eval(repacedAndCaretPos[1]);
+               // Modification in active buffer
+               //buffer.beginCompoundEdit();
+               textArea.setSelectedText(towrite);
+               // Move the caret if empty selection
+               if ((cc >= 0) && (selected.equals(""))) {
+                  
+               textArea.setCaretPosition(posini+cc);
+               }
+               //buffer.endCompoundEdit();
+
+
+            } 
+
+
+          else if (commandstr.matches("Macros\\.message\\(view.*")) {
+            // TRANSFORM TO LOCAL COMMAND (useful for replacing a system command by a
+               // local command if the command string is a pop-up window. See e.g.,
+               // jabrefString in LaTeX.js
+               eval(commandstr);
+               arg0 = "l";
+
+            } else if (arg0.equals("l")) {
+            // LOCAL COMMAND
+               eval(commandstr);
+
+            } else if (arg0.equals("s")) {
+            // SYSTEM COMMAND THAT CAN BE APPLIED TO THE MASTER DOCUMENT "|"
+               // Look for master file if "|" is in commandstr
+               ii = commandstr.indexOf("|");
+               masterfile = " ";
+       
+
+               masterFileName=DocMasterName;
+              if (ii > 0) masterfile = masterFileName;
+               // Replace | by master file name
+               String[] repacedAndCaretPos = replace(commandstr,masterfile);
+               String localCommand = repacedAndCaretPos[0];
+               if (masterfile.length() > 0) {
+                    
+                   print( "Execute: "+localCommand );
+                   SetEnv.BSconsole.Execute("exec(\" "+localCommand+" \");");
+
+
+                  // Go to buffer directory
+                //   runCommandInConsole(view,"System","cd $d");
+                  // FOR SH SHELL USE THE FOLLOWING LINE
+                  // runCommandInConsole(view,"System","\""+repacedAndCaretPos[0]+"\"");
+                  // FOR BASH SHELL USE THE FOLLOWING LINE
+                 //  runCommandInConsole(view,"System",repacedAndCaretPos[0]);
+               }
+
+            } else if (!arg0.equals("e")) {
+              //  Macros.message(view, "Tab " + (i+1).toString() + " button " +  (j+1).toString() + " has invalid first entry");
+            }
+       
+
+         }
+      }
+   }
+ 
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Functions
+////////////////////////////////////////////////////////////////////////////////
+
+public String[] replace(stringToBeTreated,replacingString) {
+   // This function replaces
+   // - all occurences of | in stringToBeTreated by replacingString
+   // - all occurences of \| (i.e., "\\|") by |.
+   // It also computes the shift amount necessary in order to push
+   // the caret at the last replaced |.
+
+   String towriteRight = stringToBeTreated;
+   String towriteLeft = "";
+   cc = -1; // caret shift
+
+   for (kk=0;kk<100;kk++) {
+
+      jj = towriteRight.indexOf("\\|");
+      ii = towriteRight.indexOf("|");
+
+      if ( ii < 0 ) break; // No more "|" or "\\|"
+
+      if (ii >= 0 ){
+         if  (ii == jj+1) {
+            // Case "\\|" replaced by "|"
+            towriteLeft = towriteLeft + towriteRight.substring(0,jj) + "|";
+            towriteRight = towriteRight.substring(jj+2,towriteRight.length());
+         } else {
+            // Case "|" replaced by replacingString
+            towriteLeft = towriteLeft + towriteRight.substring(0,ii) + replacingString ;
+            towriteRight = towriteRight.substring(ii+1,towriteRight.length());
+            // update caret shift
+            cc = towriteLeft.length();
+         }
+         jj = -1;
+         ii = -1;
+      }
+   }
+   String towrite = towriteLeft + towriteRight;
+   String[] retrunedStringArray = {towrite,cc.toString()};
+
+   return retrunedStringArray;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+masterFileName()
+{
+
+// Identifies or defines the LaTeX master document. Four steps
+// 1 - check if the buffer file exention is .tex. If no, displays a message
+//     and do nothing else
+// 2 - looks for the string "\\begin{document}" (caution: it is not checked
+//     if this string is in a commented line).
+// 3 - looks for a string "%%% TeX-master: \"", if yes, extracts the file name
+//     between " and " (caution: if multiple strings as above, only the first
+//     one is considered).
+// 4 - if 2 and 3 fail, a Macro.input is launched for entering the master file
+//     name that is written at the end of the buffer.
+
+   String alltext = textArea.getText();
+   String buffername = textArea.buffer.name;
+   String buffernamelc = buffername.toLowerCase();
+   String masterfile = "";
+   int flag = 0;
+
+   int testTex = buffernamelc.indexOf(".tex");
+   if  (testTex < 0) {
+      // Case buffer is not a LaTeX file
+    //  Macros.message(view,"The file: " + buffername + " is a not a LaTeX file");
+      flag = -1;
+
+   } else {
+
+      buffername = buffername.substring(0,testTex);
+
+      // Case buffer contains "\\begin{document}"
+      //
+      jj = alltext.indexOf("\\begin{document}");
+      // "% \\begin{document}" to be considered !!!!!!!!!!!!!!
+      if (jj >= 0) {
+
+         //Macros.message(view,"This file: " + buffername + " is a master document");
+         flag = 1;
+         masterfile = buffername;
+
+      } else {
+
+         // Emacs style master document name
+         kk = alltext.indexOf("%%% TeX-master: \"");
+
+         if (kk >= 0) {
+            String main = alltext.substring(kk+17,alltext.length());
+            kk2 = main.indexOf("\"");
+            if (kk2 >= 0) {
+               main = main.substring(0,kk2);
+               //Macros.message(view,"The master document is " + main);
+               masterfile = main;
+               flag = 1;
+            } else {
+               // Invalid string "%%% TeX-master: etc..."
+               flag = 0;
+            }
+         }
+      }
+   }
+
+   // Here, if flag = 0, insert the Emacs stuff.
+   if (flag == 0) {
+
+      masterfile = Macros.input(view,"Name of master document \n(without \".tex\" extension)");
+      if(masterfile != null){
+          textArea.goToBufferEnd(false);
+          textArea.setSelectedText("\n\n%%% Local Variables:\n%%% mode: latex\n%%% TeX-master: \""+masterfile+"\"\n%%% End:");
+          flag =  1;
+      } else {
+          flag = -1;
+      }
+   }
+
+return masterfile;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+taskbar();
+
+//Macros.message(view, "string");

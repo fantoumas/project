@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/Style2D.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+
+factory = IAnalysisFactory.create();
+tree = factory.createTreeFactory().create();
+hf = factory.createHistogramFactory(tree);
+
+r = Random();
+
+plotter = factory.createPlotterFactory().create(<span style="color: #115511">"Style2D.py Plot"</span>);
+plotter.createRegions(2,2);
+plotter.show();
+
+h2 = hf.createHistogram2D(<span style="color: #115511">"Histogram 2D"</span>,40,-3,3,40,-3,3);
+c2 = hf.createCloud2D(<span style="color: #115511">"Cloud 2D"</span>);
+
+plotter.region(0).setTitle(<span style="color: #115511">"Histogram 2D"</span>);
+plotter.region(0).style().setParameter(<span style="color: #115511">"backgroundColor"</span>,<span style="color: #115511">"yellow"</span>);
+plotter.region(0).style().setParameter(<span style="color: #115511">"foregroundColor"</span>,<span style="color: #115511">"green"</span>);
+plotter.region(0).style().setParameter(<span style="color: #115511">"hist2DStyle"</span>,<span style="color: #115511">"ellipse"</span>);
+plotter.region(0).style().dataStyle().markerStyle().setColor(<span style="color: #115511">"blue"</span>);
+plotter.region(0).plot(h2);
+
+plotter.region(1).setTitle(<span style="color: #115511">"Color Map"</span>);
+plotter.region(1).style().setParameter(<span style="color: #115511">"showStatisticsBox"</span>,<span style="color: #115511">"false"</span>);
+plotter.region(1).style().setParameter(<span style="color: #115511">"hist2DStyle"</span>,<span style="color: #115511">"colorMap"</span>);
+plotter.region(1).style().dataStyle().fillStyle().setParameter(<span style="color: #115511">"colorMapScheme"</span>,<span style="color: #115511">"rainbow"</span>);
+plotter.region(1).plot(h2);
+
+
+plotter.region(2).setTitle(<span style="color: #115511">"Cloud 2D"</span>);
+plotter.region(2).style().dataStyle().markerStyle().setColor(<span style="color: #115511">"red"</span>);
+plotter.region(2).style().dataStyle().markerStyle().setShape(<span style="color: #115511">"1"</span>);
+plotter.region(2).style().dataStyle().markerStyle().setParameter(<span style="color: #115511">"size"</span>,<span style="color: #115511">"7"</span>);
+plotter.region(2).plot(c2);
+
+plotter.region(3).setTitle(<span style="color: #115511">"Binned Cloud 2D"</span>);
+plotter.region(3).style().setParameter(<span style="color: #115511">"showAsScatterPlot"</span>,<span style="color: #115511">"false"</span>);
+plotter.region(3).plot(c2);
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(10000) :
+	h2.fill(r.nextGaussian(),r.nextGaussian());
+	c2.fill(r.nextGaussian(),r.nextGaussian());
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

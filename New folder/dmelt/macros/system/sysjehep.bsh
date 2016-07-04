@@ -1,0 +1,70 @@
+// first import
+import jehep.ui.SetEnv; 
+import jehep.ui.Editor; 
+
+
+
+// mimic jEdit
+textArea=Editor.get(); 
+view=SetEnv.win;
+
+// file separator
+fSep=SetEnv.fSep;
+
+// system directory
+SystemDir=SetEnv.DirPath;
+if (SetEnv.OSsys.equals("windows")) SystemDir=SystemDir.replace("\\","\\\\");
+
+
+// Doc name 
+DocName=Editor.DocName();
+if (SetEnv.OSsys.equals("windows")) DocName=DocName.replace("\\","\\\\");
+ 
+
+// Doc dir
+DocDir=Editor.DocDir();
+if (SetEnv.OSsys.equals("windows")) DocDir=DocDir.replace("\\","\\\\");
+
+// Proj dir
+// ProjDir=SetEnv.ProjDir;
+// if (SetEnv.OSsys.equals("windows")) ProjDir=ProjDir.replace("\\","\\\\");
+
+
+
+// Doc style
+DocStyle=Editor.DocStyle();
+
+//  DocMasterName
+DocMasterName=Editor.DocMasterName();
+if (SetEnv.OSsys.equals("windows")) DocMasterName=DocMasterName.replace("\\","\\\\");
+if (DocMasterName.length()<1) DocMasterName="Default";
+
+
+// directory for dictionaries
+DicDir=SetEnv.DicDir;
+if (SetEnv.OSsys.equals("windows")) DicDir=DicDir.replace("\\","\\\\"); 
+
+
+
+// class path
+ClassPath=SetEnv.ClassPath;
+
+// master name without the path 
+DocMasterNameShort=Editor.DocMasterNameShort();
+if (DocMasterNameShort.length()<1) DocMasterNameShort="Default";
+
+
+addClassPath( SetEnv.DirPath );  // If it's not already in our classpath
+String UserMacrosDir=SetEnv.DirPath+SetEnv.fSep+
+                  "macros" + SetEnv.fSep+"user";
+if (SetEnv.OSsys.equals("windows")) UserMacrosDir=UserMacrosDir.replace("\\","\\\\");
+
+String SystemMacrosDir=SetEnv.DirPath+SetEnv.fSep+
+                  "macros" + SetEnv.fSep+"system";
+if (SetEnv.OSsys.equals("windows"))  SystemMacrosDir=SystemMacrosDir.replace("\\","\\\\");
+
+
+addClassPath(SystemDir);
+// import
+importCommands( "macros/system" );
+importCommands( "macros/user"  );

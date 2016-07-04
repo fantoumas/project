@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/Styles.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+<span style="color: #3333CC"><b>from</b></span> java.lang <span style="color: #3333CC"><b>import</b></span> Boolean
+
+true = Boolean(<span style="color: #115511">"true"</span>)
+
+af   = IAnalysisFactory.create()
+tree = af.createTreeFactory().create()
+hf   = af.createHistogramFactory(tree)
+
+h1 = hf.createHistogram1D(<span style="color: #115511">"h1"</span>,100,-5,5)
+h2 = hf.createHistogram1D(<span style="color: #115511">"h2"</span>,100,-5,5)
+h3 = hf.createHistogram1D(<span style="color: #115511">"h3"</span>,100,-5,5)
+
+r = Random()
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(10000):
+  h1.fill(r.nextGaussian())
+  h2.fill(r.nextGaussian())
+  h3.fill(r.nextGaussian())
+
+plotterFactory = af.createPlotterFactory()
+plotter = plotterFactory.create(<span style="color: #115511">"Styles.py plot"</span>)
+
+<span style="color: #1111CC">#This are the default styles for the region</span>
+regionStyle = plotter.region(0).style()
+regionStyle.dataStyle().setParameter(<span style="color: #115511">"fillHistogramBars"</span>,<span style="color: #115511">"false"</span>)
+regionStyle.dataStyle().setParameter(<span style="color: #115511">"showHistogramBars"</span>,<span style="color: #115511">"true"</span>)
+regionStyle.dataStyle().setParameter(<span style="color: #115511">"showDataPoints"</span>,<span style="color: #115511">"false"</span>)
+regionStyle.dataStyle().setParameter(<span style="color: #115511">"showErrorBars"</span>,<span style="color: #115511">"false"</span>)
+regionStyle.dataStyle().lineStyle().setParameter(<span style="color: #115511">"color"</span>,<span style="color: #115511">"black"</span>)
+regionStyle.xAxisStyle().setLabel(<span style="color: #115511">"E/m"</span>)
+regionStyle.yAxisStyle().setLabel(<span style="color: #115511">"# Evt"</span>)
+
+regionStyle.setParameter(<span style="color: #115511">"legendFont"</span>,<span style="color: #115511">"Comics"</span>)
+regionStyle.setParameter(<span style="color: #115511">"legendFontSize"</span>,<span style="color: #115511">"16"</span>)
+regionStyle.setParameter(<span style="color: #115511">"legendFontStyle"</span>,<span style="color: #115511">"1"</span>)
+
+regionStyle.setParameter(<span style="color: #115511">"statisticsBoxFont"</span>,<span style="color: #115511">"Comics"</span>)
+regionStyle.setParameter(<span style="color: #115511">"statisticsBoxFontSize"</span>,<span style="color: #115511">"14"</span>)
+regionStyle.setParameter(<span style="color: #115511">"statisticsBoxFontStyle"</span>,<span style="color: #115511">"2"</span>)
+
+regionStyle.titleStyle().textStyle().setFontSize(30)
+regionStyle.titleStyle().textStyle().setColor(<span style="color: #115511">"orange"</span>)
+
+regionStyle.xAxisStyle().labelStyle().setFontSize(24)
+regionStyle.xAxisStyle().labelStyle().setItalic(true)
+regionStyle.xAxisStyle().labelStyle().setColor(<span style="color: #115511">"black"</span>)
+regionStyle.xAxisStyle().tickLabelStyle().setFontSize(14)
+regionStyle.xAxisStyle().tickLabelStyle().setBold(true)
+regionStyle.xAxisStyle().tickLabelStyle().setColor(<span style="color: #115511">"blue"</span>)
+
+regionStyle.yAxisStyle().labelStyle().setFontSize(24)
+regionStyle.yAxisStyle().labelStyle().setItalic(true)
+regionStyle.yAxisStyle().labelStyle().setColor(<span style="color: #115511">"brown"</span>)
+regionStyle.yAxisStyle().tickLabelStyle().setFontSize(14)
+regionStyle.yAxisStyle().tickLabelStyle().setBold(true)
+regionStyle.yAxisStyle().tickLabelStyle().setColor(<span style="color: #115511">"green"</span>)
+
+<span style="color: #1111CC">#This styles overwrite some of the region styles</span>
+style = plotterFactory.createPlotterStyle()
+style.dataStyle().setParameter(<span style="color: #115511">"showHistogramBars"</span>,<span style="color: #115511">"false"</span>)
+style.dataStyle().setParameter(<span style="color: #115511">"showDataPoints"</span>,<span style="color: #115511">"true"</span>)
+style.dataStyle().markerStyle().setParameter(<span style="color: #115511">"size"</span>,<span style="color: #115511">"12"</span>)
+style.dataStyle().markerStyle().setParameter(<span style="color: #115511">"shape"</span>,<span style="color: #115511">"3"</span>)
+style.dataStyle().markerStyle().setParameter(<span style="color: #115511">"color"</span>,<span style="color: #115511">"blue"</span>)
+
+plotter.region(0).plot(h1)
+plotter.region(0).plot(h2,style)
+
+<span style="color: #1111CC">#Create a new dataStyle to be used to plot the third histogram</span>
+dataStyle = plotterFactory.createDataStyle()
+dataStyle.setParameter(<span style="color: #115511">"showDataPoints"</span>,<span style="color: #115511">"false"</span>)
+dataStyle.setParameter(<span style="color: #115511">"showErrorBars"</span>,<span style="color: #115511">"true"</span>)
+dataStyle.setParameter(<span style="color: #115511">"showHistogramBars"</span>,<span style="color: #115511">"false"</span>)
+regionStyle.dataStyle().setParameter(<span style="color: #115511">"errorBarsColor"</span>,<span style="color: #115511">"green"</span>)
+style.setDataStyle(dataStyle)
+
+plotter.region(0).plot(h3,style)
+
+plotter.show()
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

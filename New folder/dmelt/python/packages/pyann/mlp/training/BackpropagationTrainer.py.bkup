@@ -1,0 +1,148 @@
+from pyann.mlp.training import Trainer, IterationInfo
+from pyann.mlp import InputLayer
+import fpconst
+
+class BackpropagationTrainer(Trainer):
+    """
+        Backpropagation algorithm
+
+        @author     Thiago F Pappacena
+    """
+    
+    def __init__(self, network = None, learningRate = 1.0, momentum = 0.0):
+        """
+            Build the backpropagation trainer
+
+            @author     Thiago F Pappacena
+            @param      object  network         The network to be trained
+            @param      float   learningRate    The learn rate to be used
+            @param      float   momentum        Momentum rate to be used
+        """
+        super(BackpropagationTrainer, self).__init__(network)
+        self.learningRate = learningRate
+        self.momentum = momentum
+    # end :: __init__
+
+
+    def setLearningRate(self, learningRate):
+        """
+            Sets the learning rate
+
+            @author     Thiago F Pappacena
+            @param      float   learningRate    The learn rate
+            @return     void
+        """
+        self.learningRate = learningRate
+    # end :: setLearningRate
+
+
+    def setMomentum(self, momentum):
+        """
+            Sets the momentum
+
+            @author     Thiago F Pappacena
+            @param      float   momentum    The momentum rate
+            @return     void
+        """
+        self.momentum = momentum
+    # end :: setMomentum
+
+    
+    def train(self, patterns, validationSet = []):
+        """
+            Execute the training
+
+            @author     Thiago F Pappacena
+            @param      list    patterns        The list of patterns
+            @param      list    validationSet   The list of patterns to be used in validation
+            @return     object  The last IterationInfo object
+        """
+        iterInfo = IterationInfo()
+        iterInfo.setIterationNumber(0)
+        iterInfo.setError(fpconst.PosInf)
+        iterInfo.setErrorDelta(0)
+        iterInfo.setNetwork(self.net)
+
+        while not self.mustStopTraining(iterInfo):
+            # do the training...
+            for pattern in patterns:
+                desired = pattern.getOutput()   # get desired output from pattern
+                output = self.net.getOutput( pattern.getInput() ) # Present pattern to the net...
+                errors = tuple( (desired[i] - output[i] for i in range(len(desired))) )
+                E = sum( (i**2 for i in errors) ) / 2.0
+                #E = sum( (abs(i) for i in errors) )
+                
+                # Calculate output layer weights deltas
+                # outputDelta = f'(input) * error
+                outputLayer = self.net.getOutputLayer()
+                outputErrors = tuple( (outputLayer[i].applyOutputDerivativeFunction(output[i])*errors[i] for i in range(len(output))) )
+
+
+                # Activate output layer with outputErrors
+                for i in range(len(outputLayer)):
+                    outputLayer[i].setBackwardActivation(outputErrors[i])
+
+                #print 'output errors: %s ' % list(outputErrors)
+
+                # Backpropagate activations to each hidden layer
+                hiddenLayers = self.net.getHiddenLayers()
+                hiddenErrors = [0.0] * len(hiddenLayers)
+                hiddenOutputs = [0.0] * len(hiddenLayers)
+                for i in range(len(hiddenLayers)-1, -1, -1):
+                    hidden = hiddenLayers[i]
+                    #if isinstance(hidden.getPreviousLayer().getInputLayer(), InputLayer):  # do not propagate back to the first layer
+                    #    break
+                    hidden.getNextLayer().sendBackward()
+                    #hiddenErrors[i] = hidden.getNextLayer().getOutputLayer().getBackwardOutput()    # get the output from layer
+                    hiddenErrors[i] = hidden.getBackwardOutput()
+                    hiddenOutputs[i] = hidden.getOutput()
+
+
+                # Apply deltas to output layer
+                for i in range(len(outputErrors)):
+                    neuron = outputLayer[i]
+                    neuron.adjustWeights((self.learningRate * outputErrors[i] * output[i]) + (neuron.getLastWeightDelta() * self.momentum))
+                    """
+                    for syn in neuron.getInputSynapses():
+                        #print 'to calculate output delta %s | %s | %s | %s | %s' % (self.learningRate, outputErrors[i], syn.getInputNeuron().getOutput(), syn.getLastWeightDelta(), self.momentum)
+                        delta = (self.learningRate * outputErrors[i] * syn.getInputNeuron().getOutput()) + (syn.getLastWeightDelta() * self.momentum)
+                        #print 'delta output %s' % delta
+                        syn.adjustWeight(delta)
+                    """
+
+
+                # Apply deltas to hidden layers
+                for h in range(len(hiddenLayers)-1, -1, -1):
+                    for i in range(len(hiddenErrors[h])):
+                        neuron = hiddenLayers[h][i]
+                        neuron.adjustWeights((self.learningRate * hiddenErrors[h][i] * hiddenOutputs[h][i]) + (neuron.getLastWeightDelta() * self.momentum))
+                        """
+                        for syn in neuron.getInputSynapses():
+                            #print 'to calculate hidden delta %s | %s | %s | %s | %s' % (self.learningRate, hiddenErrors[h][i], syn.getInputNeuron().getOutput(), syn.getLastWeightDelta(), self.momentum)
+                            delta = (self.learningRate * hiddenErrors[h][i] * syn.getInputNeuron().getOutput()) + (syn.getLastWeightDelta() * self.momentum)
+                            syn.adjustWeight(delta)
+                            #print 'delta hidden %s' % delta
+                            #print syn.getWeight()
+                        """
+            # end of training cycle
+
+
+            validationSetError = 0
+            for pattern in validationSet:
+                desired = pattern.getOutput()   # get desired output from pattern
+                output = self.net.getOutput( pattern.getInput() )
+                errors = tuple( (desired[i] - output[i] for i in range(len(desired))) )
+                validationSetError += sum( (abs(i) for i in errors) )
+
+
+
+            print E
+            newError = E    # put new error here! :P
+            iterInfo.adjustErrorDelta(newError)
+            iterInfo.setError(newError)
+            iterInfo.increaseIterationNumber()
+            iterInfo.setValidationSetError(validationSetError)
+        return iterInfo
+    # end :: train
+
+# end :: BackpropagationTrainer

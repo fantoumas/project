@@ -1,0 +1,17 @@
+# Automatically generated list of examples. Do not remove!
+2D Plots|canvas2D_chart1.py|Charts based on the HChart
+2D Plots|canvas2D_chart2.py|Charts based on the HChart
+3D Plots|canvas3D_histo2D_2hf.py|3D histogram (H2D) and a 3D (F2D) function overlyed on HPlot3D
+Data arrays|data_p1d_1.py|Data in X-Y, plotting on 2D canvas
+Data arrays|p2d_points.py|Interactive 3D plot with 2 sets of P2D arrays
+Data arrays|points0.py|P0D 1D array converted and shown as a H1D histgrams.
+Data clustering|clustering_gui.py|Perform a cluster analysis using jMinHEP GUI
+Function|func_1D.py|A function in 1D (F1D).
+Function|func_2D.py|F2D function in 2D shown in a 3D (HPlot3D)
+Histograms|histo1.py|Example using H1D histograms
+Histograms|histo2.py|H1D histograms with some style
+Histograms|histo2D.py|A histogram in 3D. H2D histograms. Example I
+Input/Output|io_hbook2D.py|2D histograms saved in HBook (by a fortran program)
+Input/Output|io_hfile.py|Write event records and read them back using HFile
+Statistics|stat_distributions.py|Verious random distributions
+Tools|tools_iview.py|View an image stored locally

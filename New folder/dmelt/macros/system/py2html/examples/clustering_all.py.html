@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/clustering_all.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># S.Chekanov (C) jHepWork</span>
+<span style="color: #1111CC"># cluster analysis</span>
+<span style="color: #1111CC">#</span>
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> jminhep.cluster <span style="color: #3333CC"><b>import</b></span> *
+
+
+
+<span style="color: #1111CC"># create a data holder</span>
+data = DataHolder(<span style="color: #115511">"Example"</span>)
+
+<span style="color: #1111CC"># fill 3D data with Gaussian random numbers</span>
+rand = Random()
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(100):
+      a =[]
+      a.append( 10*rand.nextGaussian() )
+      a.append( 2*rand.nextGaussian()+1 )
+      a.append( 10*rand.nextGaussian()+3 )
+      data.add( DataPoint(a) )
+      <span style="color: #3333CC"><b>del</b></span> a
+
+<span style="color: #1111CC"># show the data</span>
+<span style="color: #1111CC"># HTable(data)</span>
+
+data.print()
+
+<span style="color: #1111CC"># initialte partitioner</span>
+pat = Partition(data);
+
+<span style="color: #1111CC"># set mode</span>
+pat.set(3, 0.001, 1.7, 1000);
+
+<span style="color: #1111CC"># probability for membership (only for Fuzzy algorithm)</span>
+pat.setProbab(0.68)
+
+
+<span style="color: #1111CC"># define types of cluster analysis</span>
+mode =[];
+mode.append(111)
+mode.append(112)
+mode.append(113)
+mode.append(114)
+mode.append(121)
+mode.append(122)
+mode.append(131)
+mode.append(132)
+
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(len(mode)):
+        pat.run(mode[i])
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"algorithm: "</span> + pat.getName()
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Compactness: "</span> + str(pat.getCompactness())
+        <span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"No of final clusters: "</span> + str(pat.getNclusters())
+        Centers = pat.getCenters()
+<span style="color: #1111CC">#        Centers.Print()</span>
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

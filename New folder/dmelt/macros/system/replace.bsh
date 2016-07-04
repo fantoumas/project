@@ -1,0 +1,17 @@
+//
+//     regrep text file
+//
+//
+import java.util.regex.*;
+
+replace(String rep_from , rep_to) {
+
+Pattern pattern;
+Matcher matcher;
+pattern = Pattern.compile(rep_from);
+str     =  view.getText(); 
+matcher = pattern.matcher(str);
+str=matcher.replaceAll(rep_to);
+view.setText(str);
+
+}

@@ -1,0 +1,117 @@
+// run all jhplot example 
+// jHepWork
+// (C) S.Chekanov 
+
+import jehep.ui.SetEnv; 
+import jehep.ui.Editor; 
+import jehep.bshell.Macro;
+import javax.swing.table.DefaultTableModel;
+import java.lang.*;
+import java.awt.event.*;
+import javax.swing.event.*;
+import javax.swing.table.TableModel;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableCellRenderer;
+
+
+
+// Make list of files
+path=SetEnv.DirPath+fSep+"macros"+fSep+"examples"+fSep;
+f1= new File(path);
+s=(new File(path)).list();
+set = new TreeSet();
+     for (int i=0; i<s.length; i++) {
+         File f=new File (path+s[i]);
+         if (!f.isDirectory() ) {
+             if ( s[i].endsWith(".py")
+                  && s[i].length()>3) {
+                  set.add(new String(s[i]));
+        }
+       }
+      }
+ 
+
+JDialog frame = new JDialog();
+topPanel = new JPanel();
+lowerPanel = new JPanel();
+
+// build a table with examples
+model = new DefaultTableModel();
+model.addColumn("No");
+model.addColumn("File");
+jTab = new JTable(model);
+        
+column0 = jTab.getColumnModel().getColumn(0);
+column0.setPreferredWidth(5);
+column0 = jTab.getColumnModel().getColumn(1);
+column0.setPreferredWidth(80);
+
+
+// put to vector
+  n=1;
+  it = set.iterator();
+   while (it.hasNext() ) {
+         elem= it.next();
+         s=elem.toString();
+         model.addRow(new Object[]{new Integer(n),
+                                    new String(s)});
+         
+         n++;
+    };
+
+a=set.toArray();
+
+mouseH=  new MouseListener() {
+mousePressed ( MouseEvent e) {
+  if (e.getClickCount() == 2) { 
+          f=a[ jTab.getSelectedRow() ];
+           print("run macros"+fSep+"examples"+fSep+f);
+           SetEnv.JyRunFile(path+f);
+   }
+   }
+
+    invoke (method, args) {
+    //    print("unknown mouse method");
+    } 
+
+ };
+
+jTab.addMouseListener(mouseH);
+
+
+
+
+
+jB2 = new JButton();
+jB2.setText("Exit");
+jB2.addActionListener(new ActionListener() {
+     actionPerformed(evt) {
+  frame.dispose(); 
+}  });
+
+   
+lowerPanel.add(jB2, null);
+topPanel.setLayout(new BorderLayout());
+
+jScrollPane1 = new JScrollPane();
+jScrollPane1.getViewport().add( jTab );
+topPanel.add(jScrollPane1,BorderLayout.CENTER);
+frame.add( topPanel, BorderLayout.CENTER );
+frame.add( lowerPanel, BorderLayout.SOUTH );
+
+ 
+
+frame.setTitle("jHepWork examples");
+bounds = view.getBounds();
+ww = bounds.width;
+hh=  bounds.height;
+xx = bounds.x;
+yy = bounds.y;
+frame.setLocation(xx+(int)(0.1*ww), yy+(int)(0.1*hh));
+frame.pack();
+frame.setSize( (int)(0.24*ww),(int)(0.65*hh) );
+frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+frame.setVisible(true);
+
+

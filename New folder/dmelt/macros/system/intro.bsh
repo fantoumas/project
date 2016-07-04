@@ -1,0 +1,77 @@
+import jehep.ui.SetEnv; 
+import jehep.ui.Editor; 
+import jehep.bshell.Macro;
+
+   frame = new JDialog();
+   frame.setTitle("Introduction");
+// frame.getContentPane().add( button, "Center" );
+
+   bounds = view.getBounds();
+   ww = bounds.width;
+   hh=  bounds.height;
+   xx = bounds.x;
+   yy = bounds.y;
+  
+
+        JPanel topPanel = new JPanel();
+        JPanel lowerPanel = new JPanel();
+        JEditorPane jDescription = new JEditorPane(50,50);
+        String helpFile=SetEnv.DirPath+SetEnv.fSep+"Docs"+SetEnv.fSep+"FirstStart.txt";
+        String text=SetEnv.readFile(helpFile);
+        jDescription.setContentType("text/html");
+        jDescription.setText(text);
+
+        jDescription.setCaretPosition(0);
+        jDescription.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        jDescription.setEditable(false);
+
+/*
+        jB1 = new JButton();
+        jB1.setText("Run tests for macros");
+        jB1.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+             Macro.run( "system"+SetEnv.fSep+"test.bsh" ); 
+        }  });
+
+*/
+
+        jB2 = new JButton();
+        jB2.setText("Exit");
+        jB2.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+          frame.dispose(); // setVisible(false);
+        }  });
+
+       
+//       lowerPanel.add(jB1, null);
+       lowerPanel.add(jB2, null);
+       topPanel.setLayout(new BorderLayout());
+
+ // comments
+         jScrollPane1 = new JScrollPane();
+
+         jScrollPane1.getViewport().add( jDescription );
+         topPanel.add(jScrollPane1,BorderLayout.CENTER);
+
+
+         jDescription.setLineWrap(true);
+         jDescription.setWrapStyleWord(true);
+         jDescription.setCaretColor(Color.red);
+   
+         frame.add( topPanel, java.awt.BorderLayout.CENTER );
+         frame.add( lowerPanel, java.awt.BorderLayout.SOUTH );
+
+
+   bounds = view.getBounds();
+   ww = bounds.width;
+   hh=  bounds.height;
+   xx = bounds.x;
+   yy = bounds.y;
+  
+   frame.setLocation(xx+(int)(0.4*ww), yy+(int)(0.1*hh));
+   frame.pack();
+   frame.setSize( (int)(0.4*ww),(int)(0.5*hh) );
+   frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+   frame.setVisible(true);
+
+

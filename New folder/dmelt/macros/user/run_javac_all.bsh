@@ -1,0 +1,42 @@
+// compile all files using BeanShell
+
+import jehep.ui.SetEnv; 
+import jehep.ui.Editor; 
+import java.io.File;
+
+// keep full path, remove the extension
+DocName=Editor.DocMasterName(); 
+// full path to this file
+DocDir=Editor.DocDir();
+// file without path and extension
+DocNameShort=Editor.DocMasterNameShort(); 
+fsep=SetEnv.fSep; // file separator
+psep=File.pathSeparator; // path separator 
+// user defined jar in the project directory
+user=SetEnv.ProjDir+SetEnv.fSep+"classes.jar";
+
+ 
+JAVAHOME=System.getenv("JAVA_HOME");
+if (JAVAHOME != null) {
+    print("JAVAHOME="+JAVAHOME);  
+    cmd=JAVAHOME+fsep+"bin"+fsep+"javac -cp "+SetEnv.ClassPath+psep+user+" "+SetEnv.filesList(SetEnv.ProjDir,".java");
+    print("Process macros"+fsep+"user"+fsep+"run_java_all.bsh  ..");
+    exec( cmd );
+} else  { 
+    print("JAVA_HOME is not set! Try java.."); 
+    cmd="javac -cp "+SetEnv.ClassPath+psep+user+" "+SetEnv.filesList(SetEnv.ProjDir,".java");
+    print("Process macros"+fsep+"user"+fsep+"run_java_all.bsh  ..");
+    exec( cmd );
+}
+
+// refresh file browser
+SetEnv.win.refreshProjDir();
+
+
+// clear BeanShell console
+// SetEnv.RefreshBS(); 
+
+
+// clear Jython console
+SetEnv.RefreshJSsoft();
+ 

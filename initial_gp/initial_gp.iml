@@ -76,7 +76,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/jmi.jar!/" />
+          <root url="jar://$MODULE_DIR$/../New folder/jep-2.4.1-ext-1.1.1-gpl3/dist/jep-2.4.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -85,17 +85,131 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://C:/Program Files/MATLAB/R2010a/java/jar" />
+          <root url="jar://$MODULE_DIR$/../New folder/jep-2.4.1-ext-1.1.1-gpl3/dist/ext-1.1.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://C:/Program Files/MATLAB/R2010a/java/jar" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/matlabcontrol-4.1.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../New folder/dmelt/dmelt.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../New folder/commons-math3-3.6.1" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../New folder/commons-math3-3.6.1" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/../New folder/commons-math3-3.6.1" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../New folder/commons-math3-3.6.1" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../New folder/dmelt_jhplot-master" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../New folder/dmelt_jhplot-master/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../New folder/dmelt/lib/system/jhplot.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/jmathio.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/jmathplot.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../New folder/dmelt_jhplot-master/lib/system" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../New folder/dmelt_jhplot-master/lib/system" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/../New folder/dmelt_jhplot-master/lib/system" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../New folder/dmelt_jhplot-master/lib/system" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../New folder/jfreechart-1.0.19/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../New folder/jfreechart-1.0.19/lib" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/jlatexmath-1.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/jlatexmath-fop-1.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../New folder/jlatexmath-1.0.3/examples/Basic" />
+          <root url="file://$MODULE_DIR$/../New folder/jlatexmath-1.0.3/examples/Export" />
+          <root url="file://$MODULE_DIR$/../New folder/jlatexmath-1.0.3/examples/GIWS/src" />
+          <root url="file://$MODULE_DIR$/../New folder/jlatexmath-1.0.3/examples/Macros" />
+          <root url="file://$MODULE_DIR$/../New folder/jlatexmath-1.0.3/plugin/fop/src" />
+          <root url="file://$MODULE_DIR$/../New folder/jlatexmath-1.0.3/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../New folder/jeuclid-3.1.9" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

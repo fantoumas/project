@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/pfunctions2D_2f.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Font
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> HPlot3D
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> F2D
+
+c1 = HPlot3D(<span style="color: #115511">"Canvas"</span>,600,400)
+c1.visible(1)
+c1.setNameX(<span style="color: #115511">"Xaxis"</span>)
+c1.setNameY(<span style="color: #115511">"Yaxis"</span>)
+
+f1 = F2D(<span style="color: #115511">"2*exp(-x*y/20)+10*sin(pi*x)/y"</span>, -2.0, 5.0, -2.0, 5.0)
+f2 = F2D(<span style="color: #115511">"4*x*y"</span>, -2.0, 5.0, -2.0, 5.0)
+c1.draw(f1,f2)
+
+<span style="color: #1111CC"># export to some image (png,eps,pdf,jpeg...)</span>
+c1.export(Editor.DocMasterName()+<span style="color: #115511">".png"</span>);
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

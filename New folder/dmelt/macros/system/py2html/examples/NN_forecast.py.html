@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/NN_forecast.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># read a neural net and make predictions </span>
+<span style="color: #1111CC"># You have to read API of JooneTools</span>
+<span style="color: #1111CC"># This example is rewrite of the JAVA example</span>
+<span style="color: #1111CC"># which is located in samples/engine/helpers</span>
+<span style="color: #1111CC"># of the Joone package: http://www.jooneworld.com/</span>
+<span style="color: #1111CC"># Note: only joone-engine.jar  is used.</span>
+<span style="color: #1111CC"># S.Chekanov. JHepwWork</span>
+<span style="color: #1111CC">#</span>
+<span style="color: #3333CC"><b>from</b></span>  java.io <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  org.joone.engine <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  org.joone.helpers.factory <span style="color: #3333CC"><b>import</b></span> JooneTools
+<span style="color: #3333CC"><b>from</b></span>  org.joone.io <span style="color: #3333CC"><b>import</b></span> *;
+<span style="color: #3333CC"><b>from</b></span>  org.joone.net <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  org.joone.util <span style="color: #3333CC"><b>import</b></span> NormalizerPlugIn
+
+
+<span style="color: #1111CC"># path to the files of this example</span>
+filePath =SystemDir+fSep+<span style="color: #115511">"macros"</span>+fSep+<span style="color: #115511">"examples"</span>+fSep+<span style="color: #115511">"neural_net"</span>+fSep;
+
+<span style="color: #1111CC"># input data for predictions </span>
+fileName=filePath+<span style="color: #115511">"wine_forecast.txt"</span>
+
+
+<span style="color: #1111CC"># log file with predictions </span>
+logName=filePath+<span style="color: #115511">"wine_forecast.log"</span>
+
+<span style="color: #1111CC">#  input file with trained NN</span>
+nnOutput=filePath+<span style="color: #115511">"nn_wine.snet"</span>
+
+
+<span style="color: #1111CC"># output stream to the log file</span>
+sout=PrintStream( FileOutputStream(logName) )
+
+
+fileIn = FileInputSynapse();
+fileIn.setInputFile(File(fileName));
+fileIn.setAdvancedColumnSelector(<span style="color: #115511">"1-14"</span>)
+
+
+
+<span style="color: #1111CC"># Input data normalized between -1 and 1</span>
+normIn = NormalizerPlugIn()
+normIn.setAdvancedSerieSelector(<span style="color: #115511">"2-14"</span>)
+normIn.setMin(-1)
+normIn.setMax(1)
+fileIn.addPlugIn(normIn)
+
+<span style="color: #1111CC"># Target data normalized between 0 and 1</span>
+normOut = NormalizerPlugIn();
+normOut.setAdvancedSerieSelector(<span style="color: #115511">"1"</span>)
+fileIn.addPlugIn(normOut)
+
+
+<span style="color: #1111CC"># Extract the test data (24 raws)</span>
+inputTest = JooneTools.getDataFromStream(fileIn,1,24,2,14)
+desiredTest = JooneTools.getDataFromStream(fileIn,1,24,1,1)
+
+
+<span style="color: #1111CC"># Now assume that you have some data of the type you used to train</span>
+<span style="color: #1111CC"># now read the trained network from the file</span>
+mess=<span style="color: #115511">"read the trained NN from the file nn_wine.snet "</span>
+<span style="color: #3333CC"><b>print</b></span> mess; sout.print( mess)
+
+nnet=JooneTools.load(nnOutput)
+sout.print( <span style="color: #115511">"\n\nNN from the file=\n"</span>+nnOutput +<span style="color: #115511">"\n"</span>)
+
+
+<span style="color: #1111CC"># output stream to the log file</span>
+sout=PrintStream( FileOutputStream(logName) )
+
+
+<span style="color: #1111CC"># Gets and prints the final values</span>
+attrib = nnet.getDescriptor()
+
+out_text1=<span style="color: #115511">"\nLast training rmse="</span>+str(attrib.getTrainingError())
+out_text1=out_text1+<span style="color: #115511">" at epoch "</span>+str(attrib.getLastEpoch())
+<span style="color: #3333CC"><b>print</b></span>  out_text1
+sout.print( out_text1+<span style="color: #115511">"\n"</span>)
+
+
+<span style="color: #1111CC"># now compare outputs</span>
+out = JooneTools.compare(nnet,inputTest,desiredTest)
+sout.print(<span style="color: #115511">"\nPredictions  for "</span>+str(out.__len__())+ <span style="color: #115511">" rows:\n"</span>)
+cols = (out[0].__len__())/2
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(out.__len__()):
+        sout.print(<span style="color: #115511">'\n NN Forecast: '</span>)
+        <span style="color: #3333CC"><b>for</b></span> x <span style="color: #3333CC"><b>in</b></span> range(cols):
+             sout.print(out[i][x])
+
+
+
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Log file is"</span>,logName
+view.open( logName, 0  )
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/shapes.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># S.Chekanov (C) jHepWork</span>
+<span style="color: #1111CC"># show 1D histogram</span>
+
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Font
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> jhplot.shapes  <span style="color: #3333CC"><b>import</b></span> *
+
+
+<span style="color: #1111CC"># make empty canvas in some range</span>
+c1 =HPlot(<span style="color: #115511">"Canvas"</span>,600,400)
+c1.gTitle(<span style="color: #115511">"HShape package to draw Java 2D objects"</span>)
+c1.setDrawLegend(0)
+c1.setNameX(<span style="color: #115511">"X"</span>)
+c1.setNameY(<span style="color: #115511">"Y"</span>)
+c1.setRange(-4.0, 4.0, 0.0, 20.0)
+c1.visible(1)
+
+
+
+
+<span style="color: #1111CC"># show a line in the NDC system</span>
+line = Line(0.1,0.9, 0.2, 0.9)
+line.setPosCoord(<span style="color: #115511">"NDC"</span>)
+line.setColor(Color.red)
+line.setTransparency(0.5)
+c1.add(line)
+
+<span style="color: #1111CC">#show a line in the NDC system</span>
+line = Line(0.1,0.85, 0.2, 0.85);
+line.setDashed(3.0);
+line.setPosCoord(<span style="color: #115511">"NDC"</span>);
+line.setColor(Color.blue);
+line.setTransparency(0.5);
+c1.add(line);
+
+<span style="color: #1111CC"># show dotted line in the USER system</span>
+line = Line(-2.0, 10, -1.0, 12.0)
+line.setDotted(2.0)
+line.setColor(Color.magenta)
+line.setTransparency(0.5)
+c1.add(line)
+
+
+<span style="color: #1111CC"># arrow</span>
+arr = Arrow(-2, 2, -2, 10)
+c1.add(arr)
+
+<span style="color: #1111CC"># arrow in the NDC system</span>
+arr = Arrow(0.85, 0.5, 0.85, 0.7)
+arr.setColor(Color.blue)
+arr.setPosCoord(<span style="color: #115511">"NDC"</span>)
+stroke = BasicStroke(5.0)
+arr.setStroke(stroke)
+arr.setEndFilled()
+c1.add(arr)
+
+
+tex=  Text(<span style="color: #115511">"This is a text"</span>,-2.4, 12)
+c1.add(tex)
+
+
+<span style="color: #1111CC"># set a picture in the NDC system</span>
+file=SystemDir+fSep+<span style="color: #115511">"macros"</span>+fSep+<span style="color: #115511">"examples"</span>+fSep+<span style="color: #115511">"data"</span>+fSep+<span style="color: #115511">"anllogo.png"</span>
+pic=  Picture(0.8, 0.95, file)
+pic.setPosCoord(<span style="color: #115511">"NDC"</span>)
+c1.add(pic)
+
+
+cic= Circle(-0.5, 10, 2.0)
+cic.setFill(1)
+cic.setColor(Color.red)
+cic.setTransparency(0.5)
+c1.add(cic)
+
+
+<span style="color: #1111CC"># filled eclipse</span>
+ele= Ellipse(-1.2, 8, 1.0, 0.9)
+ele.setFill(1)
+ele.setColor(Color.green)
+ele.setTransparency(0.8)
+c1.add(ele)
+
+
+<span style="color: #1111CC"># show circle</span>
+cic=Circle(-0.9, 11, 1.5)
+cic.setFill(0)
+c1.add(cic)
+
+
+<span style="color: #1111CC"># rectangle</span>
+rec=Rectan(0.0, 10.0, 0.9, 1.2);
+rec.setFill(1);
+c1.add(rec);
+
+
+rec= Rectan(2.0, 3.0, 2.9, 1.6);
+rec.setFill(1);
+rec.setColor(Color.yellow);
+rec.setTransparency(0.7);
+c1.add(rec);
+
+
+<span style="color: #1111CC"># set HLabel in the USER coordinate system</span>
+lab=HLabel(<span style="color: #115511">"HLabel in USER"</span>, -2, 10);
+c1.add(lab);
+
+
+<span style="color: #1111CC"># set HLabel in the normilised coordinate system</span>
+lab=HLabel(<span style="color: #115511">"HLabel in NDC"</span>, 0.5, 0.2, <span style="color: #115511">"NDC"</span>);
+c1.add(lab);
+
+<span style="color: #1111CC"># now show all objects</span>
+c1.update();
+
+
+
+<span style="color: #1111CC"># export to some image (png,eps,pdf,jpeg...)</span>
+<span style="color: #1111CC"># c1.export(Editor.DocMasterName()+".png");</span>
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

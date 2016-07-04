@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/Open_Backup.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #115511">"""
+Open_Backup.py - A Jython macro for jEdit for browsing
+and opening backups of open buffers.
+
+Copyright (C) 2003 Ollie Rutherfurd &lt;oliver@rutherfurd.net&gt;
+
+$Id: Open_Backup.py 45 2003-06-04 14:15:54Z oliver $
+"""</span>
+
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> BorderLayout
+<span style="color: #3333CC"><b>from</b></span> java.awt.event <span style="color: #3333CC"><b>import</b></span> ActionListener, KeyEvent, KeyListener, MouseListener
+<span style="color: #3333CC"><b>from</b></span> java.lang <span style="color: #3333CC"><b>import</b></span> Runnable
+<span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> Box, BoxLayout, DefaultListCellRenderer, JButton, \
+	JComboBox, JDialog, JLabel, JList, JOptionPane, JPanel, \
+	JScrollPane, ListSelectionModel, SwingUtilities
+<span style="color: #3333CC"><b>from</b></span> javax.swing.border <span style="color: #3333CC"><b>import</b></span> EmptyBorder
+
+<span style="color: #3333CC"><b>from</b></span> org.gjt.sp.jedit <span style="color: #3333CC"><b>import</b></span> Macros, MiscUtilities
+<span style="color: #3333CC"><b>from</b></span> org.gjt.sp.jedit.io <span style="color: #3333CC"><b>import</b></span> VFSManager
+<span style="color: #3333CC"><b>from</b></span> org.gjt.sp.jedit.gui <span style="color: #3333CC"><b>import</b></span> VariableGridLayout
+
+<span style="color: #3333CC"><b>import</b></span> time
+<span style="color: #3333CC"><b>import</b></span> os.path
+
+
+<span style="color: #3333CC"><b>class</b></span> BufferCellRenderer(DefaultListCellRenderer):
+	<span style="color: #115511">"""
+	CellRenderer to display buffer's icon.
+	"""</span>
+	<span style="color: #3333CC"><b>def</b></span> __init__(self):
+		DefaultListCellRenderer.__init__(self)
+
+	<span style="color: #3333CC"><b>def</b></span> getListCellRendererComponent(self, jlist, value, index, isSelected, cellHasFocus):
+		DefaultListCellRenderer.getListCellRendererComponent(self, jlist, value, index, isSelected, cellHasFocus)
+		self.setIcon(value.getIcon())
+		<span style="color: #3333CC"><b>return</b></span> self
+
+<span style="color: #3333CC"><b>class</b></span> BackupCellRenderer(DefaultListCellRenderer):
+	<span style="color: #115511">"""
+	CellRenderer to display backup entry.
+	"""</span>
+	<span style="color: #3333CC"><b>def</b></span> __init__(self):
+		DefaultListCellRenderer.__init__(self)
+
+	<span style="color: #3333CC"><b>def</b></span> getListCellRendererComponent(self, jlist, value, index, isSelected, cellHasFocus):
+		DefaultListCellRenderer.getListCellRendererComponent(self, jlist, value, index, isSelected, cellHasFocus)
+		self.setText(str(value))
+		<span style="color: #3333CC"><b>return</b></span> self
+
+
+<span style="color: #3333CC"><b>def</b></span> getBackups(b,includeSelf=1):
+
+	<span style="color: #115511">"""
+	Gets list of backups for buffer `b`.
+
+	Looks for:
+	- a single backup in the backups directory
+	- a single backup in the buffer's directory
+	- numbered backups in the backups directory
+	- numbered backups in the buffer's directory
+	"""</span>
+
+	directory = jEdit.getProperty(<span style="color: #115511">'backup.directory'</span>)
+	prefix = jEdit.getProperty(<span style="color: #115511">'backup.prefix'</span>)
+	suffix = jEdit.getProperty(<span style="color: #115511">'backup.suffix'</span>)
+
+	bufferName = b.getName()
+	bufferPath = b.getPath()
+	bufferDir = b.getVFS().getParentOfPath(b.getPath())
+
+	<span style="color: #1111CC"># if directory is None or empty string, assume</span>
+	<span style="color: #1111CC"># backups in current directory</span>
+	<span style="color: #3333CC"><b>if</b></span> directory <span style="color: #3333CC"><b>is</b></span> None <span style="color: #3333CC"><b>or</b></span> directory == <span style="color: #115511">''</span>:
+		directory = bufferDir
+	<span style="color: #3333CC"><b>else</b></span>:
+		<span style="color: #1111CC"># pickup if path starts with X:\</span>
+		<span style="color: #3333CC"><b>if</b></span> bufferPath[1:3] == <span style="color: #115511">':\\'</span>:
+			directory = MiscUtilities.constructPath(
+				directory, bufferDir[0] + bufferDir[2:])
+		<span style="color: #1111CC"># if a UNC path</span>
+		<span style="color: #3333CC"><b>elif</b></span> bufferPath.startswith(<span style="color: #115511">'\\\\'</span>):
+			directory = MiscUtilities.constructPath(directory, bufferDir[2:])
+		<span style="color: #1111CC"># not a 'windows drive' or UNC path</span>
+		<span style="color: #3333CC"><b>else</b></span>:
+			directory = MiscUtilities.constructPath(directory, bufferDir[1:])
+
+	backups = []
+	<span style="color: #3333CC"><b>if</b></span> includeSelf:
+		backups.append(bufferPath)
+
+	<span style="color: #1111CC"># look for a single backup in the buffer directory</span>
+	filename = MiscUtilities.constructPath(bufferDir,
+		prefix + bufferName + suffix)
+	<span style="color: #3333CC"><b>if</b></span> os.path.exists(filename):
+		backups.append(filename)
+
+	<span style="color: #1111CC"># look for a single backup in the backups directory</span>
+	<span style="color: #1111CC"># (if it's not the same as the buffer's directory)</span>
+	filename = MiscUtilities.constructPath(directory,
+		prefix + bufferName + suffix)
+	<span style="color: #3333CC"><b>if</b></span> os.path.exists(filename) <span style="color: #3333CC"><b>and</b></span> filename <span style="color: #3333CC"><b>not</b></span> <span style="color: #3333CC"><b>in</b></span> backups:
+		backups.append(filename)
+
+	<span style="color: #1111CC"># get numbered backups in buffer directory</span>
+	i = 1
+	<span style="color: #3333CC"><b>while</b></span> 1:
+		filename = os.path.join(bufferDir, 
+			prefix + bufferName + suffix + str(i) + suffix)
+		<span style="color: #3333CC"><b>if</b></span> <span style="color: #3333CC"><b>not</b></span> os.path.exists(filename):
+			<span style="color: #3333CC"><b>break</b></span>
+		backups.append(filename)
+		i += 1
+
+	<span style="color: #3333CC"><b>if</b></span> directory == bufferDir:
+		<span style="color: #3333CC"><b>return</b></span> backups
+
+	<span style="color: #1111CC"># get number backups in backup directory</span>
+	i = 1
+	<span style="color: #3333CC"><b>while</b></span> 1:
+		filename = os.path.join(directory, 
+			prefix + bufferName + suffix + str(i) + suffix)
+		<span style="color: #3333CC"><b>if</b></span> <span style="color: #3333CC"><b>not</b></span> os.path.exists(filename):
+			<span style="color: #3333CC"><b>break</b></span>
+		backups.append(filename)
+		i += 1
+
+	<span style="color: #3333CC"><b>return</b></span> backups
+
+
+<span style="color: #3333CC"><b>class</b></span> BackupPicker(JDialog, ActionListener, KeyListener, MouseListener):
+
+	<span style="color: #3333CC"><b>def</b></span> __init__(self, view, modal=1):
+		JDialog.__init__(self,view,<span style="color: #115511">'Open Buffer Backup'</span>,modal)
+		self.view = view
+
+		panel = JPanel(BorderLayout(), border=EmptyBorder(12,12,12,12))
+		self.setContentPane(panel)
+
+		fields = JPanel(VariableGridLayout(VariableGridLayout.FIXED_NUM_COLUMNS, 1, 2, 2))
+		fields.add(JLabel(<span style="color: #115511">'Buffers:'</span>))
+		<span style="color: #1111CC"># only list local buffers</span>
+		buffers = filter(<span style="color: #3333CC"><b>lambda</b></span> b: b.getVFS().getName() == <span style="color: #115511">'file'</span>, jEdit.getBuffers())
+		self.buffers = JComboBox(buffers, actionListener=self)
+		self.buffers.setRenderer(BufferCellRenderer())
+		fields.add(self.buffers)
+		self.backups = JList(keyListener=self, mouseListener=self)
+		self.backups.setCellRenderer(BackupCellRenderer())
+		self.backups.setSelectionMode(ListSelectionModel.SINGLE_SELECTION)
+		fields.add(JLabel(<span style="color: #115511">'Backups:'</span>))
+		fields.add(JScrollPane(self.backups))
+		panel.add(fields, BorderLayout.CENTER)
+
+		buttons = JPanel(border=EmptyBorder(12,50,0,50))
+		buttons.setLayout(BoxLayout(buttons, BoxLayout.X_AXIS))
+		buttons.add(Box.createGlue())
+		self.open = JButton(<span style="color: #115511">'Open'</span>,actionListener=self, keyListener=self)
+		self.getRootPane().setDefaultButton(self.open)
+		buttons.add(self.open)
+		buttons.add(Box.createHorizontalStrut(6))
+		close = JButton(<span style="color: #115511">'Close'</span>,actionListener=self, keyListener=self)
+		self.open.setPreferredSize(close.getPreferredSize())
+		buttons.add(close)
+		buttons.add(Box.createGlue())
+		panel.add(buttons, BorderLayout.SOUTH)
+
+		self.addKeyListener(self)
+
+		<span style="color: #1111CC"># set selected buffer (will add backups for selected buffer)</span>
+		self.buffers.setSelectedItem(self.view.getBuffer())
+
+		self.pack()
+		self.setLocationRelativeTo(view)
+		self.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE)
+		self.setVisible(1)
+
+		self.backups.requestFocus()
+
+	<span style="color: #3333CC"><b>def</b></span> actionPerformed(self, evt):
+		<span style="color: #3333CC"><b>if</b></span> evt.getSource() == self.open:
+			self.openBackup()
+		<span style="color: #3333CC"><b>elif</b></span> evt.getSource() == self.buffers:
+			self.updateBackupsList()
+		<span style="color: #3333CC"><b>else</b></span>:
+			self.close()
+
+	<span style="color: #3333CC"><b>def</b></span> keyPressed(self, evt):
+		<span style="color: #3333CC"><b>if</b></span> evt.getKeyCode() == KeyEvent.VK_ESCAPE:
+			self.close()
+		<span style="color: #3333CC"><b>if</b></span> evt.getKeyCode() == KeyEvent.VK_SPACE:
+			self.openBackup()
+
+	keyReleased = keyTyped = <span style="color: #3333CC"><b>lambda</b></span> self,evt: None
+
+	<span style="color: #3333CC"><b>def</b></span> mouseClicked(self,evt):
+		<span style="color: #3333CC"><b>if</b></span> evt.clickCount &gt; 1:
+			self.openBackup()
+
+	mouseEntered = mouseExited = mousePressed = mouseReleased = <span style="color: #3333CC"><b>lambda</b></span> self,evt: None
+
+	<span style="color: #3333CC"><b>def</b></span> openBackup(self):
+		backup = self.backups.getSelectedValue()
+		<span style="color: #3333CC"><b>if</b></span> backup:
+			path = backup.path
+			mode = self.buffers.getSelectedItem().getMode()
+			SwingUtilities.invokeLater(BackupOpener(self.view, path, mode))
+
+	<span style="color: #3333CC"><b>def</b></span> close(self):
+		self.view = None
+		self.dispose()
+
+	<span style="color: #3333CC"><b>def</b></span> updateBackupsList(self):
+		<span style="color: #115511">"""
+		Populate buffer backup combo box.
+		"""</span>
+		backups = [BufferBackup(b) <span style="color: #3333CC"><b>for</b></span> b <span style="color: #3333CC"><b>in</b></span> getBackups(self.buffers.getSelectedItem(),0)]
+		self.backups.setListData(backups)
+		self.backups.requestFocus()
+
+
+<span style="color: #3333CC"><b>class</b></span> BufferBackup:
+
+	<span style="color: #3333CC"><b>def</b></span> __init__(self, path):
+		self.path = path
+		self.modified = time.strftime(<span style="color: #115511">'%Y-%m-%d %I:%M:%S %p'</span>, time.localtime(os.stat(path)[-2]))
+		self.name = os.path.split(path)[-1]
+
+	<span style="color: #3333CC"><b>def</b></span> __str__(self):
+		<span style="color: #3333CC"><b>return</b></span> <span style="color: #115511">'%s : (%s)'</span> % (self.name, self.modified)
+
+
+<span style="color: #3333CC"><b>class</b></span> BackupOpener(Runnable):
+
+	<span style="color: #3333CC"><b>def</b></span> __init__(self, view, path, mode):
+		self.view = view
+		self.path = path
+		self.mode = mode
+
+	<span style="color: #3333CC"><b>def</b></span> run(self):
+		b = jEdit.openFile(self.view, self.path)
+		VFSManager.waitForRequests()
+		b.setMode(self.mode)
+		self.view = None
+		self.path = None
+		self.mode = None
+
+
+<span style="color: #3333CC"><b>if</b></span> __name__ <span style="color: #3333CC"><b>in</b></span> (<span style="color: #115511">'__main__'</span>,<span style="color: #115511">'main'</span>):
+	BackupPicker(init.view,modal=0)
+
+<span style="color: #1111CC"># :indentSize=4:lineSeparator=\n:noTabs=false:tabSize=4:</span>
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

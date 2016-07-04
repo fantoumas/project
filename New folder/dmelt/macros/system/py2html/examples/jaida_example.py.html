@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/jaida_example.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># how to use JAIDA classes</span>
+
+<span style="color: #3333CC"><b>from</b></span> hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.lang <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> *
+
+
+System.getProperties().setProperty(<span style="color: #115511">"hep.aida.IAnalysisFactory"</span>,<span style="color: #115511">"hep.aida.ref.AnalysisFactory"</span>)
+
+true = Boolean(<span style="color: #115511">"true"</span>);
+false = Boolean(<span style="color: #115511">"false"</span>);
+
+factory = IAnalysisFactory.create();
+tree    = factory.createTreeFactory().create(<span style="color: #115511">"UsingJAIDAFromJython.aida"</span>,<span style="color: #115511">"xml"</span>,false,true);
+hf      = factory.createHistogramFactory(tree);
+
+tree.mkdir(<span style="color: #115511">"/Histograms"</span>);
+tree.cd(<span style="color: #115511">"/Histograms"</span>);
+
+h1 = hf.createHistogram1D(<span style="color: #115511">"Histogram 1D"</span>,50,-3,3);
+h2 = hf.createHistogram2D(<span style="color: #115511">"Histogram 2D"</span>,40,-3,3,40,-3,3);
+        
+tree.mkdir(<span style="color: #115511">"/Clouds"</span>);
+tree.cd(<span style="color: #115511">"/Clouds"</span>);
+
+c1 = hf.createCloud1D(<span style="color: #115511">"Cloud 1D"</span>);
+c2 = hf.createCloud2D(<span style="color: #115511">"Cloud 2D"</span>);
+
+page1 = factory.createPlotterFactory().create(<span style="color: #115511">"Page1"</span>);
+
+page1.show();
+page1.createRegions(2,2);
+
+page1.region(0).plot(h1);
+page1.region(1).plot(h2);
+page1.region(2).plot(c1);
+page1.region(3).plot(c2);
+
+r = Random()
+
+<span style="color: #3333CC"><b>def</b></span> fill():
+          <span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(5000):
+                h1.fill(r.nextGaussian())
+                h2.fill(r.nextGaussian(),r.nextGaussian())
+                c1.fill(r.nextGaussian())
+                c2.fill(r.nextGaussian(),r.nextGaussian())
+
+fill()
+tree.commit();
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

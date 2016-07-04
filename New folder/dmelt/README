@@ -1,0 +1,37 @@
+==========================
+ DataMelt computation program 
+ http://jwork.org/dmelt/
+==========================
+
+
+How to run:
+==========
+
+Make sure Java7 and above is installed.
+
+For Linux/Unix/Mac, run:
+
+./dmelt.sh
+
+
+To run it in a batch mode, use:
+./dmelt_batch.sh jython_script.py  
+
+For Windows: Click on the file: 
+
+dmelt.bat
+
+
+Documentation
+============
+
+Read http://jwork.org/dmelt/
+
+
+DataMelt License
+==============
+Please read Docs/license.txt
+
+
+2005-2015
+S.Chekanov (jWork.ORG)

@@ -1,0 +1,3 @@
+// run make file on the current document
+compile="make -c "+ DocDir;
+exec( compile );

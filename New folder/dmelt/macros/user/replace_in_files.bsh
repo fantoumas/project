@@ -1,0 +1,69 @@
+// replace in all directories 
+//import java.io.*;
+//import java.lang.*;
+
+
+rep_from = "aaa";
+rep_to = "bbb";
+// current 
+dir_in = [DIR]
+
+
+
+// do not modify below //
+code = "Shift_JIS";
+import java.util.regex.*;
+Pattern pattern;
+Matcher matcher;
+pattern = Pattern.compile(rep_from);
+
+
+dir = new File(dir_in);
+if (!dir.isDirectory()) 
+ {print("dir: " + dir + " is not Directory");
+  exit();
+ };
+
+
+ls_al(dir_name){
+  import java.io.*;
+  import java.lang.*;
+  print("<?xml version=\"1.0\" encoding=\"Shift_JIS\"?>");
+  print("<directory>");
+  dir_a = new File(dir_name);
+  String [] s = dir_a.list();
+  print("<name>" + dir_a.getName() + "</name>");
+  print("<parent_path>" + dir_a.getParentFile() + "</parent_path>");
+  print("<url>" + dir_a.toURL() + "</url>");
+
+  for( int i=0; i<s.length; i++ ) {
+
+    file = new File (dir_a + File.separator + s[i]);
+    if (file.isDirectory()) {
+      ls_al(dir_a + File.separator + s[i]);
+    } else {
+
+
+in_file = new FileInputStream(file);
+in_r = new InputStreamReader(in_file,code);
+in = new BufferedReader(in_r);
+out_file = new FileOutputStream(file+".new");
+out_w = new OutputStreamWriter(out_file,code);
+out = new PrintWriter(out_w);
+
+StringBuffer sbr  = new StringBuffer();
+while(in.ready()){
+  str = in.readLine();
+  matcher = pattern.matcher(str);
+  out.println(matcher.replaceAll(rep_to));
+}
+in.close();
+out.close();
+
+    };
+  }
+
+}
+
+
+ls_al(dir_in)

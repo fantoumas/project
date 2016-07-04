@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/histo3.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># S.Chekanov (C) jHepWork</span>
+<span style="color: #1111CC"># show several 1D histograms</span>
+
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Font
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+<span style="color: #3333CC"><b>from</b></span> java.lang <span style="color: #3333CC"><b>import</b></span> Thread
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> HPlot
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> H1D
+
+c1 = HPlot(<span style="color: #115511">"Canvas"</span>,600,400,0.1, 1, 2)
+c1.gTitle(<span style="color: #115511">"Global Title"</span>, Color.blue) <span style="color: #1111CC">#put title</span>
+c1.visible(1)
+
+h1 = H1D(<span style="color: #115511">"e^{+}e^{-} &amp;rarr; W^+{}W^{-} &amp;rarr; 4 jets"</span>,20, -2.0, 2.0)
+rand = Random()
+<span style="color: #1111CC"># fill histogram</span>
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(500):
+      h1.fill(rand.nextGaussian())
+
+h1.setFill(1)
+h1.fillColor(Color.green)
+h1.errX(0)
+h1.errY(1)
+h1.setPenWidthErr(2)
+
+
+h2 = H1D(<span style="color: #115511">"e^{+}e^{-} &amp;rarr; Z/&amp;gamma; &amp;rarr;  q#bar{q} "</span>,15, -2.0, 2.0)
+h2.setFill(1)
+h2.errX(0);
+h2.errY(1)
+h2.fillColorTransparency(0.7)
+h2.fillColor(Color.blue)
+h2.setColor(Color.blue)
+h2.errColorY(Color.black)
+h2.setNameX(<span style="color: #115511">"X of H2"</span>)
+h2.setNameY(<span style="color: #115511">"Y of H2"</span>)
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(1000):
+      h2.fill(2+rand.nextGaussian())
+
+c1.cd(1,1)
+c1.setAutoRange()
+
+c1.setBackgColor(Color.yellow)
+c1.setLegendFont( Font(<span style="color: #115511">"Lucida Sans"</span>, Font.BOLD, 12)  )
+c1.setNameX(<span style="color: #115511">"mass"</span>)
+c1.setNameY(<span style="color: #115511">"Entries"</span>)
+c1.setName(<span style="color: #115511">"Canvas &amp;alpha;"</span>)
+c1.draw(h1)
+c1.draw(h2)
+
+
+c1.cd(1,2);
+c1.setAutoRange()
+
+<span style="color: #1111CC"># c1.setBackgroundColor(Color.yellow)</span>
+c1.setLegendFont( Font(<span style="color: #115511">"Lucida Sans"</span>, Font.BOLD, 12)  )
+c1.setNameX(<span style="color: #115511">"mass"</span>)
+c1.setNameY(<span style="color: #115511">"Entries"</span>)
+c1.setName(<span style="color: #115511">"Canvas &amp;beta;"</span>)
+c1.setDrawGrid(0,0)
+c1.setDrawGrid(1,0)
+c1.setRange(0, -0.5, 3.0)
+c1.setShadow(1)
+
+
+h1.fillColorTransparency(1)
+c1.draw(h1)
+
+h2.setStyle(<span style="color: #115511">"p"</span>);
+c1.draw(h2)
+
+
+
+
+
+
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

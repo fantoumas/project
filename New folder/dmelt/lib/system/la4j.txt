@@ -1,0 +1,8 @@
+version 4.9
+Linear Algebra for Java
+Lightweight and 100% Java sparse/dense matrix library 
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+

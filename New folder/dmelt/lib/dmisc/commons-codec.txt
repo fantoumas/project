@@ -1,0 +1,1 @@
+commons-codec-1.8.jar. Apache public license

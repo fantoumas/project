@@ -1,0 +1,81 @@
+
+ jeHEP JythonShell HELP
+ --------------------
+
+ JythonShell was created on top of
+ JyConsole by Artenum, http://www.artenum.com
+ Type "copyright", "credits" or "license" for more information.
+
+
+ 1) Use ! in front of any external program.
+             Examples: !latex <file> - will execute latex
+                     : !make         - will execute make file
+                     : !gv           - will start gv
+
+
+ 2) Typing the file with the extension .py will automatically
+    execute it
+
+
+ 3) Command history (Key: Up and Down);
+    Style management on text (Popup menu on the console);
+    Script loader (Popup menu on the console);
+    Java completion (Key: Ctrl + Space);
+    Python completion (Key: Ctrl + Space) 
+
+
+ 4) It  uses the following aliases: 
+          [CLASSPATH]   - java class path
+          [FILE_SHORT]  - returns the file name without the extension
+          [FILE_SHORT_NODIR]  - returns the file name without the extension & path
+          [FILE]              - returns the full name of the file including the path
+          [FILE_NODIR]        - returns the full name of the file excluding the path
+          [DIR_FILE]    - returns  file directory
+          [DIR_SYS]     - returns system directory
+
+
+ 
+ Example: print [FILE] and you should see the name of the currently opened file
+ Note: Such substitutions can be used in macros. For example, if  your macro
+ contains [FILE], it will be automatically replaced by the current file name
+ There is a special command: run. 
+ This is just a shortcut to the command source([FILE]),
+ i.e. the currently edited file will be evaluated.
+
+5) One can access all the information about the currently opened 
+    document, as well as the jeHEP GUI frame, by  using the variables:
+
+    -  textArea         - the text area (like for jEdit) 
+    -  view             - the main GUI window. Can be used as a replacement for 
+                          the textArea 
+    -  SystemDir        - the system directory;
+    -  UserMacrosDir    - the user directory with macros 
+    -  DocName          - the name of the last opened document  directory 
+    -  DocMasterName    - the name of the last opened document without the extension. 
+    -  DocDir           - the directory of the last opened document  directory 
+    -  DocStyle         - the style of the last opened document  directory 
+    -  DicDir           - the directory with dictionaries 
+ 
+   Check this by typing "dir()" command. 
+   Check all the methods as: "view." +  Ctrl + Space
+
+
+
+6)  You can view all avalable methods by typing "obrowser";
+    This will open object browser window with all objects.
+    If you want to add some object, do this: obrowser.add(your object);
+
+     Example:
+        >>  obrowser
+        >> a=JLabel("OK");
+        >> obrowser.add(a);
+
+
+7) The user can put macros to the macros/user directory. There
+   are already several macros in the system directory. For example,
+   one can replace a string with another string in the current text just
+   by calling replace(String1, String2); In fact, the macros should be
+   rather similar to jEdirt macros, as long as you are using the textArea class.
+
+
+S.Chekanov, Aug. 2006

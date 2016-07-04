@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/NN_train.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #1111CC"># Build a neural net using Joone </span>
+<span style="color: #1111CC"># This program reads data, train and then test NN using</span>
+<span style="color: #1111CC"># last raws of data (not used for the trainning)</span>
+<span style="color: #1111CC"># </span>
+<span style="color: #1111CC"># You have to read API of JooneTools</span>
+<span style="color: #1111CC"># This example is a rewrite of the JAVA example</span>
+<span style="color: #1111CC"># which is located in samples/engine/helpers</span>
+<span style="color: #1111CC"># of the Joone package: http://www.jooneworld.com/</span>
+<span style="color: #1111CC"># Note: only joone-engine.jar  is used.</span>
+<span style="color: #1111CC"># S.Chekanov. JHepwWork</span>
+<span style="color: #1111CC">#</span>
+<span style="color: #3333CC"><b>from</b></span>  java.io <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  org.joone.engine <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  org.joone.helpers.factory <span style="color: #3333CC"><b>import</b></span> JooneTools
+<span style="color: #3333CC"><b>from</b></span>  org.joone.io <span style="color: #3333CC"><b>import</b></span> *;
+<span style="color: #3333CC"><b>from</b></span>  org.joone.net <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span>  org.joone.util <span style="color: #3333CC"><b>import</b></span> NormalizerPlugIn
+
+
+<span style="color: #1111CC"># path to the files of this example</span>
+filePath =SystemDir+fSep+<span style="color: #115511">"macros"</span>+fSep+<span style="color: #115511">"examples"</span>+fSep+<span style="color: #115511">"neural_net"</span>+fSep;
+
+<span style="color: #1111CC"># input data for training and testing </span>
+fileName=filePath+<span style="color: #115511">"wine_train.txt"</span>
+
+<span style="color: #1111CC"># log file from the training</span>
+logName=filePath+<span style="color: #115511">"wine_train.log"</span>
+
+<span style="color: #1111CC"># output file with saved trained NN</span>
+nnOutput=filePath+<span style="color: #115511">"nn_wine.snet"</span>
+
+
+<span style="color: #1111CC"># number of raws to train the NN</span>
+<span style="color: #1111CC"># the rest is used for validation</span>
+trainingRows = 150
+
+
+fileIn = FileInputSynapse();
+fileIn.setInputFile(File(fileName));
+fileIn.setAdvancedColumnSelector(<span style="color: #115511">"1-14"</span>)
+
+
+
+<span style="color: #1111CC"># Input data normalized between -1 and 1</span>
+normIn = NormalizerPlugIn()
+normIn.setAdvancedSerieSelector(<span style="color: #115511">"2-14"</span>)
+normIn.setMin(-1)
+normIn.setMax(1)
+fileIn.addPlugIn(normIn)
+
+<span style="color: #1111CC"># Target data normalized between 0 and 1</span>
+normOut = NormalizerPlugIn();
+normOut.setAdvancedSerieSelector(<span style="color: #115511">"1"</span>)
+fileIn.addPlugIn(normOut)
+
+<span style="color: #115511">"""
+ Extracts a subset of data from the StreamInputSynapse passed as parameter.
+ @return A 2D array of double containing the extracted data
+ @param dataSet The input StreamInputSynapse. Must be buffered.
+ @param firstRow The first row (relative to the internal buffer) to extract
+ @param lastRow The last row (relative to the internal buffer) to extract
+ @param firstCol The first column (relative to the internal buffer) to extract
+ @param lastCol The last column (relative to the internal buffer) to extract
+"""</span>
+
+<span style="color: #1111CC"># Extract the training data</span>
+inputTrain = JooneTools.getDataFromStream(fileIn,1,trainingRows,2,14)
+desiredTrain = JooneTools.getDataFromStream(fileIn,1,trainingRows,1,1)
+
+
+<span style="color: #1111CC"># Extract the test data for validation </span>
+inputTest = JooneTools.getDataFromStream(fileIn,trainingRows+1,178,2,14)
+desiredTest = JooneTools.getDataFromStream(fileIn,trainingRows+1,178,1,1)
+
+
+<span style="color: #115511">"""
+ * Creates a feed forward neural network without I/O components.
+ * @param nodes array of integers containing the nodes of each layer
+ * @param outputType the type of output layer. One of 'LINEAR', 'SOFTMAX', 'LOGISTIC'
+ * @return The neural network created
+ @throws java.lang.IllegalArgumentException .
+"""</span>
+
+<span style="color: #1111CC"># 13 input nodes, 4 hiden, 1 output</span>
+nodes = [13, 4, 1]
+nnet = JooneTools.create_standard(nodes,JooneTools.LOGISTIC)
+<span style="color: #1111CC"># Set optimal values for learning rate and momentum</span>
+nnet.getMonitor().setLearningRate(0.3)
+nnet.getMonitor().setMomentum(0.5)
+
+
+<span style="color: #1111CC"># output stream to the log file</span>
+sout=PrintStream( FileOutputStream(logName) )
+
+<span style="color: #115511">"""
+* Trains a neural network using the input/desired pairs contained in 2D arrays of double.
+* If Monitor.trainingPatterns = 0, all the input array's rows will be used for training.
+* @param nnet The neural network to train
+* @param input 2D array of double containing the training data. The # of columns must be equal to the # of input nodes
+* @param desired 2D array of double containing the target data. The # of columns must be equal to the # of output nodes
+* @param epochs Number of max training epochs
+* @param stopRMSE The desired min error at which the training must stop. If zero, the training continues until the last epoch is reached.
+* @param epochs_btw_reports Number of epochs between the notifications on the stdOut
+* @param stdOut The object representing the output. It can be either a PrintStream or a NeuralNetListener instance. If null, no notifications will be made.
+* @param async if true, the method returns after having stated the network, without waiting for the completition. In this case, the value returned is zero.
+* @return The final training RMSE (or MSE)
+"""</span>
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"wait.. training.."</span>
+nnwt=JooneTools.train(nnet,inputTrain,desiredTrain,5000,0.010,100,sout,0)
+
+
+<span style="color: #1111CC"># Gets and prints the final values</span>
+attrib = nnet.getDescriptor()
+
+out_text1=<span style="color: #115511">"\nLast training rmse="</span>+str(attrib.getTrainingError())
+out_text1=out_text1+<span style="color: #115511">" at epoch "</span>+str(attrib.getLastEpoch())
+<span style="color: #3333CC"><b>print</b></span>  out_text1
+sout.print( out_text1+<span style="color: #115511">"\n"</span>)
+
+
+mess=<span style="color: #115511">"write the trained NN to a serialized file"</span>
+sout.print(<span style="color: #115511">"\n--------- "</span>+mess+<span style="color: #115511">" ----------------\n"</span>);
+
+<span style="color: #1111CC"># clean up from the input:</span>
+<span style="color: #1111CC"># we do not need to put all such information</span>
+<span style="color: #1111CC"># in serialized form</span>
+<span style="color: #1111CC"># however, if you want to contibue with training,</span>
+<span style="color: #1111CC"># do not resert anything!</span>
+nnet.resetInput()
+nnet.removeAllOutputs()
+nnet.removeAllInputs()
+<span style="color: #1111CC"># save it</span>
+JooneTools.save(nnet,nnOutput)
+
+
+
+
+<span style="color: #115511">"""
+ * Compare the output and target data of a trained neural network using 2D array of double as the input/desired data sources.
+ * If Monitor.validationPatterns = 0, all the input array's rows will be used for testing.
+ * @param nnet The neural network to test
+ * @param input 2D array of double containing the test data. The # of columns must be equal to the # of input nodes
+ * @param desired 2D array of double containing the target data. The # of columns must be equal to the # of output nodes
+ * @return a 2D of double containing the output+desired data for each pattern.
+"""</span>
+
+<span style="color: #1111CC"># now compare outputs, i.e. verify the sample</span>
+out = JooneTools.compare(nnet,inputTest,desiredTest)
+sout.print(<span style="color: #115511">"\nComparion of the last "</span>+str(out.__len__())+ <span style="color: #115511">" rows:\n"</span>)
+cols = (out[0].__len__())/2
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(out.__len__()):
+        sout.print(<span style="color: #115511">'\n NN Output: '</span>)
+        <span style="color: #3333CC"><b>for</b></span> x <span style="color: #3333CC"><b>in</b></span> range(cols):
+             sout.print(out[i][x])
+      
+        sout.print (<span style="color: #115511">'\t Expected Target='</span>)
+        <span style="color: #3333CC"><b>for</b></span> x <span style="color: #3333CC"><b>in</b></span> range( cols, cols*2  ):
+             sout.print (out[i][x])
+             sout.print (<span style="color: #115511">" "</span>)
+
+
+
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Log file is"</span>,logName
+view.open( logName, 0  )
+
+
+
+
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

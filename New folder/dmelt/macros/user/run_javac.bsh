@@ -1,0 +1,52 @@
+// compile java program using a BeanShell script.
+// please modify it when needed.
+// it is recommended to use JAVA_PATH for such scripts
+// S.Chekanov (jwork.org). DMelt project
+
+import jehep.ui.SetEnv; 
+import jehep.ui.Editor; 
+import java.io.File;
+
+DocName=Editor.DocName();
+
+// keep full path, remove the extension
+DocNameShort=Editor.DocMasterName();
+DocDir=Editor.DocDir();
+fsep=SetEnv.fSep; // file separator
+psep=File.pathSeparator; // path separator 
+
+// remove old class
+cmd=DocNameShort+".class";
+suc=rm(cmd);
+if (suc) print("Project was cleaned successfully!");
+
+JAVAHOME=System.getenv("JAVA_HOME");
+cmd_javac=JAVAHOME+fsep+"bin"+fsep+"javac";
+ffile = new File(cmd_javac);
+if (!ffile.isFile()) {
+    print("JAVA_HOME was not set or JAVA_HOME/bin/javac was not found! Or no JDK installed?");
+    print("It is recommended to set JAVA_HOME. It will point to JAVA_HOME/bin/javac");
+    print("Remove this check in macros/user/run_javac.bsh if this is not a problem"); 
+} else { 
+
+// user defined jar in the project directory
+user=SetEnv.ProjDir+fsep+"classes.jar";
+
+if (DocName.endsWith(".java") && JAVAHOME != null) {
+    // print("JAVA_HOME="+JAVAHOME);  
+    cmd=JAVAHOME+fsep+"bin"+fsep+"javac -cp "+SetEnv.ClassPath+psep+user+psep+DocDir+" "+DocName;
+    print("Process macros"+fsep+"user"+fsep+"run_javac.bsh  ..");
+    exec( cmd );
+}
+if (DocName.endsWith(".java") && JAVAHOME == null) { 
+    // print("JAVA_HOME is not set! Trying javac.."); 
+    cmd="javac -cp "+SetEnv.ClassPath+psep+user+psep+DocDir+" "+DocName;
+    print("Process macros"+fsep+"user"+fsep+"run_javac.bsh  ..");
+    exec( cmd );
+}
+
+} // end javahome test
+
+
+// refresh file browser
+SetEnv.win.refreshProjDir();

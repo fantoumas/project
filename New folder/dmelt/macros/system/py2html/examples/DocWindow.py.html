@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/DocWindow.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>import</b></span> java
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> BorderLayout, Event
+
+<span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> AbstractAction,JMenuBar,JMenu
+<span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> JMenuItem,JButton,JFrame, JTextArea,JToolBar,KeyStroke
+
+
+<span style="color: #3333CC"><b>class</b></span> CallbackAction(AbstractAction):
+     <span style="color: #115511">''' Action that calls a callback method '''</span>
+     <span style="color: #3333CC"><b>def</b></span> __init__(self, name, desc, callback):
+         AbstractAction.__init__(self)
+         self.putValue(self.NAME, name)
+         self.putValue(self.SHORT_DESCRIPTION, desc)
+         self.callback = callback
+
+     <span style="color: #3333CC"><b>def</b></span> actionPerformed(self, event):
+         self.callback()
+
+
+<span style="color: #3333CC"><b>class</b></span> DocWindow(JFrame):
+     <span style="color: #115511">''' A top-level view that displays a course document (Learning 
+Object) '''</span>
+
+     <span style="color: #3333CC"><b>def</b></span> __init__(self):
+         JFrame.__init__(self, <span style="color: #115511">'Swing Demo'</span>, windowClosing=self.exit)
+         self.setBounds(200, 200, 200, 200)
+         self.makeUI()
+
+
+     <span style="color: #3333CC"><b>def</b></span> makeUI(self):
+         <span style="color: #1111CC"># Toolbar at the top</span>
+         toolBar = self.makeToolBarAndMenus()
+         self.getContentPane().add(toolBar, BorderLayout.NORTH)
+
+         self.infoPanel = JTextArea()
+         self.getContentPane().add(self.infoPanel, BorderLayout.CENTER)
+
+
+     <span style="color: #3333CC"><b>def</b></span> makeToolBarAndMenus(self):
+         <span style="color: #115511">''' Create the toolbar and menus. They are created together because
+             they share many actions. Creation is in the order of the 
+toolbar. '''</span>
+         menuBar = JMenuBar()
+         self.setJMenuBar(menuBar)
+
+         <span style="color: #1111CC"># File menu</span>
+         fileMenu = JMenu(<span style="color: #115511">'File'</span>)
+         fileMenu.setMnemonic(<span style="color: #115511">'f'</span>)
+         menuBar.add(fileMenu)
+
+         toolBar = JToolBar()
+
+         <span style="color: #1111CC"># Actions - These are in the order that they appear in the toolbar</span>
+         newAction = CallbackAction(<span style="color: #115511">'New'</span>, <span style="color: #115511">'Create a new file'</span>, self.new)
+         self.addAction(newAction, <span style="color: #115511">'N'</span>, <span style="color: #115511">'N'</span>, toolBar, fileMenu)
+
+         openAction = CallbackAction(<span style="color: #115511">'Open...'</span>, <span style="color: #115511">'Open a file'</span>, self.open)
+         self.addAction(openAction, <span style="color: #115511">'O'</span>, <span style="color: #115511">'O'</span>, toolBar, fileMenu)
+
+         self.saveAction = CallbackAction(<span style="color: #115511">'Save'</span>, <span style="color: #115511">'Save a file'</span>, self.save)
+         self.addAction(self.saveAction, <span style="color: #115511">'S'</span>, <span style="color: #115511">'S'</span>, toolBar, fileMenu)
+
+         fileMenu.addSeparator()
+
+         exitAction = CallbackAction(<span style="color: #115511">'Exit'</span>, <span style="color: #115511">'Exit'</span>, self.exit)
+         self.addAction(exitAction, <span style="color: #115511">'X'</span>, None, None, fileMenu)
+
+         <span style="color: #3333CC"><b>return</b></span> toolBar
+
+
+     <span style="color: #3333CC"><b>def</b></span> addAction(self, action, mnemonic, accelerator, toolBar, menu):
+         <span style="color: #115511">''' Add an action to a toolbar and a menu '''</span>
+         <span style="color: #3333CC"><b>if</b></span> toolBar:
+             toolbarButton = JButton(action)
+             toolBar.add(toolbarButton)
+
+         <span style="color: #3333CC"><b>if</b></span> menu:
+             menuItem = JMenuItem(action)
+
+             <span style="color: #3333CC"><b>if</b></span> mnemonic:
+                 menuItem.setMnemonic(mnemonic)
+
+             <span style="color: #3333CC"><b>if</b></span> accelerator:
+ 
+                menuItem.setAccelerator(KeyStroke.getKeyStroke(ord(accelerator), 
+                Event.CTRL_MASK, 0))
+
+                menu.add(menuItem)
+
+
+     <span style="color: #3333CC"><b>def</b></span> new(self):
+         self.infoPanel.append(<span style="color: #115511">'New\n'</span>)
+
+
+     <span style="color: #3333CC"><b>def</b></span> open(self, filePath=None):
+         self.infoPanel.append(<span style="color: #115511">'Open\n'</span>)
+
+     <span style="color: #3333CC"><b>def</b></span> save(self):
+         self.infoPanel.append(<span style="color: #115511">'Save\n'</span>)
+
+
+     <span style="color: #3333CC"><b>def</b></span> exit(self, event=None):
+         java.lang.System.exit(0)
+
+<span style="color: #3333CC"><b>if</b></span> __name__ == <span style="color: #115511">'__main__'</span>:
+     <span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> JFrame, UIManager
+
+     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName() )
+     JFrame.setDefaultLookAndFeelDecorated(1)
+
+     frame = DocWindow()
+     frame.setVisible(1)
+
+<span style="color: #1111CC"># show it</span>
+frame = DocWindow()
+frame.setVisible(1)
+
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/ScansAndContour.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> hep.aida <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> Random
+
+anFactory = IAnalysisFactory.create()
+tree = anFactory.createTreeFactory().create()
+histFactory = anFactory.createHistogramFactory( tree );
+tuplFactory = anFactory.createTupleFactory( tree );
+funcFactory = anFactory.createFunctionFactory( tree );
+fitFactory  = anFactory.createFitFactory();
+fitter      = fitFactory.createFitter(<span style="color: #115511">"chi2"</span>,<span style="color: #115511">"jminuit"</span>);
+    
+hist  = histFactory.createHistogram1D(<span style="color: #115511">"hist"</span>,<span style="color: #115511">"Test Histogram"</span>,100,-5,5);
+
+r = Random(1234);
+
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(10000):
+  x = r.nextGaussian();
+  hist.fill(x);
+
+fitData = fitFactory.createFitData();
+fitData.create1DConnection(hist);
+
+pars = [hist.maxBinHeight(),hist.mean(),hist.rms()];
+fitResult = fitter.fit(fitData,<span style="color: #115511">"g"</span>,pars);
+
+meanIndex = fitResult.fittedFunction().indexOfParameter(<span style="color: #115511">"mean"</span>);
+meanVal = fitResult.fittedParameters()[meanIndex];
+meanErr = fitResult.errors()[meanIndex];
+meanScan = fitter.createScan1D(fitData, fitResult.fittedFunction(),<span style="color: #115511">"mean"</span>,20, meanVal-3*meanErr, meanVal+3*meanErr);
+
+sigmaIndex = fitResult.fittedFunction().indexOfParameter(<span style="color: #115511">"sigma"</span>);
+sigmaVal = fitResult.fittedParameters()[sigmaIndex];
+sigmaErr = fitResult.errors()[sigmaIndex];
+oneSigmaContour = fitter.createContour(fitData, fitResult, <span style="color: #115511">"mean"</span>, <span style="color: #115511">"sigma"</span>, 10, 1);
+twoSigmaContour = fitter.createContour(fitData, fitResult, <span style="color: #115511">"mean"</span>, <span style="color: #115511">"sigma"</span>, 10, 2);
+
+plotter = anFactory.createPlotterFactory().create(<span style="color: #115511">"ScansAndContour.py plot"</span>);
+plotter.destroyRegions();
+plotter.createRegion(0,0,.66,1).plot(hist);
+plotter.region(0).plot(fitResult.fittedFunction());
+plotter.createRegion(.66,0,.33,.5).plot( meanScan );
+plotter.createRegion(.66,.5,.33,.5).plot( twoSigmaContour );
+plotter.region(2).plot( oneSigmaContour );
+plotter.show();
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

@@ -1,0 +1,30 @@
+//
+//     insert line number in text file
+//
+//
+//
+code = "Shift_JIS";
+infile = [FILE];
+outfile = "out.txt";
+
+in_file = new FileInputStream(infile);
+in_r = new InputStreamReader(in_file,code);
+in = new BufferedReader(in_r);
+out_file = new FileOutputStream(outfile);
+out_w = new OutputStreamWriter(out_file,code);
+out = new PrintWriter(out_w);
+
+String str;
+int line = 1;
+while(in.ready()){
+  str = in.readLine();
+  String number = String.valueOf(line++);
+  if ( line < 11 ) { 
+   out.println( " " + number + ":|" + str);
+  } else {
+   out.println( number + ":|" + str);
+  }
+}
+
+in.close();
+out.close();

@@ -1,0 +1,86 @@
+// goto.bsh - a BeanShell macro script for the jEdit text editor
+// Version 12-May-2006.
+//
+// This macro ...
+//
+// Copyright (C) 2004 Jean-Francois Magni
+// E-mail: jfmagni_at_free_dot_fr
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with the jEdit application; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+   import java.util.regex.*;
+
+// Absolute path to script directory
+   String slash = System.getProperty( "file.separator" );
+   for (i=0;i<scriptPath.length()-1;i++) {
+      if (scriptPath.substring(i,i+1).equals(slash))  scriptDir = scriptPath.substring(0,i+1);
+   }
+
+// Absolute path to file directory
+   bufferPath = buffer.getPath();
+   for (i=0;i<textArea.buffer.getPath().length()-1;i++) {
+      if (bufferPath.substring(i,i+1).equals(slash))  bufferDir = bufferPath.substring(0,i+1);
+   }
+
+// Check that the active buffer is .labelTeX
+   if (!bufferPath.matches(".*\\.labelTeX.*")) {
+      Macros.message(view,"The file of the active buffer was not obtained by parsing a\nLaTeX project. Click the \"Parse\" button. Then, in the\ngenerated file, move the caret to a line containing a label\nwhere you want to go and click again the \"Go to\" button.");
+      return;
+   };
+
+// Retrieve -the line of .labelTeX.tex with line number <-> label
+//          -the line of .labelTeX.tex with name of file to go to.
+   int lineNumber = textArea.getCaretLine();
+   String lineText = textArea.getLineText(lineNumber);
+   String fileLineLine = lineText;
+   String fileNameLine = lineText;
+   while (!fileNameLine.matches(".*( \"\\/|:\\\\).*")) {
+      // Unix ' "/' e.g., ' "/home/...'
+      // Windows ':\' e.g., 'C:\Doc...'
+      lineNumber = lineNumber - 1;
+      fileNameLine = textArea.getLineText(lineNumber);
+      if (lineNumber == 0){
+         return;
+      };
+   }
+
+// Retrieve Line
+   Pattern patt = Pattern.compile(" (\\d+) .*");
+   Matcher match = patt.matcher(fileLineLine);
+   if (match.find()) {
+      fileLine = match.group(1);
+   } else {
+      fileLine = 1;
+   }
+
+// Retrieve Name
+   Pattern patt = Pattern.compile(".* : (.*?) *$");
+   Matcher match = patt.matcher(fileNameLine);
+   if (match.find()) {
+      filName = match.group(1);
+      filName = filName.toString();
+      int l1 = filName.length();
+      // Remove " on both sides
+      filName = filName.substring(1,l1-1);
+   } else {
+      filName = "";
+   }
+
+// Open file at specified line -2
+   eval("ln = "+fileLine.toString()+"-2");
+   jEdit.openFile(view,filName);
+   VFSManager.waitForRequests();
+   textArea.setFirstPhysicalLine(ln);
+

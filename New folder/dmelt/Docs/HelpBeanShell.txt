@@ -1,0 +1,84 @@
+
+ jeHEP BeanShell HELP
+ --------------------
+
+
+  You do not need to put ";" at the end of each line. 
+  This will be done automatically!
+
+ 1) Use ! in front of any external program.
+             Examples: !latex <file> - will execute latex
+                     : !make         - will execute make file
+                     : !gv           - will start gv
+
+ 2) Use unix-type commands, such as 
+             ls                  -  show the current directory     
+             cd <path>           -  change the current directory   
+             mv <file1> <file2>  -  move <file1> to <file2>       
+             cp <file1> <file2>  -  copy <file1> to <file2>       
+             rm <file>           -  remove <file>                 
+             pwd                 -  show the current directory    
+             cat <file>          -  print the content of the file 
+             echo <String>       -  print the content of the String 
+             print <String>      -  print the content of the String
+ All such commands should work under windows, since they are mapped
+ to the corresponding bsh commands. 
+ 
+4) jeHEP uses the following aliases:
+          [CLASSPATH]   - java class path   
+          [FILE_SHORT]  - returns the file name without the extension
+          [FILE_SHORT_NODIR]  - returns the file name without the extension & path
+          [FILE]              - returns the full name of the file including the path
+          [FILE_NODIR]        - returns the full name of the file excluding the path
+          [DIR_FILE]    - returns  file directory
+          [DIR_SYS]     - returns system directory   
+           
+ Example: print [FILE] and you should see the name of the currently opened file
+ Note: Such substitutions can be used in macros. For example, if  your macro
+ contains [FILE], it will be automatically replaced by the current file name
+ There is a special command: run. 
+ This is just a shortcut to the command source([FILE]),
+ i.e. the currently edited BeanShell file will be evaluated by BeanShell.
+
+ 5) To execute a BeanShell script, just type <script>.bsh. 
+    This will execute this script (i.e. you  do not need to use the
+    standard BeanShell source command). 
+
+ 6) One can access all the information about the currently opened 
+    document, as well as the jeHEP GUI frame, by  using the variables:
+
+    -  textArea         - the text area (like for jEdit) 
+    -  view             - the main GUI window. Can be used as a replacement for 
+                          the textArea 
+    -  SystemDir        - the system directory;
+    -  UserMacrosDir    - the user directory with BeanShell macros 
+    -  DocName          - the name of the last opened document  directory 
+    -  DocMasterName    - the name of the last opened document without the extension. 
+    -  DocDir           - the directory of the last opened document  directory 
+    -  DocStyle         - the style of the last opened document  directory 
+    -  DicDir           - the directory with dictionaries 
+ 
+ Check this by using: print(textArea), print(SystemDir) etc.
+ All methods can be found as: javap(textArea),  print(view).
+ When you start jeHEP, it loads an intitial macro 
+ macro/system/sysjehep.bsh, which defines the variables above.  
+ 
+
+7)  You can view all methods by typing "obrowser"; 
+    This will open object browser window with all objects.
+    If you want to add some object, do this: ob.add(your object);
+
+    Example:
+        bsh% obrowser; 
+        bsh% a=new JLabel("OK");
+        bsh% obrowser.add(a);
+
+
+8) The user can put macros to the macros/user directory. There
+   are already several macros in the system directory. For example,
+   one can replace a string with another string in the current text just
+   by calling replace(String1, String2); In fact, the macros should be
+   rather similar to jEdirt macros, as long as you are using the textArea class.
+
+
+S.Chekanov, Aug. 2006

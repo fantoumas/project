@@ -1,0 +1,48 @@
+// Print out information of directory "c:/app/beanshell" as XML format.
+//import java.io.*;
+//import java.lang.*;
+
+dir_in = [DIR]
+dir = new File(dir_in);
+if (!dir.isDirectory()) 
+ {print("dir: " + dir + " is not Directory");
+  exit();
+ };
+
+
+ls_al(dir_name){
+  import java.io.*;
+  import java.lang.*;
+  print("<?xml version=\"1.0\" encoding=\"Shift_JIS\"?>");
+  print("<directory>");
+  dir_a = new File(dir_name);
+  String [] s = dir_a.list();
+  print("<name>" + dir_a.getName() + "</name>");
+  print("<parent_path>" + dir_a.getParentFile() + "</parent_path>");
+  print("<url>" + dir_a.toURL() + "</url>");
+
+  for( int i=0; i<s.length; i++ ) {
+
+    file = new File (dir_a + File.separator + s[i]);
+    if (file.isDirectory()) {
+      ls_al(dir_a + File.separator + s[i]);
+    } else {
+      print("<file>");
+      print("<name>" + s[i] + "</name>");
+      print("<length>" + file.length() + "</length>");
+      date_f = new Date(file.lastModified());
+      print("<year> " + date_f.Year+1900 + "</year>");
+      print("<month>" + date_f.Month+1 + "</month>");
+      print("<day>" + date_f.Day + "</day>");
+      print("<hour>" + date_f.getHours() + "</hour>");
+      print("<minute>" + date_f.getMinutes() + "</minute>");
+      print("<second>" + date_f.getSeconds() + "</second>");
+      print("</file>");
+    };
+  }
+  print("</directory>");
+
+}
+
+
+ls_al(dir_in)

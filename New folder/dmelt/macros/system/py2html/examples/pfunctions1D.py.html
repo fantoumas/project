@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/pfunctions1D.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Font
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> HPlot
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> F1D
+
+c1 = HPlot(<span style="color: #115511">"Canvas"</span>,600,400,0.1, 1, 2)
+c1.viewHisto(0)       <span style="color: #1111CC"># make sure starts from 0</span>
+c1.visible(1)
+c1.setAutoRange()
+
+c1.gTitle(<span style="color: #115511">"Example of functions"</span>, Color.red) <span style="color: #1111CC">#put title</span>
+c1.setNameX(<span style="color: #115511">"Xaxis"</span>)
+c1.setNameY(<span style="color: #115511">"Yaxis"</span>)
+c1.setName(<span style="color: #115511">"Canvas title"</span>)
+c1.visible(1)
+
+f1 = F1D(<span style="color: #115511">"2*exp(-x*x/50)+sin(pi*x)/x"</span>, -2.0, 5.0)
+c1.draw(f1);
+
+f1 = F1D(<span style="color: #115511">"exp(-x*x/50)+cos(pi*x)"</span>, -2.0, 5.0)
+f1.setColor(Color.green)
+f1.setPenWidth(1)
+c1.draw(f1);
+
+
+c1.cd(1,2)
+c1.setAutoRange()
+
+f1 = F1D(<span style="color: #115511">"20*x*x"</span>, -2.0, 5.0)
+f1.setColor(Color.red)
+f1.setPenWidth(3);
+c1.draw(f1);
+
+f1 = F1D(<span style="color: #115511">"10*sqrt(x)+20*x"</span>, 0.1, 5.0)
+f1.setColor(Color.blue)
+f1.setPenWidth(5)
+c1.draw(f1);
+
+<span style="color: #1111CC"># export to some image (png,eps,pdf,jpeg...)</span>
+c1.export(Editor.DocMasterName()+<span style="color: #115511">".png"</span>)
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

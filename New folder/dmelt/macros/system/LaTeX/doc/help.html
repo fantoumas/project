@@ -1,0 +1,537 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>Help for the jEdit BeanShell macro script LaTeX.bsh</title>
+<link rel="stylesheet" href="orange.css" type="text/css">
+<style type="text/css">
+</style></head>
+
+<body bgcolor="grey" link="black" text="black" vlink="black">
+<a name="top"></a>
+<center><table class="bod" width ="800"><tr><td>
+
+<h1>A LaTeX macro for jEdit</h1>
+<tt>Version 19-May-2006.</tt>
+
+<p><hr></p>
+<p>
+</p><ul>
+  <li><a class="intext" href="#whatisit">What is this macro for</a></li>
+  <li><a class="intext" href="#installation">Installation</a></li>
+  <li><a class="intext" href="#default">Default button panels (Solaris)</a></li>
+  <li><a class="intext" href="#look">Panels on other platforms</a></li>
+  <li><a class="intext" href="#quick">Quick customization</a></li>
+  <li><a class="intext" href="#secondary">Some secondary points</a></li>
+  <li><a class="intext" href="#detailed">Definitions of buttons and actions</a></li>
+  <li><a class="intext" href="#tools">Other tools for use with LaTeX</a></li>
+  <li><a class="intext" href="#problems">History</a></li>
+</ul>
+<p></p>
+
+<hr>
+<a name="whatisit"></a>
+<h2>What is this macro for</h2>
+
+<p>
+<a class="intext" href="http://www.jedit.org/">jEdit</a> is an impressive free programmer's text editor written in Java.
+</p>
+
+<p>
+What is the <tt>LaTeX.bsh</tt> macro for&nbsp;? see the <a class="intext" href="#default">screenshots</a> below....
+</p>
+
+<p>
+This macro is very similar to the jEdit Clipper and Xinsert plugins. It is expected
+to be more convenient because using tabs and icons, the number
+of visible commands is much larger, so, all commands can be attained with at most
+two mouse clicks.
+</p>
+
+<p>
+The present version is designed for use with LaTeX. In particular there is a command panel
+for launching latex, pdflatex... If the master document is not indicated
+at the end of the file being processed, a dialog window will pop up for
+entering (only once) this information.
+</p>
+
+<p>
+This macro is divided into two files <tt>LaTeX.bsh</tt> and <tt>LaTeX.js</tt>.
+<b>All customizations are in the second file</b>. The first file is independent of
+the language considered, for example, it can be used for HTML
+instead of LaTeX.
+</p>
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+
+<p><hr></p>
+<a name="installation"></a>
+<h2>Installation</h2>
+
+<p>
+Installing jEdit creates a directory <tt>.jedit</tt> in the home directory (e.g.
+<tt>C:\Documents and settings\foo\.jedit</tt> or <tt>$HOME/.jedit</tt>). The installation
+of <tt>LaTeX.bsh</tt>
+reduces to unzip the file <a class="intext" href="http://community.jedit.org/?q=filestore/download/1830"><tt>LaTeX.zip</tt></a>
+in the subdirectory <tt>macros</tt> of <tt>.jedit</tt>.
+</p>
+
+<p>
+In some cases you will have to tune some default paths and names of programs
+(latex, pdflatex, bibtex, dvips, dvi viewer, postscript viewer and pdf viewers)
+in the file <tt>LaTeX.js</tt>. See "<a class="intext" href="#quick">quick customization</a>" for details.
+</p>
+
+
+<p>
+<blink>Warning</blink>: recent versions of the console plugin (4.2.6.x) are not working properly. If some commands
+of the "command panel" don't work try one of the following tricks:
+
+<ul>
+  <li>Unix: set the shell prefix to "bash" (see  Plugins -> Plugins options -&gt; Console -&gt; General -&gt; Shell Prefix).</li>
+  <li>Repace the file <tt>.jedit/jars/Console.jar</tt> by an <a class="intext" href="http://jfmagni.free.fr/doc/Console.jar">older version</a>.</li>
+  <li>See also the <tt>readme.txt</tt> file.</li>
+</ul>
+</p>
+
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+<p><hr></p>
+<a name="default"></a>
+<h2>Default button panels (Solaris - CDE, Metouia Look and Feel)</h2>
+
+<center>
+<table class="nopadding">
+<tr>
+    <td><img src="images/gene1sol.gif" alt="Tab Gene1" height="450" width="150"></td>
+    <td><img src="images/gene2sol.gif" alt="Tab Gene2" height="450" width="150"></td>
+    <td><img src="images/math1sol.gif" alt="Tab Math1" height="450" width="150"></td>
+  </tr>
+  <tr>
+    <td><img src="images/math2sol.gif" alt="Tab Math2" height="450" width="150"></td>
+    <td><img src="images/greeksol.gif" alt="Tab Greek" height="450" width="150"></td>
+    <td><img src="images/cmdssol.gif" alt="Tab Cmds" height="450" width="150"></td>
+  </tr>
+</table>
+</center>
+
+<br>
+
+All these tabs and buttons can be easily modified (<a class="intext" href="#cmd_custom">example: sixth panel</a>).<ul>
+  <li> The button "<tt>Link</tt>" (fist panel)
+  opens the Jedit file browser for insertion of images, bib files or other tex files.</li>
+  <li>The button "<tt>def color</tt>" (fist panel) opens the color picker for
+  defining colors in LaTeX format.</li>
+  <li>The button "<tt>Mark master doc</tt>" (sixth panel) adds in Emacs style the
+  master document name (avoids definitions of projects).</li>
+  <li>The button "<tt>Parse doc</tt>" (sixth panel) opens a buffer listing all
+  labels for "copy and paste". The macro behind calls a Perls script, if perl is not
+  available, remove this button. The LaTeX plugin is more sophisticated but it
+  parses the document each times a file of the project is saved. I have written
+  this macro because my computer is very slow, so, I cannot wait for 20 seconds
+  each times the document is parsed by this plugin.</li>
+  <li>The button "<tt>Help</tt>" (sixth panel) opens this help file in the Info Viewer
+  (if it disappears immediately, change the "auto hide" feature of the docker plugin).</li>
+  <li>The button "<tt>Edit macro</tt>" (sixth panel) opens a buffer containing the file
+  <tt>LaTeX.js</tt> for customization: size and position of the dialog window,
+  number of tabbed panes, number
+  of buttons, actions, colors and so on (extension <tt>.js</tt> in order
+  to avoid this file to be an entry of the macro menu and in order to preserve colored syntax).
+  If you change this file, close the dialog and reopen it.</li>
+</ul>
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+
+<p><hr></p>
+<a name="look"></a>
+<h2>On other platforms</h2>
+
+<center>
+<table class="nopadding">
+  <tr>
+    <td><img src="images/math1mac.png" alt="Tab Math1, Mac OSX" height="450" width="150"></td>
+    <td><img src="images/math1win2k.gif" alt="Tab Math1, Windows 2000" height="450" width="150"></td>
+    <td><img src="images/math1winxp.png" alt="Tab Math1, Windows XP" height="450" width="150"></td>
+    <td><img src="images/math1kde.png" alt="Tab Math1, KDE" height="450" width="150"></td>
+  </tr>
+  <tr>
+    <td valign="top">Mac OSX<br>Tabs replaced<br>by a menu: not<br>very convenient</td>
+    <td valign="top">Windows 2000</td>
+    <td valign="top">Windows XP "Look<br>and Feel" with<br>"background color"<br>around buttons</td>
+    <td valign="top">Linux KDE</td>
+  </tr>
+</table>
+</center>
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+<p><hr></p>
+<a name="quick"></a>
+<h2>Quick customization (program paths and names)</h2>
+
+Click the button "<tt>Edit macro</tt>" of the sixth screenshot in order to
+open the file <tt>LaTeX.js</tt>. Scroll down to the relevant
+area (use find "<tt>paths to standard LaTeX commands</tt>") and
+read the explanations. Briefly:
+
+<blockquote>
+If you use <b class="bold">Windows with MiKTeX</b>
+and have installed GSview and AcroRd32 in their
+default installation directories (in hard drive "C:"), you have nothing to do
+(except tuning the AcroRd32.exe path that depends on its version).
+If you use <b class="bold">Windows with TeXLive</b>, similar
+but change also "<tt>isMiktex = true</tt>" to "<tt>isMiktex = false</tt>".
+</blockquote>
+
+<blockquote>
+If you use <b class="bold">Unix-Linux</b> with the most
+standard programs (xdvi, ghostview, acroread, xpdf) you have nothing to do.
+If you don't use the most standard programs, you might have to replace
+for example
+"<tt>xdvi</tt>" by "<tt>kdvi</tt>" in <tt>xdviString</tt>,
+"<tt>ghostview</tt>" by "<tt>kghostview</tt>" in <tt>ghostviewString</tt>,
+"<tt>xpdf</tt>" by "<tt>gpdf</tt>" in <tt>pdfString</tt> and so on.
+</blockquote>
+
+<blockquote>
+<b class="bold">Mac</b>, the default paths were defined from a discussion in the
+<a class="intext" href="http://sourceforge.net/mailarchive/forum.php?thread_id=5779094&amp;forum_id=5663">jedit user forum</a>.
+The macro distinguishes between LaTeX installation in <tt>/sw/bin/</tt> (Fink installation, in this case
+change "<tt>isFink = false</tt>" to "<tt>isFink = true</tt>") or
+in <tt>/usr/local/teTeX/bin/powerpc-apple-darwin(6.6)</tt>. Comments welcome.
+</blockquote>
+
+<p>
+There are 8 strings to be adapted depending on your operating system and
+LaTeX distribution (in some case, it suffices to comment/uncomment the relevant lines) .
+<a name="latexstring2"></a>
+<ul>
+  <li><tt>latexString</tt></li>
+  <li><tt>pdflatexString</tt></li>
+  <li><tt>bibtexString</tt></li>
+  <li><tt>dvipsString</tt></li>
+  <li><tt>xdviString</tt></li>
+  <li><tt>ghostviewString</tt></li>
+  <li><tt>acroreadString</tt></li>
+  <li><tt>pdfString</tt></li>
+</ul>
+<a name="latexstring"></a>
+For example, <tt>latexString = "latex -interaction nonstopmode -c-style-errors |";</tt>
+in which "<tt>|</tt>" will be automatically replaced by the name of the master document.
+There is no difficulty to add other commands like "makeindex" for example,
+see the next sections.
+</p>
+
+<p>
+For launching external programs directly from the command panel the following strings must be
+adapted to your system:
+<ul>
+  <li><tt>jabrefString</tt></li>
+  <li><tt>jpicedtString</tt></li>
+  <li><tt>printString</tt></li>
+  <li><tt>aspellEnString</tt></li>
+</ul>
+</p>
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+<p><hr></p>
+<a name="secondary"></a>
+<h2>Secondary points</h2>
+</p>
+
+<p>
+The above strings are arguments of a big tridimensional array <tt>tabx</tt>
+that defines all buttons and all actions. Before defining the syntax of the
+elements of this array, let us describe some secondary points.
+</p>
+
+<p>
+Click the button "<tt>Edit macro</tt>" of the sixth screenshot in order to
+open the file <tt>LaTeX.js</tt>.
+</p>
+
+<p>
+The title of the dialog window (here <tt>LaTeX</tt>) can be modified in
+<br>
+<tt>JDialog frame = new JDialog(view, "LaTeX", false);</tt>
+</p>
+
+<p>
+You can also modify the size and the location ("<tt>right</tt>", "<tt>left</tt>" or
+"<tt>bottom</tt>")
+of the dialog window. If you replace the default "tall" shape by a "flat" one,
+adapt also <tt>nbrow</tt> defined below.
+<br>
+<tt>int d_width = 150;</tt>
+<br>
+<tt>int d_height = 450;</tt>
+<br>
+<tt>String d_position = "right";</tt>
+
+</p>
+
+<p>
+The maximum number of panels and of buttons per panel must be defined
+(memory reservation), by default the number of panels is limited to <tt>6</tt>
+and the number of buttons per panel is limited to <tt>70</tt>. If necessary
+change these values in
+<br>
+<tt>JComponent[][] f = new JComponent[6][70];</tt>
+</p>
+
+<p>
+The number of rows of buttons per panel is <tt>16</tt> by default.
+It can be modified in
+<br>
+<tt>int nbrow = 16;</tt>
+</p>
+
+<p>
+The relative path to the icons directory from the directory containing this macro
+is <tt>imagescol</tt> by default. It can be modified in
+<br>
+<tt> String path2icons = "imagescol";</tt>
+</p>
+
+<p>
+Strings appearing on the tabs, see
+<br>
+<tt>String[] tabn = {"Gene1","Gene2","Math1","Math2","Greek","Cmds"};</tt>
+</p>
+
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+
+<p><hr></p>
+<a name="detailed"></a>
+<h2>Main customization (definition of buttons and actions)</h2>
+
+<p>
+<b>Syntax of <tt>tabx</tt></b>.</p>
+
+Click the button "<tt>Edit macro</tt>" of the sixth screenshot and scroll down to the
+relevant area (use find "<tt>commands/clipper panels</tt>") and
+read the explanations.
+Each element <tt>tabx[i][j]</tt> is an array containing  3 to 5 strings (the indice <tt>i</tt> corresponds
+to tabbed panes, here from <tt>0</tt> to <tt>5</tt>, the indice <tt>j</tt> corresponds to buttons
+on each tabbed pane).
+<ul>
+  <li><u>1st string:</u> "<tt>et</tt>", "<tt>ei</tt>", "<tt>ct</tt>", "<tt>ci</tt>",
+  "<tt>lt</tt>", "<tt>li</tt>", "<tt>st</tt>" or "<tt>si</tt>".
+  <ul>
+    <li>"<tt>e</tt>" means empty,  </li>
+    <li>"<tt>c</tt>" means clipper command,</li>
+    <li>"<tt>l</tt>" means local command,</li>
+    <li>"<tt>s</tt>" means system command</li>
+    <li>"<tt>t</tt>" means text,</li>
+    <li>"<tt>i</tt>" means icon.</li>
+  </ul></li>
+  <li><u>2nd string:</u> command that can be "<tt>empty</tt>" or of "<tt>clipper</tt>", "<tt>local</tt>"
+  or "<tt>system</tt>" type
+  <ul>
+    <li><tt>clipper</tt> type command example: "<tt>{\\bf |}</tt>" (<tt>|</tt> will be replaced by the selected text)</li>
+    <li><tt>local</tt>   type command example: "<tt>frame.dispose()</tt>"</li>
+    <li><tt>system</tt>  type command example: "<tt>dvips -o |.ps |</tt>" (<tt>|</tt> will be
+    replaced by the master document)</li>
+  </ul>
+  Note that commands are separated in the command string by <tt>\n</tt></li>
+  <li><u>3rd string:</u> "<tt>text</tt>" (case :"<tt>t</tt>" in first string)
+  or "<tt>icon name</tt>" without its .gif extension (case "<tt>i</tt>" in first string) to
+  appear on button</li>
+  <li><u>4th string:</u> optional, foreground color (case "<tt>t</tt>") or background color (case "<tt>i</tt>")</li>
+  <li><u>5th string:</u> optional, background color (case "<tt>t</tt>"). Note that depending on
+  Look and Feel, the background color might be interpreted as the circumference
+  of the button. Warning: in this case white foreground is not visible.</li>
+</ul>
+<p></p>
+
+<p>
+<b>A few illustrative examples</b> <tt>tabx[i][j] =</tt>
+</p><ul>
+  <li><tt>{"et","",""}</tt>: "<tt>e</tt>" for empty command (if the second string is
+      not empty, the corresponding command will be ignored). The button is
+      replaced by an empty "JLabel".</li>
+  <li><tt>{"et","","Slides"}</tt>: as above but the "JLabel" is not empty. "<tt>t</tt>" indicates that this
+      "JLabel" will contain the text "<tt>Slides</tt>".</li>
+  <li><tt>{"ct","{\\huge |}","Huge"}</tt>: "<tt>c</tt>" indicates that this is a clipper command, i.e.,
+      the selected text will be replaced by <tt>{\huge selected-text}</tt> in the active buffer.
+      If no text is selected, the caret will move to the position of "<tt>|</tt>".
+      "<tt>t</tt>" means that the text "<tt>Huge</tt>" will appear on the button.</li>
+  <li><tt>{"ci","\\alpha","alpha","red"}</tt>: "<tt>c</tt>" for clipper command, here, <tt>\alpha</tt>
+       will be written in the active buffer at the caret position,
+       "<tt>i</tt>" indicates that the third argument is an icon name, here "<tt>alpha.gif</tt>"
+       (icons are stored in the directory "<tt>imagescol</tt>", customizable). The icon will appear
+       on a red button.</li>
+  <li><tt>{"lt","frame.dispose();","Close","white","black"}</tt>: <tt>l</tt> for local command. Here the local
+       command is <tt>frame.dispose()</tt> that closes the dialog window. The text "<tt>Close</tt>" will
+       appear in <tt>white</tt> on a <tt>black</tt> button.</li>
+  <li><tt>{"lt","latexColPick()","def color","red"}</tt>. As above but the local command is a user defined
+       one that must be added in the macro script (scroll down to "<tt>User defined actions</tt>").
+       The text "<tt>def color</tt>" will appear in <tt>red</tt>.</li>
+  <li><tt>{"lt","Macros.getMacro(\"Text/Add_Prefix_and_Suffix\").invoke(view);","Pref &amp; suff","red"}</tt>.
+       As above but here the local command is a macro (<tt>Add_Prefix_and_Suffix</tt> appearing here in the
+       <tt>macros/Text</tt> menu).</li>
+  <li><tt>{"st",latexString,"LaTeX"}</tt>: "<tt>s</tt>" for system command. The macro will ask the system
+       to execute the string <tt>latexString</tt> (see <a href="#latexstring">here</a>) in which
+       <tt>|</tt> has been replaced by the master document name.</li>
+  <li><tt>{"st","makeindex |","Makeindex"}</tt>: as above but here the command string was
+       not defined earlier.</li>
+</ul>
+
+<p></p>
+
+<p>
+<b>Comments.</b>
+</p><ul>
+<li>
+Note that the string "<tt>|</tt>" might appear in some <b>clipper command</b> definitions
+like <tt> \begin{array}{|c|}</tt>. In order to avoid the replacement of "<tt>|</tt>"
+by the buffer selected text, use "<tt>\\|</tt>" instead of "<tt>|</tt>"
+(e.g. <tt>"\\begin{array}{\\|c\\|}"</tt>).
+</li>
+<li>
+For <b>system commands</b> some shortcuts are very useful.
+For example assume that the file of the active buffer is
+<tt>/home/foo/file.tex</tt>:
+   <ul>
+     <li><b><tt>$c</tt></b> = file name without extension nor path (<i>e.g.</i>, <tt>file</tt>)</li>
+     <li><b><tt>$d</tt></b> = directory with full path (<i>e.g.</i>,
+         <tt>/home/foo</tt>)</li>
+     <li><b><tt>$f</tt></b> = file with extension and full path (<i>e.g.</i>, <tt>/home/foo/file.tex</tt>)</li>
+     <li><b><tt>$n</tt></b> =  file name with extension  (<i>e.g.</i>, <tt>file.tex</tt>)</li>
+     <li><b><tt>$u</tt></b> = URL for browsers (<i>e.g.</i>,
+         <tt>file://home/foo/file.tex</tt>) (don't use because
+         one slash is missing ("<tt>file://</tt>" should be "<tt>file:///</tt>").</li>
+   </ul>
+   For example, if you want to run <tt>dvips -o file.ps file</tt> the system command strings
+   are <tt>"cd $d"</tt> followed by <tt>"dvips -o $c.ps $c"</tt>.
+</li>
+<li>The commands separator is <tt>\n</tt>, for example <tt>"cd $d \n dvips -o $c.ps $c"</tt>.
+</li>
+<li>
+For creating new gif icons you can use the script <tt>tex2gif.py</tt> of
+<a class="intext" href="http://www.wag.caltech.edu/home/rpm/projects/tex2gif/">http://www.wag.caltech.edu/home/rpm/projects/tex2gif/</a>
+(I used myself an adapted version of this script for batch generation of sets of coloured icons).
+</li>
+</ul>
+<p></p>
+
+<a name="cmd_custom"></a>
+<p>
+<b>Example of ugly customization of the command panel.</b>
+</p>
+<center>
+<table class="nopadding">
+<tr>
+    <td><img src="images/cmd_custom.gif" alt="Customized command panel" height="450" width="150"></td>
+</tr>
+</table>
+</center>
+<p></p>
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+<p><hr></p>
+<a name="tools"></a>
+<h2>Other tools for use with LaTeX</h2>
+
+<ul>
+<li>The "<b>LaTeX plugin</b>" together with the "<b>Sidekick plugin</b>" are very
+useful for navigation and for handling labels in large documents.
+The "<b>Navigator plugin</b>" is also useful.
+</li>
+<li>
+It is worth
+configuring  "<b>plugins &gt; plugins options &gt; console &gt; error patterns</b>"
+so that LaTeX warnings are sent to the "error list". For example, add
+an error pattern (it will only work for warnings on a single line (short labels)).:
+<br><br>
+<table class="nopadding">
+<tr><td class="help">Name</td><td class="help"><tt>LaTeX</tt></td></tr>
+<tr><td class="help">RE </td><td class="help">foo</td></tr>
+<tr><td class="help">Warning RE</td><td class="help"><tt>.*\: (Reference|Citation) \`(.+)\' .+ (\d+)\.</tt></td></tr>
+<tr><td class="help">Extra RE</td><td class="help">&nbsp;</td></tr>
+<tr><td class="help">Filename</td><td class="help"><tt>$f</tt></td></tr>
+<tr><td class="help">Line Numb</td><td class="help"><tt>$3</tt></td></tr>
+<tr><td class="help">Err Mess</td><td class="help"><tt>Warning $1:$2</tt></td></tr>
+</table><br>
+
+<center>
+<img src="images/errorpatern_win.gif" title="Error Pattern for LaTeX warnings" alt="Error Pattern for LaTeX warnings" height="256" width="439">
+</center>
+</li>
+<li>
+For presentations (à la PowerPoint), click the "Tutorial" button beside
+the "Beamer" button (first panel). This tutorial is provisional.
+</li>
+<li>
+For BiBTeX data bases management, see
+<a class="intext" href="http://jabref.sourceforge.net/">http://jabref.sourceforge.net/</a>
+</li>
+<li>
+For PsTrick figures, see
+<a class="intext" href="http://www.jpicedt.org/">http://www.jpicedt.org/</a>
+</li>
+</ul>
+
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+<p><hr></p>
+<a name="problems"></a>
+<h2>History</h2>
+
+<ul>
+  <li><tt>19-May-2006</tt>
+      <ul>
+        <li>Bug of the Perl script used for parsing a project fixed (single documents, i.e., without master document,
+        were not parsed).</li>
+      </ul>
+  </li>
+  <li><tt>15-May-2006</tt>
+      <ul>
+        <li>New macro for navigation within a LaTeX project ("<b>Go to</b>" button of the command panel).</li>
+        <li>The Perl script used for parsing a project ("<b>Parse</b>" button of the command panel) has been rewritten
+            in particular for compatibility with navigation (see above). There are still some limitations
+            relative to LaTeX code (see the script file <tt>latexLabelParser.pl</tt> for more information). </li>
+        <li>A button for index generation ("<b>Index -s</b>" button of the command panel) has been added. The corresponding
+            index customization file <tt>latexIndex.ist</tt> is in the same directory as the main <tt>LaTeX.bsh</tt> macro.</li>
+        <li>More information in the <tt>LaTeX.js</tt> file for customization of the command panel, minor bugs fixed, etc...</li>
+      </ul>
+  </li>
+  <li><tt>22-Dec-2004</tt>
+      <ul>
+        <li>Attempt to define a default configuration for the Mac.</li>
+        <li>Modification of the background color of some buttons for compatibility with some "Look and Feel".</li>
+        <li>Possibility to define more than one command in the "command strings" (the separator
+        is <tt>\n</tt>)</li>
+        <li>Document parser slightly improved</li>
+        <li>Minor bugs fixed</li>
+      </ul>
+  </li>
+  <li><tt>5-Nov-2004</tt>: first release.</li>
+</ul>
+
+<p><table class = "button"><tr><td class = "button"><a href="#top">TOP</a></td></tr></table></p>
+
+</td></tr></table></center>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/histo_root.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> HPlot
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> H1D
+<span style="color: #3333CC"><b>from</b></span> hep.io.root <span style="color: #3333CC"><b>import</b></span> *;
+<span style="color: #3333CC"><b>from</b></span> hep.io.root.interfaces <span style="color: #3333CC"><b>import</b></span> *;
+<span style="color: #3333CC"><b>from</b></span> java.io <span style="color: #3333CC"><b>import</b></span> IOException
+
+<span style="color: #1111CC"># location of ROOT file</span>
+file=SystemDir+fSep+<span style="color: #115511">"macros"</span>+fSep+<span style="color: #115511">"examples"</span>+fSep+<span style="color: #115511">"data"</span>+fSep+<span style="color: #115511">"Example.root"</span>
+
+rfr = RootFileReader(file)
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"number of histograms="</span>,rfr.nKeys()
+
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"ROOT version="</span>,rfr.getVersion()
+
+key = rfr.getKey(<span style="color: #115511">"mainHistogram"</span>)
+his1 = key.getObject()
+h1 = H1D(his1)
+
+main = rfr.getKey(<span style="color: #115511">"mainHistogram"</span>).getObject()
+total = rfr.getKey(<span style="color: #115511">"totalHistogram"</span>).getObject()
+s1 = rfr.getKey(<span style="color: #115511">"s1Histogram"</span>).getObject()
+s2 = rfr.getKey(<span style="color: #115511">"s2Histogram"</span>).getObject()
+<span style="color: #1111CC"># convert usual histograms </span>
+h1 = H1D(main)
+h2 = H1D(total)
+h3 = H1D(s1)
+h4 = H1D(s2)
+
+<span style="color: #1111CC"># create canvas 1x1</span>
+c1 = HPlot(<span style="color: #115511">"Canvas"</span>,600,400,0.12,1, 1)
+c1.gTitle(<span style="color: #115511">"Show ROOT histograms from Example.root"</span>)
+c1.visible(1)
+
+
+c1.setRange(0, -4, 4)
+<span style="color: #1111CC"># set autorange for Y</span>
+c1.setAutoRange(1,1)
+
+h1.setColor(Color.blue)
+c1.draw(h1)
+
+h2.setColor(Color.red)
+c1.draw(h2)
+
+h3.setStyle(<span style="color: #115511">"p"</span>)
+h3.setDrawLine(0)
+h3.setColor(Color.green)
+c1.draw(h3)
+
+h4.setFill(1)
+h4.setPenWidthErr(2);
+h4.fillColorTransparency(0.5)
+h4.fillColor(Color.red)
+c1.draw(h4)
+
+c1.setNameX(<span style="color: #115511">"Xaxis"</span>)
+c1.setNameY(<span style="color: #115511">"Yaxis"</span>)
+c1.setName(<span style="color: #115511">"Canvas title"</span>)
+c1.update()
+
+
+
+<span style="color: #1111CC"># export to some image (png,eps,pdf,jpeg...)</span>
+c1.export(Editor.DocMasterName()+<span style="color: #115511">".png"</span>);
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

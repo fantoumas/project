@@ -13,6 +13,7 @@ import java.io.*;
 import java.util.*;
 
 import org.apache.log4j.*;
+import org.apache.log4j.pattern.IntegerPatternConverter;
 import org.jgap.*;
 import org.jgap.distr.grid.gp.*;
 import org.jgap.event.*;
@@ -27,7 +28,7 @@ import org.jgap.util.*;
  * @since 3.0
  */
 public class GPGenotype
-        implements Runnable, Serializable, Comparable {
+        implements Serializable, Comparable {
     /** String containing the CVS revision. Read out via reflection!*/
     private final static String CVS_REVISION = "$Revision: 1.60 $";
 
@@ -59,6 +60,19 @@ public class GPGenotype
      * Best solution found
      */
     private IGPProgram m_allTimeBest;
+
+    List<Integer> generations = new ArrayList();
+    List<IGPProgram> allSolutions = new ArrayList();
+    List<Integer> complexity = new ArrayList();
+    List<ArrayList> solution = new ArrayList();
+    class everytghing {
+        IGPProgram program;
+        int generation;
+        int complex;
+    };
+
+    List<everytghing> sections = new ArrayList <>();
+
 
     private double m_allTimeBestFitness;
 
@@ -531,7 +545,8 @@ public class GPGenotype
         else {
             evolutions = a_evolutions;
         }
-//    getGPPopulation().sort(new GPFitnessComparator());
+        if (getGPPopulation().size() > 1542)
+        getGPPopulation().sort(new GPFitnessComparator());
         for (int i = 0; i < evolutions; i++) {
             if (m_verbose) {
                 if (i % 25 == 0) {
@@ -544,8 +559,44 @@ public class GPGenotype
                 }
             }
             evolve();
-            calcFitness();
+            calcFitness(i);
         }
+        for (int i=0; i<allSolutions.size();i++) {
+            everytghing something = new everytghing();
+            something.program = allSolutions.get(i);
+            something.complex = complexity.get(i);
+            something.generation = generations.get(i);
+            sections.add(something);
+        }
+    }
+
+    public List<String> getSolutionsString (){
+        List<String> sol = new ArrayList();
+        for (int i = 0; i < allSolutions.size(); i++) {
+            sol.add(allSolutions.get(i).toStringNorm(0));
+        }
+        return sol;
+    }
+
+    public List<Integer> getGenerationOfSolutions (){
+        return generations;
+    }
+
+    public List<Integer> getGenerationOfComplexity (){
+        return complexity;
+    }
+
+    public List<everytghing> getSolutions (){
+        return sections;
+    }
+
+    private List<String> accessPrograms() {
+        List<String> stringSolutions = new ArrayList<>();
+        for(int i =0;i<allSolutions.size(); i++) {
+            stringSolutions.add(allSolutions.get(i).toStringNorm(0));
+        }
+
+        return stringSolutions;
     }
 
     /**
@@ -555,7 +606,7 @@ public class GPGenotype
      * @author Klaus Meffert
      * @since 3.0
      */
-    public void calcFitness() {
+    public void calcFitness(int evolution) {
         double totalFitness = 0.0d;
         GPPopulation pop = getGPPopulation();
         IGPProgram best = null;
@@ -630,7 +681,7 @@ public class GPGenotype
                 if (m_verbose) {
                     // Output the new best solution found.
                     // -----------------------------------
-                    outputSolution(m_allTimeBest);
+                    outputSolution(m_allTimeBest, evolution);
                 }
             }
         }
@@ -657,7 +708,7 @@ public class GPGenotype
      * @author Klaus Meffert
      * @since 3.0
      */
-    public void outputSolution(IGPProgram a_best) {
+    public void outputSolution(IGPProgram a_best, int evolution) {
         if (a_best == null) {
             LOGGER.debug("No best solution (null)");
             return;
@@ -667,23 +718,23 @@ public class GPGenotype
             LOGGER.debug("No best solution (infinite)");
             return;
         }
-        LOGGER.info("Best solution fitness: " +
-                NumberKit.niceDecimalNumber(bestValue, 2));
-        LOGGER.info("Best solution: " + a_best.toStringNorm(0));
+
         String depths = "";
+
         int size = a_best.size();
+        int depth = 0;
         for (int i = 0; i < size; i++) {
             if (i > 0) {
                 depths += " / ";
             }
             depths += a_best.getChromosome(i).getDepth(0);
+            depth = a_best.getChromosome(i).getDepth(0);
         }
-        if (size == 1) {
-//            LOGGER.info("Depth of chrom: " + depths);
-        }
-        else {
-//            LOGGER.info("Depths of chroms: " + depths);
-        }
+        LOGGER.info("Best solution fitness: " + NumberKit.niceDecimalNumber(bestValue, 2));
+        LOGGER.info("Best solution with depth "+depths+" : " + a_best.toStringNorm(0));
+        allSolutions.add(a_best);
+        generations.add(evolution);
+        complexity.add(depth);
     }
 
     /**
@@ -932,20 +983,20 @@ public class GPGenotype
      * @author Klaus Meffert
      * @since 3.0
      */
-    public void run() {
-        try {
-            while (!Thread.currentThread().interrupted()) {
-                evolve();
-                calcFitness();
-                // Do G.C. for cleanup and to avoid 100% CPU load.
-                // -----------------------------------------------
-                System.gc();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.exit(1);
-        }
-    }
+//    public void run() {
+//        try {
+//            while (!Thread.currentThread().interrupted()) {
+//                evolve();
+//                calcFitness();
+//                // Do G.C. for cleanup and to avoid 100% CPU load.
+//                // -----------------------------------------------
+//                System.gc();
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            System.exit(1);
+//        }
+//    }
 
     /**
      * Retrieves the GPProgram in the population with the best fitness

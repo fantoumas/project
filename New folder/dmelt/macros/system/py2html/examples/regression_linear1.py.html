@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/regression_linear1.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color,Font
+<span style="color: #3333CC"><b>from</b></span> java.util <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> jhplot  <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> org.apache.commons.math.stat.regression <span style="color: #3333CC"><b>import</b></span> SimpleRegression
+
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"\napache.commons.math:"</span>
+c1 = HPlot(<span style="color: #115511">"Canvas"</span>,600,400,0.12,1, 1)
+c1.visible(1)
+c1.gTitle(<span style="color: #115511">"Linear regression"</span>)
+c1.setAutoRange()
+
+
+reg=SimpleRegression()
+p1= P1D(<span style="color: #115511">"data"</span>)
+
+rand = Random()
+<span style="color: #3333CC"><b>for</b></span> i <span style="color: #3333CC"><b>in</b></span> range(200):
+      x=10*rand.nextGaussian()
+      y=20*x +50*rand.nextGaussian()+5.0
+      p1.add(x,y)
+      reg.addData(x,y) 
+ 
+a1=reg.getIntercept()
+a2=reg.getInterceptStdErr() 
+b1=reg.getSlope()
+b2=reg.getSlopeStdErr() 
+
+func=<span style="color: #115511">"P1*x+P0"</span>
+f1 = F1D(func, -40.0, 40.0)
+f1.setPar(<span style="color: #115511">"P0"</span>,a1)
+f1.setPar(<span style="color: #115511">"P1"</span>,b1)
+
+
+
+f1.setColor(Color.blue)
+p1.setStyle(<span style="color: #115511">"p"</span>)
+p1.setSymbolSize(3)
+c1.setNameX(<span style="color: #115511">"X"</span>)
+c1.setNameY(<span style="color: #115511">"Y"</span>)
+<span style="color: #1111CC"># c1.setLegendFont(Font("SansSerif", Font.BOLD, 16))</span>
+c1.draw(p1)
+c1.draw(f1)
+
+
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Intercept="</span>,a1,<span style="color: #115511">"+/-"</span>,a2
+<span style="color: #3333CC"><b>print</b></span> <span style="color: #115511">"Slope="</span>,a1,<span style="color: #115511">"+/-"</span>,a2
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>./examples/gui_jasplotter.py</title></head>
+                  <body style="background-color: #FFFFFF">
+                  <!--header-->
+                  
+                  <!--script-->
+                  <pre><span style="color: #3333CC"><b>from</b></span> jehep.ui <span style="color: #3333CC"><b>import</b></span> SetEnv
+<span style="color: #3333CC"><b>from</b></span> jehep.ui <span style="color: #3333CC"><b>import</b></span> Editor 
+<span style="color: #3333CC"><b>from</b></span> javax.swing <span style="color: #3333CC"><b>import</b></span> JButton, JDialog, JLabel, JPanel, JScrollPane, JTextArea
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> BorderLayout
+<span style="color: #3333CC"><b>from</b></span> java.awt <span style="color: #3333CC"><b>import</b></span> Color
+<span style="color: #3333CC"><b>from</b></span> java.awt.event <span style="color: #3333CC"><b>import</b></span> ActionListener, KeyEvent, KeyListener, MouseListener
+<span style="color: #3333CC"><b>from</b></span> jas.hist <span style="color: #3333CC"><b>import</b></span> *
+<span style="color: #3333CC"><b>from</b></span> jas.hist.test <span style="color: #3333CC"><b>import</b></span> MemoryDataSource
+
+frame =JDialog();
+topPanel = JPanel();
+lowerPanel = JPanel();
+
+plot = JASHist()
+plot.setBackground(Color.white)
+plot.setTitle(<span style="color: #115511">"Java Memory Usage"</span>)
+plot.getYAxis().setLabel(<span style="color: #115511">"MB"</span>)
+plot.getXAxis().setLabel(<span style="color: #115511">"Time"</span>)
+mem=MemoryDataSource()
+plot.addData(mem).show(1);
+
+
+
+<span style="color: #3333CC"><b>def</b></span> exitme(event):
+       frame.dispose()    
+
+<span style="color: #3333CC"><b>def</b></span> startme(event):
+        plot.addData(mem).show(1);
+<span style="color: #3333CC"><b>def</b></span> stopme(event):
+         plot.removeAllData();        
+
+  
+
+jB1 = JButton(<span style="color: #115511">"Start"</span>, actionPerformed=startme)
+jB2 = JButton(<span style="color: #115511">"Stop"</span>, actionPerformed=stopme)
+jB3 = JButton(<span style="color: #115511">"Exit"</span>, actionPerformed=exitme)
+  
+
+lowerPanel.add(jB1)
+lowerPanel.add(jB2)
+lowerPanel.add(jB3)
+topPanel.setLayout(BorderLayout())
+
+<span style="color: #1111CC"># comments</span>
+jScrollPane1 = JScrollPane()
+jScrollPane1.getViewport().add( plot );
+topPanel.add(jScrollPane1,BorderLayout.CENTER);
+frame.add( topPanel,  BorderLayout.CENTER );
+frame.add( lowerPanel, BorderLayout.SOUTH );
+
+
+bounds = view.getBounds()
+ww = bounds.width
+hh=  bounds.height
+xx = bounds.x
+yy = bounds.y
+  
+frame.setLocation(xx+(int)(0.4*ww), yy+(int)(0.1*hh))
+frame.pack()
+frame.setSize( (int)(0.5*ww),(int)(0.8*hh) );
+frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE)
+frame.setVisible(1)
+</pre>
+                  <!--footer-->
+                  <i># jHepWork @S.Chekanov</i> 
+
+                  </body></html>
